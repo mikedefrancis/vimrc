@@ -79,6 +79,7 @@ let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let g:NERDTreeDirArrows=0
 map <C-t> :NERDTreeToggle<CR>
+map <C-g> :NERDTreeFind<CR>
 
 " ==== Syntastic ====
 "let g:syntastic_always_populate_loc_list = 1
