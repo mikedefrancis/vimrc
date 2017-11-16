@@ -119,8 +119,7 @@ fi
 # ALIASES ADDED BY MPD
 alias tt='gnome-terminal'
 alias save='pushd .'
-alias ret='popd;ls'
-alias back='cd -;ls'
+alias back='popd;ls'
 alias home='pushd .; cd ~;ls'
 alias jump='pushd .; cd '
 # find the process by searching for its name:
@@ -140,46 +139,53 @@ alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 alias c='clear'
-# save standard err and standard out to make output file:
-alias make='make -j4 |& tee latest_make_output.txt'
-alias i='ifconfig -a'
-alias ifconfig='ifconfig -a'
-alias ggrep='grep --color -rni'
-alias ffind='find -type f -name'
-alias dfind='find -type d -name'
-alias vi='vim'
-alias vihelp='echo use vi +[LineNum] [file] || vi [file]'
-alias cat='cat -n'
-
-# added the following for the bookmarking script
-if [ -f ~/.cdb ]; then
-    source ~/.cdb
-fi
-
-#some aliases to use cdb
-alias bmark='cdb -c'
-alias bmk='cdb -c'
-alias bjump='cdb -g'
-alias bgo='cdb -g'
-alias bmarks='cdb -l'
-alias bmks='cdb -l'
-alias bdel='cdb -d'
-
-alias src='source'
-
-# for editing this file
-alias editbash='vim ~/.bashrc'
-alias srcbash='source ~/.bashrc'
-
-
-# for using my todo list
-alias cnotes='cat ~/.notes.txt | more'
-alias notes='cnotes'
-alias allnotes='vim ~/.archivenotes.txt'
-alias vnotes='vim ~/.notes.txt'
-alias editnotes='vnotes'
-alias enotes='vnotes'
-alias dnotes='echo USE delnotes to delete all notes'
+# save standard err and standard out to make output file:    
+alias make='make -j4 |& tee latest_make_output.txt'    
+alias i='ifconfig -a'    
+alias ifconfig='ifconfig -a'    
+alias ggrep='grep --color -rni'    
+alias ffind='find -type f -name'    
+alias dfind='find -type d -name'    
+alias mfind='find -name'      
+alias vi='vim'                                               
+alias vihelp='echo use vi +[LineNum] [file] || vi [file]'    
+alias cat='cat -n'    
+                                                    
+# added the following for the bookmarking script    
+if [ -f ~/.cdb ]; then    
+    source ~/.cdb    
+fi    
+                                
+#some aliases to use cdb    
+alias bmark='cdb -c'    
+alias bmk='cdb -c'      
+alias bjump='cdb -g'    
+alias bgo='cdb -g'       
+alias bmarks='cdb -l'    
+alias bmks='cdb -l'    
+alias bdel='cdb -d'    
+                          
+alias src='source'    
+                               
+# for editing this file           
+alias editbash='vim ~/.bashrc'      
+alias srcbash='source ~/.bashrc'    
+        
+                                
+# for using my todo list                  
+alias cnotes='cat ~/.notes.txt | more'    
+alias notes='cnotes'                        
+alias allnotes='vim ~/.archivenotes.txt'    
+alias vnotes='vim ~/.notes.txt'    
+alias editnotes='vnotes'    
+alias enotes='vnotes'                                   
+alias dnotes='echo USE delnotes to delete all notes'    
 alias delnotes='savenotes;rm ~/.notes.txt'
 alias savenotes='cp ~/.notes.txt ~/.prevnotes.txt;cat ~/.prevnotes.txt >> ~/.archivenotes.txt'
 
+alias logout='i3-msg exit'
+
+alias v='vim'
+
+alias disk=df
+alias chrome='chromium-browser'
