@@ -29,7 +29,7 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
           :PluginInstall
 
-## install the silver searcher (ag) using:
-* Ubuntu >= 13.10 (Saucy) or Debian >= 8 (Jessie)
+## silver searcher (ag)
+* if you want to use a super fast search that is faster than grep by an order of magnitude, install the silver searcher (ag) using:
 
           apt-get install silversearcher-ag
