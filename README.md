@@ -1,7 +1,11 @@
 # linux_devtools
-Useful superuser scripts
+I use this directory in order to quickly set up my linux environment on other computers. Anyone is welcome to copy this configuration.
 
-I use vim as my IDE, and i3 for development when possible. Very fast. 
+* There are some useful tools and aliases in .bashrc
+
+* I use vim as my IDE, and i3 for development when possible. Very fast. 
+
+## Notes regarding using this stuff
 
 copy the .vimrc, .bashrc, and other files from this repo into your user directory. This will blow away whatever . file you already have there.. so make sure to make a backup if you have any custom configurations there already. In particular, you should back up your .bashrc file.. some applications add their paths to it on install, and you might need to recover back to your original if something breaks for some reason.
 
@@ -32,4 +36,12 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 ## silver searcher (ag)
 * if you want to use a super fast search that is faster than grep by an order of magnitude, install the silver searcher (ag) using:
 
-          apt-get install silversearcher-ag
+          sudo apt-get install silversearcher-ag
+
+## install i3
+
+          sudo apt-get install i3
+
+* logout, select i3 as the desktop, and log back in. for a tutorial on using i3, see:
+
+          https://fedoramagazine.org/getting-started-i3-window-manager/
