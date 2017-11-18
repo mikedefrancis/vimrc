@@ -44,4 +44,4 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
 * logout, select i3 as the desktop, and log back in. for a tutorial on using i3, see:
 
-          https://fedoramagazine.org/getting-started-i3-window-manager/
+* https://fedoramagazine.org/getting-started-i3-window-manager/
