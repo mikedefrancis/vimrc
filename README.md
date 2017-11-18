@@ -1,9 +1,30 @@
 # linux_devtools
+
 I use this directory in order to quickly set up my linux environment on other computers. Anyone is welcome to copy this configuration.
+
+* These tools assume you are using Ubuntu 16.04
 
 * There are some useful tools and aliases in .bashrc
 
-* I use vim as my IDE, and i3 for development when possible. Very fast. 
+* I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
+
+        much functionality added by default including syntax coloring, line numbers, etc.
+        use <ctrl+t> to toggle nerdtree
+        use <ctrl+g> to jump show current file in nerdtree
+        use <ctrl+f> to search for files
+        use :Ack to find text in files
+        use <ctrl+w> to toggle mouse clicks
+        use <ctrl+l> to toggle showing line nums
+        use <alt+ARROWS> to switch windows
+
+* I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
+
+* In addition to whatever is on here. I recommend installing the following programs:
+
+      sudo apt-get install meld
+      sudo apt-get install htop
+      sudo apt-get install filezilla
+      sudo apt-get install git
 
 ## Notes regarding using this stuff
 
