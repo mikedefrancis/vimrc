@@ -13,4 +13,5 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 install the silver searcher (ag) using:
 * Ubuntu >= 13.10 (Saucy) or Debian >= 8 (Jessie)
+
           apt-get install silversearcher-ag
