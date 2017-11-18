@@ -5,16 +5,14 @@ set exrc
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" ==== BUNDLES ====
-"Bundle 'rking/ag.vim'
-
-
 " ==== PLUGINS ====
 
+" @MPD
 " I am adding this one for practical reasons
+" not originally in SK's github
 Plugin 'mileszs/ack.vim'
 
-
+" Commenting out some of SK's plugins for speed reasons
 Plugin 'VundleVim/Vundle.vim'
 "Plugin 'vim-scripts/L9'
 "Plugin 'tpope/vim-fugitive'
@@ -81,6 +79,10 @@ let g:NERDTreeDirArrows=0
 map <C-t> :NERDTreeToggle<CR>
 map <C-g> :NERDTreeFind<CR>
 
+" @MPD I am not using syntastic anymore.
+" It is very, very slow, and doesn't always work
+" for my use cases. I think it is better with javascript and other high level
+" stuff. 
 " ==== Syntastic ====
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
@@ -113,7 +115,7 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
-" ==== MIKE DEFRANCIS EXTRA STUFF ====
+" ==== MIKE (@MPD) EXTRA STUFF ====
 function! ToggleMouse()
     if &mouse == 'a'
         set mouse=
@@ -128,7 +130,7 @@ endfunc
 
 map <C-l> :call ToggleLines()<CR>
 
-map <C-w> :call ToggleMouse()<CR>
+map <C-y> :call ToggleMouse()<CR>
 
 let g:ctrlp_map = '<c-f>'
 
@@ -141,9 +143,15 @@ nnoremap <Leader>a :Ack!<Space>
 
 cnoreabbrev ag Ack!
 
-"map <C-s> :<esc>Ack!<Space>
+map <C-r> :Ack  
+map <C-x> :q<CR>
+map <C-w> :w<CR>
 
-"let g:ag_prg = 'ag --nogroup --nocolor --column'
-"let g:ag_map = '<c-s>' 
+map <C-e> :edit 
+
+map <C-v> :vsplit<CR>
+map <C-h> :split<CR>
+
+" ==== END @MPD EXTRA STUFF ==== 
 
 set secure

@@ -6,14 +6,22 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * There are some useful tools and aliases in .bashrc
 
+
+## MIKEYVIM
+* I give you a simplified and expanded vim IDE defined by my .vimrc file. There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
 
         much functionality added by default including syntax coloring, line numbers, etc.
+        use <ctrl+w> to save the file in the current window
+        use <ctrl+x> to close the current window 
+        use <ctrl+e> to open a new file in the current window
+        use <ctrl+h> to do a horozontal split (open new window to the right)
+        use <ctrl+v> to do a vertical split (open new window to the bottom)
         use <ctrl+t> to toggle nerdtree
         use <ctrl+g> to jump show current file in nerdtree
         use <ctrl+f> to search for files
-        use :Ack to find text in files
-        use <ctrl+w> to toggle mouse clicks
+        use <ctrl+r> to find text in files with Ack (or ag if ag is installed)
+        use <ctrl+y> to toggle mouse clicks (useful for nerdtree/filetree things)
         use <ctrl+l> to toggle showing line nums
         use <alt+ARROWS> to switch windows
 
