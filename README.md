@@ -8,21 +8,22 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 ## install vim first to make sure you have the latest version
 
         sudo apt-get install vim
-
-## copy these . files to your home directory
-
-        sudo cp .bashrc ~/.bashrc
-        sudo cp .vimrc ~/.vimrc
-        sudo cp .cdb ~/.cdb
-        sudo cp .gdbinit ~/.gdbinit
-        ... 
-
-*see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
+        
 
 ## install vundle using:
 * I use vundle in my .vimrc file. It is very useful. You need to install it "manually" first, in order for the other vim plugins I am using to be installable automagically.
 
           git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+* see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
+
+
+## copy my configuration to your home directory     
+    
+          sudo cp .bashrc ~/.bashrc    
+          sudo cp .vimrc ~/.vimrc    
+          sudo cp .cdb ~/.cdb    
+          sudo cp .gdbinit ~/.gdbinit
 
 * <RUN THIS FROM INSIDE OF VIM> Once installed, you can install the other plugins specified in the .vimrc file automagically using
 
