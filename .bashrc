@@ -185,6 +185,16 @@ alias savenotes='cp ~/.notes.txt ~/.prevnotes.txt;cat ~/.prevnotes.txt >> ~/.arc
 
 alias logout='i3-msg exit'
 
+
+# place a tunnel in the user home 
+# redirect the tunnel to current location
+alias tun='rm ~/tun;ln -sf "$(pwd)" ~/tun'
+alias tunnel='rm ~/tunnel;ln -sf "$(pwd)" ~/tunnel'
+alias tunnel2='rm ~/tunnel2;ln -sf "$(pwd)" ~/tunnel2'
+alias tunnel3='rm ~/tunnel3;ln -sf "$(pwd)" ~/tunnel3'
+       
+alias ff='nautilus .'
+
 alias v='vim'
 
 alias disk=df
