@@ -11,19 +11,51 @@ I use this directory in order to quickly set up my linux environment on other co
 * I give you a simplified and expanded vim IDE defined by my .vimrc file. There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
 
-        much functionality added by default including syntax coloring, line numbers, etc.
-        use <ctrl+w> to save the file in the current window
-        use <ctrl+x> to close the current window 
-        use <ctrl+e> to open a new file in the current window
-        use <ctrl+h> to do a horozontal split (open new window to the right)
-        use <ctrl+v> to do a vertical split (open new window to the bottom)
-        use <ctrl+t> to toggle nerdtree
-        use <ctrl+g> to jump show current file in nerdtree
-        use <ctrl+f> to search for files
-        use <ctrl+r> to find text in files with Ack (or ag if ag is installed)
-        use <ctrl+y> to toggle mouse clicks (useful for nerdtree/filetree things)
-        use <ctrl+l> to toggle showing line nums
-        use <alt+ARROWS> to switch windows
+
+* Summary of key mapping available from both insert mode and command mode
+
+    <Space>   - Display current working directory                                               
+    <Shift-c> - Change the current working directory to the location of the open file
+    <Ctrl-a>  - Toggle between insert mode and command mode
+    <Ctrl-w>  - Alias for <ESC>       
+	<Ctrl-b>  - Open the ': ' prompt directly
+
+	<Ctrl-z>  - Undo
+	<Ctrl-c>  - Copy (same as y. compatibility: only works from insert mode)
+	<Ctrl-v>  - Paste (same as pi)
+    <Ctrl-u>  - Duplicate Undo...                                                                                                
+    <Ctrl-r>  - Redo
+	<Ctrl-p>  - Enter Paste Mode (ready to paste content into file in vim. must already be in insert mode)
+	
+    <Ctrl-x>   - Close the active window                                                                                   
+    <Ctrl-s>   - Save the file in the active window    
+    <Ctrl-e>   - Open a new file by specifying the path relative to the current working directory
+    <Ctrl-n>   - Create a new window to the right of the current window and jump to it                                
+    <Ctrl-h>   - Create a new window below the current one and jump to it                         
+    <Ctrl-l>   - Toggle line numbers
+
+    <Ctrl-Up>    - Move up one window                                     
+    <Ctrl-Left>  - Move left one window                                
+    <Ctrl-Down>  - Move down one window                                
+    <Ctrl-Right> - Move right one window
+
+
+* Summary of plugin key mappings
+
+    <Ctrl-f> - (CTRLP) Perform a fuzzy file search from current working directory                                                  
+    <Ctrl-g> - (NT) Go to current file in nerdtree file browser
+    <Ctrl-t> - (NT) Toggle nerdtree file browser                                             
+    <Ctrl-y> - (NT) Toggle mouse clicking (for use with nerdtree file browser)
+    <Ctrl-d> - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
+
+
+* Summary of key mapping available from command mode only
+
+    <Shift-q through Shift-y> (e.g., Shift+QWERTY LETTER) - set 'starcraft-style' bookmark for current file
+	  (ex: type <Shift+q> to bookmark line 511 in file main.c)
+    <qq through yy> (e.g., qq / ww / ee / rr / tt / yy) - jump to 'starcraft-style' bookmark
+	  (ex: type <qq> to open main.c and set cursor to line 511)
+    <Alt-Left> - Go to previous location   
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
@@ -67,9 +99,17 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
           sudo apt-get install silversearcher-ag
 
-## install i3
+## install vim-searchindex
+
+          cd ~/.vim/bundle
+          git clone https://github.com/google/vim-searchindex.git
+
+
+## OPTIONAL: install i3
 
           sudo apt-get install i3
+
+* there are better ways to install and configure i3, but this works on ubuntu
 
 * logout, select i3 as the desktop, and log back in. for a tutorial on using i3, see:
 

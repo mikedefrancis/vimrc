@@ -1,3 +1,7 @@
+" This file based off of a .vimrc inside of https://github.com/sebbekarlsson
+" There is no warrantee for this software (implied or otherwise), including
+" fitness for a particular use.
+" @Author Mike DeFrancis. mike (AT) defrancis (DOT) org.
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set exrc
@@ -5,11 +9,34 @@ set exrc
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" ==== PLUGINS ====
-
+" ====  CONTROL VIM  ====
 " @MPD
-" I am adding this one for practical reasons
-" not originally in SK's github
+" The goal of CONTROL VIM is to create an easymode vim / easy vim that is easy to learn.
+" PLEASE NOT THAT
+"  - I love vim, but I am no vim guru. I needed to make it usable fast.
+"  - dont care that I am removing some regular vim functionality
+"    usability is more important than features I hardly use
+"  - have some plugins in here and a lot of them are commented out
+"    speed of vim is more important than resource heavy features
+"    exception is nerdtree and cntrlp because they are so useful 
+"    that it is worth the speed trade-off!
+"  - vim is designed to use <ESC>: (command) or <ESC>(command) for much of 
+"    its regular functionality. I find this clunky, because
+"     A) it requires memorizing a lot of key combinations
+"     B) it requires a lot of typing 
+"    THEREFORE (as name implies), I created a lot of sorta-emacs-style ctrl+{key} shortcuts
+"  - I am not responsible for any pain in your pinky caused by use of 
+"    these ctrl+{key} shortcuts!
+"  - Feel free to enable the extra plugins and try them out, add your own,
+"    etc. Some plugins are really awesome like syntastic but very slow.
+"    so I don't use them, but if someone thinks that I should add one to this
+"    list, please send me a message. I appreciate input.
+"
+" ==== PLUGINS ====
+" search index is pretty much required if you want to study large c files
+Bundle 'vim-searchindex'
+" having a built-in search inside of vim is also pretty much required if you
+" want to be able to use it for large projects
 Plugin 'mileszs/ack.vim'
 
 " Commenting out some of SK's plugins for speed reasons
@@ -28,8 +55,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'easymotion/vim-easymotion'
 "Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'SirVer/ultisnips'
+"Plugin 'godlygeek/tabular'
+"Plugin 'SirVer/ultisnips'
 
 " ==== PLUGIN THEMES ====
 Plugin 'vim-scripts/darktango.vim'
@@ -76,8 +103,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.s
 let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let g:NERDTreeDirArrows=0
-map <C-t> :NERDTreeToggle<CR>
-map <C-g> :NERDTreeFind<CR>
 
 " @MPD I am not using syntastic anymore.
 " It is very, very slow, and doesn't always work
@@ -98,24 +123,35 @@ map <C-g> :NERDTreeFind<CR>
 "let g:syntastic_html_tidy_exec = 'tidy5'
 
 " ==== Snips ====
-let g:UltiSnipsExpandTrigger="<A-ENTER>"
-let g:UltiSnipsJumpForwardTrigger="<A-ENTER>"
-let g:UltiSnipsJumpBackwardTrigger="<A-BACKSPACE>"
+"let g:UltiSnipsExpandTrigger="<A-ENTER>"
+"let g:UltiSnipsJumpForwardTrigger="<A-ENTER>"
+"let g:UltiSnipsJumpBackwardTrigger="<A-BACKSPACE>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsEditSplit="vertical"
 
 " ==== Easymotion ====
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 nmap f <Plug>(easymotion-s)
 
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
 
 " ==== MIKE (@MPD) EXTRA STUFF ====
+" adding to navigate between windows even in insert mode
+inoremap <silent> <C-Up> <ESC>:wincmd k<CR>
+inoremap <silent> <C-Left> <ESC>:wincmd h<CR>
+inoremap <silent> <C-Down> <ESC>:wincmd j<CR>
+inoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+
+nnoremap <silent> <C-Up> <ESC>:wincmd k<CR>
+nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
+nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
+nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+
 function! ToggleMouse()
     if &mouse == 'a'
         set mouse=
@@ -128,30 +164,144 @@ function! ToggleLines()
     set invnumber
 endfunc
 
-map <C-l> :call ToggleLines()<CR>
-
-map <C-y> :call ToggleMouse()<CR>
-
-let g:ctrlp_map = '<c-f>'
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
 cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
-
 cnoreabbrev ag Ack!
 
-map <C-r> :Ack  
-map <C-x> :q<CR>
-map <C-w> :w<CR>
+" CUSTOM KEY MAPPINGS
+" mode switches (hotkeys only available when the correct switch used):
+" nnoremap - normal mode
+" inoremap - insert mode
+" vnoremap - visual and select mode
+" xnoremap - visual mode
+" snoremap - select mode
+" cnoremap - command line mode
+" onoremap - operator pending mode
 
-map <C-e> :edit 
 
-map <C-v> :vsplit<CR>
-map <C-h> :split<CR>
+let g:ctrlp_map = '<c-f>'
 
-" ==== END @MPD EXTRA STUFF ==== 
+map <C-t> :NERDTreeToggle<CR>                                                   
+map <C-g> :NERDTreeFind<CR>
+
+nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
+inoremap <C-l> <ESC>:call ToggleLines()<CR>
+vnoremap <C-l> <ESC>:call ToggleLines()<CR>
+
+nnoremap <C-y> <ESC>:call ToggleMouse()<CR>
+inoremap <C-y> <ESC>:call ToggleMouse()<CR>
+vnoremap <C-y> <ESC>:call ToggleMouse()<CR>
+
+nnoremap <C-d> <ESC>:Ack! 
+inoremap <C-d> <ESC>:Ack!
+vnoremap <C-d> <ESC>:Ack!
+cnoremap <C-d> <ESC>:ACK!
+
+nnoremap <C-x> <ESC>:q<CR>
+inoremap <C-x> <ESC>:q<CR>
+vnoremap <C-x> <ESC>:q<CR>
+cnoremap <C-x> <ESC>:q<CR>
+
+nnoremap <C-s> <ESC>:w<CR>
+inoremap <C-s> <ESC>:w<CR>
+vnoremap <C-s> <ESC>:w<CR>
+cnoremap <C-s> <ESC>:w<CR>
+
+nnoremap <C-b> <ESC>:
+inoremap <C-b> <ESC>:
+vnoremap <C-b> <ESC>:
+cnoremap <C-b> <ESC>:
+
+nnoremap <C-e> <ESC>:edit 
+inoremap <C-e> <ESC>:edit
+vnoremap <C-e> <ESC>:edit
+cnoremap <C-e> <ESC>:edit
+
+nnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+inoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+
+inoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
+nnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
+vnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
+cnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
+
+cnoremap <C-u> <ESC>:undo<CR>
+vnoremap <C-u> <ESC>:undo<CR>
+nnoremap <C-u> <ESC>:undo<CR>
+inoremap <C-u> <ESC>:undo<CR>
+
+inoremap <C-z> <ESC>:undo<CR>
+nnoremap <C-z> <ESC>:undo<CR>
+vnoremap <C-z> <ESC>:undo<CR>
+cnoremap <C-z> <ESC>:undo<CR>
+
+nnoremap <C-r> <ESC>:redo<CR>
+inoremap <C-r> <ESC>:redo<CR>
+vnoremap <C-r> <ESC>:redo<CR>
+cnoremap <C-r> <ESC>:redo<CR>
+
+inoremap <C-a> <ESC>l
+nnoremap <C-a> <ESC>i
+vnoremap <C-a> <ESC>i
+cnoremap <C-a> <ESC>i
+
+inoremap <C-c> <ESC>:yank<CR><ESC>i
+vnoremap <C-c> <ESC>:yank<CR><ESC>i
+
+set pastetoggle=<C-p>
+inoremap <C-v> <ESC>pi
+nnoremap <C-v> <ESC>pi
+vnoremap <C-v> <ESC>pi
+
+inoremap <C-w> <ESC>l
+nnoremap <C-w> <ESC>l
+vnoremap <C-w> <ESC>l
+cnoremap <C-w> <ESC>l
+
+" prev and next location cycling
+inoremap <A-Left> <C-o>
+nnoremap <A-Left> <C-o>
+vnoremap <A-Left> <C-o>
+
+inoremap <A-Right> <Tab>
+nnoremap <A-Right> <Tab>
+vnoremap <A-Right> <Tab>
+
+noremap <Space> <ESC>:pwd<CR>
+noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
+
+
+" @MPD
+" 'starcraft' style hotkeys
+" I KNOW THIS CLOBBERS SOME REGULAR FUNCTIONALIY AND I DONT CARE
+nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark B"<CR>
+nnoremap qq 'Q
+vnoremap qq 'Q
+
+nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
+nnoremap ww 'W
+vnoremap ww 'W
+
+nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
+nnoremap ee 'E
+vnoremap ee 'E
+
+nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+nnoremap rr 'R
+vnoremap rr 'R
+
+nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
+nnoremap tt 'T
+vnoremap tt 'T
+
+nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
+nnoremap yy 'Y
+vnoremap yy 'Y
+"==== END @MPD EXTRA STUFF ==== 
 
 set secure

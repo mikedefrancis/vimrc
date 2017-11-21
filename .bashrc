@@ -199,3 +199,7 @@ alias v='vim'
 
 alias disk=df
 alias chrome='chromium-browser'
+
+
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
