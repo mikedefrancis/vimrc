@@ -16,48 +16,48 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Summary of key mapping available from both insert mode and command mode
 
-    <Space>   - Display current working directory                                               
-    <Shift-c> - Change the current working directory to the location of the open file
-    <Ctrl-a>  - Toggle between insert mode and command mode
-    <Ctrl-w>  - Alias for <ESC>       
-	<Ctrl-b>  - Open the ': ' prompt directly
+    Space   - Display current working directory                                               
+    Shift-c> - Change the current working directory to the location of the open file
+    Ctrl-a>  - Toggle between insert mode and command mode
+    Ctrl-w>  - Alias for <ESC>       
+	Ctrl-b>  - Open the ': ' prompt directly
 
-	<Ctrl-z>  - Undo
-	<Ctrl-c>  - Copy (same as y. compatibility: only works from insert mode)
-	<Ctrl-v>  - Paste (same as pi)
-    <Ctrl-u>  - Duplicate Undo...                                                                                                
-    <Ctrl-r>  - Redo
-	<Ctrl-p>  - Enter Paste Mode (ready to paste content into file in vim. must already be in insert mode)
+	Ctrl-z>  - Undo
+	Ctrl-c>  - Copy (same as y. compatibility: only works from insert mode)
+	Ctrl-v>  - Paste (same as pi)
+    Ctrl-u>  - Duplicate Undo...                                                                                                
+    Ctrl-r>  - Redo
+	Ctrl-p>  - Enter Paste Mode (ready to paste content into file in vim. must already be in insert mode)
 	
-    <Ctrl-x>   - Close the active window                                                                                   
-    <Ctrl-s>   - Save the file in the active window    
-    <Ctrl-e>   - Open a new file by specifying the path relative to the current working directory
-    <Ctrl-n>   - Create a new window to the right of the current window and jump to it                                
-    <Ctrl-h>   - Create a new window below the current one and jump to it                         
-    <Ctrl-l>   - Toggle line numbers
+    Ctrl-x>   - Close the active window                                                                                   
+    Ctrl-s>   - Save the file in the active window    
+    Ctrl-e>   - Open a new file by specifying the path relative to the current working directory
+    Ctrl-n>   - Create a new window to the right of the current window and jump to it                                
+    Ctrl-h>   - Create a new window below the current one and jump to it                         
+    Ctrl-l>   - Toggle line numbers
 
-    <Ctrl-Up>    - Move up one window                                     
-    <Ctrl-Left>  - Move left one window                                
-    <Ctrl-Down>  - Move down one window                                
-    <Ctrl-Right> - Move right one window
+    Ctrl-Up>    - Move up one window                                     
+    Ctrl-Left>  - Move left one window                                
+    Ctrl-Down>  - Move down one window                                
+    Ctrl-Right> - Move right one window
 
 
 * Summary of plugin key mappings
 
-    <Ctrl-f> - (CTRLP) Perform a fuzzy file search from current working directory                                                  
-    <Ctrl-g> - (NT) Go to current file in nerdtree file browser
-    <Ctrl-t> - (NT) Toggle nerdtree file browser                                             
-    <Ctrl-y> - (NT) Toggle mouse clicking (for use with nerdtree file browser)
-    <Ctrl-d> - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
-
+    Ctrl-f> - (CTRLP) Perform a fuzzy file search from current working directory                                                  
+    Ctrl-g> - (NT) Go to current file in nerdtree file browser
+    Ctrl-t> - (NT) Toggle nerdtree file browser                                             
+    Ctrl-y> - (NT) Toggle mouse clicking (for use with nerdtree file browser)
+    Ctrl-d> - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
 
 * Summary of key mapping available from command mode only
 
-    <Shift-q through Shift-y> (e.g., Shift+QWERTY LETTER) - set 'starcraft-style' bookmark for current file
+    Shift-q through Shift-y> (e.g., Shift+QWERTY LETTER) - set 'starcraft-style' bookmark for current file
 	  (ex: type <Shift+q> to bookmark line 511 in file main.c)
-    <qq through yy> (e.g., qq / ww / ee / rr / tt / yy) - jump to 'starcraft-style' bookmark
+    qq through yy> (e.g., qq / ww / ee / rr / tt / yy) - jump to 'starcraft-style' bookmark
 	  (ex: type <qq> to open main.c and set cursor to line 511)
-    <Alt-Left> - Go to previous location   
+    Alt-Left> - Go to previous location   
+    Alt-Right> - Go to next location
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
