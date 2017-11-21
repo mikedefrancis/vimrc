@@ -1,4 +1,4 @@
-# linux_devtools
+# CTRL-VIM & FRIENDS
 
 I use this directory in order to quickly set up my linux environment on other computers. Anyone is welcome to copy this configuration.
 
@@ -7,7 +7,7 @@ I use this directory in order to quickly set up my linux environment on other co
 * There are some useful tools and aliases in .bashrc
 
 
-## MIKEYVIM
+## CTRL-VIM
 * I give you a simplified and expanded vim IDE defined by my .vimrc file. There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
 
