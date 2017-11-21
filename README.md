@@ -6,6 +6,8 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * There are some useful tools and aliases in .bashrc
 
+* TODO: create an easy install script!
+
 
 ## CTRL-VIM
 * I give you a simplified and expanded vim IDE defined by my .vimrc file. There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
@@ -74,6 +76,10 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
         sudo apt-get install vim
         
+## install vim-searchindex
+* This plugin is not set up to use vundle so download it as a first step to prevent the vundle install from breaking
+          cd ~/.vim/bundle
+          git clone https://github.com/google/vim-searchindex.git
 
 ## install vundle using:
 * I use vundle in my .vimrc file. It is very useful. You need to install it "manually" first, in order for the other vim plugins I am using to be installable automagically.
@@ -81,7 +87,6 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
           git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
-
 
 ## copy my configuration to your home directory     
     
@@ -98,12 +103,6 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 * if you want to use a super fast search that is faster than grep by an order of magnitude, install the silver searcher (ag) using:
 
           sudo apt-get install silversearcher-ag
-
-## install vim-searchindex
-
-          cd ~/.vim/bundle
-          git clone https://github.com/google/vim-searchindex.git
-          :PluginInstall
 
 ## OPTIONAL: install i3
 
