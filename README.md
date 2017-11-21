@@ -78,6 +78,7 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
         
 ## install vim-searchindex
 * This plugin is not set up to use vundle so download it as a first step to prevent the vundle install from breaking
+
           cd ~/.vim/bundle
           git clone https://github.com/google/vim-searchindex.git
 
