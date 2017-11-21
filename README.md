@@ -100,6 +100,11 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
           :PluginInstall
 
+* FIX YOUR .bashrc file by adding this line (if you did not copy mine):
+
+          stty -ixon
+
+
 ## silver searcher (ag)
 * if you want to use a super fast search that is faster than grep by an order of magnitude, install the silver searcher (ag) using:
 
