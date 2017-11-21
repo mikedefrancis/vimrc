@@ -16,8 +16,8 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Summary of key mapping available from both insert mode and command mode
 
-    Space   - Display current working directory                                               
-    Shift-c - Change the current working directory to the location of the open file
+        Space   - Display current working directory                                               
+        Shift-c - Change the current working directory to the location of the open file
     Ctrl-a  - Toggle between insert mode and command mode
     Ctrl-w  - Alias for <ESC>       
 	Ctrl-b  - Open the ': ' prompt directly
