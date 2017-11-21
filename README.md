@@ -103,7 +103,7 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
 
           cd ~/.vim/bundle
           git clone https://github.com/google/vim-searchindex.git
-
+          :PluginInstall
 
 ## OPTIONAL: install i3
 
