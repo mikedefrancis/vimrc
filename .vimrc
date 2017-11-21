@@ -226,10 +226,10 @@ inoremap <C-d> <ESC>:Ack!
 vnoremap <C-d> <ESC>:Ack!
 cnoremap <C-d> <ESC>:ACK!
 
-nnoremap <C-x> <ESC>:q<CR>
-inoremap <C-x> <ESC>:q<CR>
-vnoremap <C-x> <ESC>:q<CR>
-cnoremap <C-x> <ESC>:q<CR>
+nnoremap <C-x> <ESC>:q!<CR>
+inoremap <C-x> <ESC>:q!<CR>
+vnoremap <C-x> <ESC>:q!<CR>
+cnoremap <C-x> <ESC>:q!<CR>
 
 nnoremap <C-s> <ESC>:w<CR>
 inoremap <C-s> <ESC>:w<CR>
