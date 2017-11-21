@@ -38,6 +38,7 @@ Bundle 'vim-searchindex'
 " having a built-in search inside of vim is also pretty much required if you
 " want to be able to use it for large projects
 Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdcommenter'
 
 " Commenting out some of SK's plugins for speed reasons
 Plugin 'VundleVim/Vundle.vim'
@@ -171,6 +172,29 @@ endif
 cnoreabbrev Ack Ack!
 cnoreabbrev ag Ack!
 
+"NERDCOMMENTER
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
 " CUSTOM KEY MAPPINGS
 " mode switches (hotkeys only available when the correct switch used):
 " nnoremap - normal mode
@@ -181,6 +205,8 @@ cnoreabbrev ag Ack!
 " cnoremap - command line mode
 " onoremap - operator pending mode
 
+let hlstate=1
+nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
 
 let g:ctrlp_map = '<c-f>'
 
@@ -274,7 +300,6 @@ vnoremap <A-Right> <Tab>
 
 noremap <Space> <ESC>:pwd<CR>
 noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
-
 
 " @MPD
 " 'starcraft' style hotkeys

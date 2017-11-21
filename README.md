@@ -63,6 +63,11 @@ I use this directory in order to quickly set up my linux environment on other co
         Alt-Left - Go to previous location   
         Alt-Right - Go to next location
 
+* Other key mappings
+        
+        \c<space> - Toggle block comment in visual mode
+        Shift-h   - Toggle search result highlighting
+
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
 * In addition to whatever is on here. I recommend installing the following programs:
