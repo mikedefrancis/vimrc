@@ -23,7 +23,7 @@ I use this directory in order to quickly set up my linux environment on other co
 	    Ctrl-b  - Open the ': ' prompt directly
 
 	    Ctrl-z  - Undo
-	    Ctrl-c  - Copy (same as y. compatibility: only works from insert mode)
+	    Ctrl-c  - Copy (same as y. compatibility: only works from insert/visual/select modes)
     	Ctrl-v  - Paste (same as pi)
         Ctrl-u  - Duplicate Undo...                                                                                                
         Ctrl-r  - Redo
