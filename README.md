@@ -14,73 +14,8 @@ I use this directory in order to quickly set up my linux environment on other co
 * I give you a simplified and expanded vim IDE defined by my .vimrc file. There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
 
-
-* Summary of regular key mappings
-
-        Space   - Display current working directory                                               
-        Shift-c - Change the current working directory to the location of the open file
-        Ctrl-a  - Toggle between insert mode and command mode
-        Ctrl-w  - Alias for <ESC>       
-	    ;       - Alias for :
-
-	    Ctrl-z  - Undo
-	    Ctrl-c  - Copy (same as y. compatibility: only works from insert/visual/select modes)
-    	Ctrl-v  - Paste (same as pi)
-        Ctrl-u  - Duplicate Undo...                                                                                                
-        Ctrl-r  - Redo
-    	Ctrl-p  - Enter Paste Mode (ready to paste content into file in vim. must already be in insert mode)
-        Shift-f - Do a find and replace-all in file (not very sophisticated)
-
-        Shift-b  - Create a new tab
-        Ctrl-b   - Switch between existing tabs
-        Ctrl-x   - Close the active window                                                                                   
-        Ctrl-s   - Save the file in the active window    
-        Ctrl-e   - Open a new file by specifying the path relative to the current working directory
-        Ctrl-n   - Create a new window to the right of the current window and jump to it                                
-        Ctrl-h   - Create a new window below the current one and jump to it                         
-        Ctrl-l   - Toggle line numbers
-
-        Ctrl-Up    - Move up one window                                     
-        Ctrl-Left  - Move left one window                                
-        Ctrl-Down  - Move down one window                                
-        Ctrl-Right - Move right one window
-
-
-* Summary of plugin key mappings
-
-        Ctrl-f - (CTRLP) Perform a fuzzy file search from current working directory                                                  
-        Ctrl-g - (NT) Go to current file in nerdtree file browser
-        Ctrl-t - (NT) Toggle nerdtree file browser                                             
-        Ctrl-y - (NT) Toggle mouse clicking (for use with nerdtree file browser)
-        Ctrl-d - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
-
-* Summary of special key mappings that are relatively unique to Ctrl-Vim
-
-        Shift-x  - set write permissions on current file using sudo
-
-        Shift-q//Shift-y (e.g., Shift+QWERTY LETTER) - set 'starcraft-style' bookmark for current file
-	  
-        (ex: type <Shift+q> to bookmark line 511 in file main.c)
-    
-        qq//yy (e.g., qq / ww / ee / rr / tt / yy) - jump to 'starcraft-style' bookmark
-	  
-        (ex: type <qq> to open main.c and set cursor to line 511)
-    
-        Alt-Left - Go to previous location   
-        Alt-Right - Go to next location
-
-* Other key mappings
-        
-        <leader>  - this is mapped to '.' versus the default of '\'
-
-        .c<space> - Toggle block comment in visual mode
-        Shift-h   - Toggle search result highlighting
-
-* Standard key mappings to keep in mind
-
-        :<number> jumps to line number
-        :cd .. goes up one working directory
-        :h <plugin name> shows help for the given plugin
+* TODO ADD KEY MAPPINGS
+* for now please look at my .vimrc file to determine what hotkeys to use, or ask me xD
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
