@@ -250,7 +250,6 @@ vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
 nnoremap <S-f> <ESC>:%s/<find>/<replace>/g
-inoremap <S-f> <ESC>:%s/<find>/<replace>/g
 vnoremap <S-f> <ESC>:%s/<find>/<replace>/g
 cnoremap <S-f> <ESC>:%s/<find>/<replace>/g
 
@@ -317,8 +316,8 @@ inoremap <A-Right> <Tab>
 nnoremap <A-Right> <Tab>
 vnoremap <A-Right> <Tab>
 
-noremap <Space> <ESC>:pwd<CR>
-noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
+nnoremap <Space> <ESC>:pwd<CR>
+nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
 
 " @MPD
 " 'starcraft' style hotkeys
