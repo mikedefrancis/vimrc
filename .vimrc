@@ -260,7 +260,6 @@ vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
 nnoremap <S-f> <ESC>:%s/<find>/<replace>/g
-inoremap <S-f> <ESC>:%s/<find>/<replace>/g
 vnoremap <S-f> <ESC>:%s/<find>/<replace>/g
 
 " This is a really fun hack. If you don't have write permissions hit <ESC>shift-x
@@ -383,7 +382,7 @@ nnoremap a i
 
 nnoremap <S-s> <ESC>:call ToggleBackground()<CR>
 
-function ToggleBackground()
+function! ToggleBackground()
 	if &background == "dark"
 		set background=light
 	else
