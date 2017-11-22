@@ -60,6 +60,7 @@ Plugin 'kien/ctrlp.vim'
 "Plugin 'SirVer/ultisnips'
 
 " ==== PLUGIN THEMES ====
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-scripts/darktango.vim'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'morhetz/gruvbox'
@@ -80,10 +81,12 @@ filetype plugin indent on
 
 " ==== BASIC ====
 colorscheme gruvbox
-set guifont=Monospace\ 10
-set fillchars+=vert:\$
+"colorscheme solarized
 syntax enable
 set background=dark
+
+set guifont=Monospace\ 10
+set fillchars+=vert:\$
 set ruler
 set hidden
 set number
@@ -92,7 +95,7 @@ set smartindent
 set st=4 sw=4 et
 set shiftwidth=4
 set tabstop=4
-let &colorcolumn="80"
+"let &colorcolumn="80"
 :set guioptions-=m  "remove menu bar
 :set guioptions-=T  "remove toolbar
 :set guioptions-=r  "remove right-hand scroll bar
@@ -110,6 +113,7 @@ set ignorecase smartcase
 set incsearch
 set autoindent smartindent
 " note that the swapfile is still used here in case your terminal crashes.
+set clipboard=unnamedplus
 
 " ==== NERDTREE ====
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*', '[a-zA-Z]*egg[a-zA-Z]*', '[a-zA-Z]*cache[a-zA-Z]*']
@@ -164,6 +168,13 @@ nnoremap <silent> <C-Up> <ESC>:wincmd k<CR>
 nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+
+noremap <silent> <A-Up> 10k
+noremap <silent> <A-Down> 10j
+
+noremap <silent> <A-PageUp> 4<PageUp>
+noremap <silent> <A-PageDown> 4<PageDown>
+
 
 function! ToggleMouse()
     if &mouse == 'a'
@@ -230,19 +241,18 @@ inoremap <C-l> <ESC>:call ToggleLines()<CR>
 vnoremap <C-l> <ESC>:call ToggleLines()<CR>
 cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 
-nnoremap <C-y> <ESC>:call ToggleMouse()<CR>
-inoremap <C-y> <ESC>:call ToggleMouse()<CR>
-vnoremap <C-y> <ESC>:call ToggleMouse()<CR>
+nnoremap <C-d> <ESC>:call ToggleMouse()<CR>
+inoremap <C-d> <ESC>:call ToggleMouse()<CR>
+vnoremap <C-d> <ESC>:call ToggleMouse()<CR>
+cnoremap <C-d> <ESC>:call ToggleMouse()<CR>
 
-nnoremap <C-d> <ESC>:Ack! 
-inoremap <C-d> <ESC>:Ack!
-vnoremap <C-d> <ESC>:Ack!
-cnoremap <C-d> <ESC>:ACK!
+nnoremap <S-d> <ESC>:Ack! 
+vnoremap <S-d> <ESC>:Ack!
 
-nnoremap <C-x> <ESC>:q!<CR>
-inoremap <C-x> <ESC>:q!<CR>
-vnoremap <C-x> <ESC>:q!<CR>
-cnoremap <C-x> <ESC>:q!<CR>
+nnoremap <C-q> <ESC>:x!<CR>
+inoremap <C-q> <ESC>:x!<CR>
+vnoremap <C-q> <ESC>:x!<CR>
+cnoremap <C-q> <ESC>:x!<CR>
 
 nnoremap <C-s> <ESC>:w<CR>
 inoremap <C-s> <ESC>:w<CR>
@@ -250,14 +260,11 @@ vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
 nnoremap <S-f> <ESC>:%s/<find>/<replace>/g
+inoremap <S-f> <ESC>:%s/<find>/<replace>/g
 vnoremap <S-f> <ESC>:%s/<find>/<replace>/g
-cnoremap <S-f> <ESC>:%s/<find>/<replace>/g
 
-" This is a really fun hack. If you don't have write permissions hit ctrl+b!
-inoremap <C-b> <ESC>:w !sudo tee %<CR>
-nnoremap <C-b> <ESC>:w !sudo tee %<CR>
-vnoremap <C-b> <ESC>:w !sudo tee %<CR>
-cnoremap <C-b> <ESC>:w !sudo tee %<CR>
+" This is a really fun hack. If you don't have write permissions hit <ESC>shift-x
+nnoremap <S-x> <ESC>:w !sudo tee %<CR>
 
 nnoremap <C-e> <ESC>:edit 
 inoremap <C-e> <ESC>:edit
@@ -290,17 +297,30 @@ vnoremap <C-r> <ESC>:redo<CR>
 cnoremap <C-r> <ESC>:redo<CR>
 
 inoremap <C-a> <ESC>l
-nnoremap <C-a> <ESC>i
-vnoremap <C-a> <ESC>i
-cnoremap <C-a> <ESC>i
+nnoremap <C-a> <ESC>l
+vnoremap <C-a> <ESC>l
+cnoremap <C-a> <ESC>l
 
-inoremap <C-c> <ESC>:yank<CR><ESC>i
-vnoremap <C-c> <ESC>:yank<CR><ESC>i
+"using control +z, x, c, v, r for undo, cut, copy, paste, redo
+"like all other programs
+"note that for copy paste compatibility with other editors is broken
+"because vim uses yank instead of copy
+"also note that you need to be in visual mode to block copy
+vnoremap <C-c> y
+nnoremap <C-c> yy
+inoremap <C-c> <ESC>yyi
 
 set pastetoggle=<C-p>
 inoremap <C-v> <ESC>pi
-nnoremap <C-v> <ESC>pi
-vnoremap <C-v> <ESC>pi
+
+nnoremap <C-v> <ESC><Up>p<Down>
+vnoremap <C-v> <ESC>pv
+
+vnoremap <C-x> d
+nnoremap <C-x> dd
+inoremap <C-x> <ESC>ddi
+
+nnoremap <C-w> i<CR><ESC>
 
 inoremap <C-w> <ESC>l
 nnoremap <C-w> <ESC>l
@@ -316,51 +336,63 @@ inoremap <A-Right> <Tab>
 nnoremap <A-Right> <Tab>
 vnoremap <A-Right> <Tab>
 
-nnoremap <Space> <ESC>:pwd<CR>
-nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
+let scrollstate=1
+nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
+
+noremap cc <ESC>:pwd<CR>
+noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
 
 " @MPD
-" 'starcraft' style hotkeys
-" I KNOW THIS CLOBBERS SOME REGULAR FUNCTIONALIY AND I DONT CARE
-nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark B"<CR>
-nnoremap qq 'Q
-vnoremap qq 'Q
+" 'starcraft' style bookmarks
+nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark B"<CR>
+nnoremap <S-q> 'Q
 
-nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
-nnoremap ww 'W
-vnoremap ww 'W
+nnoremap bw <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
+nnoremap <S-w> 'W
 
-nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
-nnoremap ee 'E
-vnoremap ee 'E
+nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
+nnoremap <S-e> 'E
 
-nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
-nnoremap rr 'R
-vnoremap rr 'R
+nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+nnoremap <S-r> 'R
 
-nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
-nnoremap tt 'T
-vnoremap tt 'T
+nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
+nnoremap <S-t> 'T
 
-nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
-nnoremap yy 'Y
-vnoremap yy 'Y
+nnoremap by <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
+nnoremap <S-y> 'Y
 "==== END @MPD EXTRA STUFF ==== 
 
 " some more hacks
 nnoremap ; :
-let mapleader="."
+let mapleader=","
+
+let g:ackhighlight = 1
+let g:ackpreview = 1
 
 " FUN WITH TABS
-nnoremap <S-b> <ESC>:tabnew<CR>                                                   
-vnoremap <S-b> <ESC>:tabnew<CR>                                                   
-cnoremap <S-b> <ESC>:tabnew<CR> 
+nnoremap <C-b> <ESC>:tabnew<CR>                                                   
+vnoremap <C-b> <ESC>:tabnew<CR>                                                   
+cnoremap <C-b> <ESC>:tabnew<CR> 
+inoremap <C-b> <ESC>:tabnew<CR>
 
-inoremap <C-b> <ESC>gti
-vnoremap <C-b> <ESC>gtv
-nnoremap <C-b> <ESC>gt
-cnoremap <C-b> <ESC>gt
+vnoremap <S-b> <ESC>gt
+nnoremap <S-b> <ESC>gt
 
+inoremap <C-CR> <ESC>:
+nnoremap <C-CR> <ESC>:
+vnoremap <C-CR> <ESC>:
+cnoremap <C-CR> <ESC>:
+
+let cmode = 0
+if cmode == 0
+  set background=dark
+  let cmode = 1
+else
+  set background=light
+  cmode = 0
+endif
 
 
 set secure
+
