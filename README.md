@@ -7,6 +7,7 @@ I use this directory in order to quickly set up my linux environment on other co
 * There are some useful tools and aliases in .bashrc
 
 * TODO: create an easy install script!
+* TODO: add an option to toggle code-completion options using commented-out plugins
 
 
 ## CTRL-VIM
