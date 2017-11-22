@@ -14,7 +14,7 @@ I use this directory in order to quickly set up my linux environment on other co
 * I use vim as my IDE, and i3 for development when possible. Very fast. This tutorial turns vim into a fully-functional IDE with fuzzy filename search, multi-file search (ack/ag functionality) from within vim, file-tree viewing with nerd-tree.
 
 
-* Summary of key mapping available from both insert mode and command mode
+* Summary of regular key mappings
 
         Space   - Display current working directory                                               
         Shift-c - Change the current working directory to the location of the open file
@@ -53,7 +53,7 @@ I use this directory in order to quickly set up my linux environment on other co
         Ctrl-y - (NT) Toggle mouse clicking (for use with nerdtree file browser)
         Ctrl-d - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
 
-* Summary of key mapping available from normal mode only
+* Summary of special key mappings that are relatively unique to Ctrl-Vim
 
         Shift-x  - set write permissions on current file using sudo
 
