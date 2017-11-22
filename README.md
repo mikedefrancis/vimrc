@@ -20,7 +20,7 @@ I use this directory in order to quickly set up my linux environment on other co
         Shift-c - Change the current working directory to the location of the open file
         Ctrl-a  - Toggle between insert mode and command mode
         Ctrl-w  - Alias for <ESC>       
-	    Ctrl-b  - Open the ': ' prompt directly
+	    ;       - Alias for :
 
 	    Ctrl-z  - Undo
 	    Ctrl-c  - Copy (same as y. compatibility: only works from insert/visual/select modes)
@@ -28,7 +28,10 @@ I use this directory in order to quickly set up my linux environment on other co
         Ctrl-u  - Duplicate Undo...                                                                                                
         Ctrl-r  - Redo
     	Ctrl-p  - Enter Paste Mode (ready to paste content into file in vim. must already be in insert mode)
-	
+        Shift-f - Do a find and replace-all in file (not very sophisticated)
+
+        Shift-b  - Create a new tab
+        Ctrl-b   - Switch between existing tabs
         Ctrl-x   - Close the active window                                                                                   
         Ctrl-s   - Save the file in the active window    
         Ctrl-e   - Open a new file by specifying the path relative to the current working directory
@@ -50,7 +53,9 @@ I use this directory in order to quickly set up my linux environment on other co
         Ctrl-y - (NT) Toggle mouse clicking (for use with nerdtree file browser)
         Ctrl-d - (ACK) Perform a grep-like search from current working directory using ack or ag if it is installed                    
 
-* Summary of key mapping available from command mode only
+* Summary of key mapping available from normal mode only
+
+        Shift-x  - set write permissions on current file using sudo
 
         Shift-q//Shift-y (e.g., Shift+QWERTY LETTER) - set 'starcraft-style' bookmark for current file
 	  
@@ -65,8 +70,16 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Other key mappings
         
-        \c<space> - Toggle block comment in visual mode
+        <leader>  - this is mapped to '.' versus the default of '\'
+
+        .c<space> - Toggle block comment in visual mode
         Shift-h   - Toggle search result highlighting
+
+* Standard key mappings to keep in mind
+
+        :<number> jumps to line number
+        :cd .. goes up one working directory
+        :h <plugin name> shows help for the given plugin
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
@@ -97,7 +110,7 @@ copy the .vimrc, .bashrc, and other files from this repo into your user director
           git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
-
+0
 ## copy my configuration to your home directory     
     
           sudo cp .bashrc ~/.bashrc    

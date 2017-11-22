@@ -117,9 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 # ALIASES ADDED BY MPD
+# warning! undefining something does not remove the alias from shells that have previously sourced this
 alias tt='gnome-terminal'
 alias save='pushd .'
-alias back='popd;ls'
+alias ret='popd;ls'
+alias back='cd -;ls'
 alias home='pushd .; cd ~;ls'
 alias jump='pushd .; cd '
 # find the process by searching for its name:
@@ -140,7 +142,8 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 alias c='clear'
 # save standard err and standard out to make output file:    
-alias make='make -j4 |& tee latest_make_output.txt'    
+alias make='make'
+alias mmake='make |& tee latest_make_output.txt'
 alias i='ifconfig -a'    
 alias ifconfig='ifconfig -a'    
 alias ggrep='grep --color -rni'    

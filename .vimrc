@@ -98,6 +98,18 @@ let &colorcolumn="80"
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
 :set lines=999 columns=999
+" more hacks
+" DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
+" I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
+set history=1000
+set undolevels=1000
+set title
+set nobackup
+" this is an awesome one. makes all '/' searches non-case sensitive unless the search contains an upper case letter
+set ignorecase smartcase 
+set incsearch
+set autoindent smartindent
+" note that the swapfile is still used here in case your terminal crashes.
 
 " ==== NERDTREE ====
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*', '[a-zA-Z]*egg[a-zA-Z]*', '[a-zA-Z]*cache[a-zA-Z]*']
@@ -216,6 +228,7 @@ map <C-g> :NERDTreeFind<CR>
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
 inoremap <C-l> <ESC>:call ToggleLines()<CR>
 vnoremap <C-l> <ESC>:call ToggleLines()<CR>
+cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 
 nnoremap <C-y> <ESC>:call ToggleMouse()<CR>
 inoremap <C-y> <ESC>:call ToggleMouse()<CR>
@@ -236,10 +249,16 @@ inoremap <C-s> <ESC>:w<CR>
 vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
-nnoremap <C-b> <ESC>:
-inoremap <C-b> <ESC>:
-vnoremap <C-b> <ESC>:
-cnoremap <C-b> <ESC>:
+nnoremap <S-f> <ESC>:%s/<find>/<replace>/g
+inoremap <S-f> <ESC>:%s/<find>/<replace>/g
+vnoremap <S-f> <ESC>:%s/<find>/<replace>/g
+cnoremap <S-f> <ESC>:%s/<find>/<replace>/g
+
+" This is a really fun hack. If you don't have write permissions hit ctrl+b!
+inoremap <C-b> <ESC>:w !sudo tee %<CR>
+nnoremap <C-b> <ESC>:w !sudo tee %<CR>
+vnoremap <C-b> <ESC>:w !sudo tee %<CR>
+cnoremap <C-b> <ESC>:w !sudo tee %<CR>
 
 nnoremap <C-e> <ESC>:edit 
 inoremap <C-e> <ESC>:edit
@@ -328,5 +347,21 @@ nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 nnoremap yy 'Y
 vnoremap yy 'Y
 "==== END @MPD EXTRA STUFF ==== 
+
+" some more hacks
+nnoremap ; :
+let mapleader="."
+
+" FUN WITH TABS
+nnoremap <S-b> <ESC>:tabnew<CR>                                                   
+vnoremap <S-b> <ESC>:tabnew<CR>                                                   
+cnoremap <S-b> <ESC>:tabnew<CR> 
+
+inoremap <C-b> <ESC>gti
+vnoremap <C-b> <ESC>gtv
+nnoremap <C-b> <ESC>gt
+cnoremap <C-b> <ESC>gt
+
+
 
 set secure
