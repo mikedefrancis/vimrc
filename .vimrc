@@ -169,8 +169,8 @@ nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 
-noremap <silent> <A-Up> 10k
-noremap <silent> <A-Down> 10j
+map <silent> <A-Up> 10k
+map <silent> <A-Down> 10j
 
 noremap <silent> <A-PageUp> 4<PageUp>
 noremap <silent> <A-PageDown> 4<PageDown>
@@ -322,11 +322,6 @@ inoremap <C-x> <ESC>ddi
 
 nnoremap <C-w> i<CR><ESC>
 
-inoremap <C-w> <ESC>l
-nnoremap <C-w> <ESC>l
-vnoremap <C-w> <ESC>l
-cnoremap <C-w> <ESC>l
-
 " prev and next location cycling
 inoremap <A-Left> <C-o>
 nnoremap <A-Left> <C-o>
@@ -384,15 +379,17 @@ nnoremap <C-CR> <ESC>:
 vnoremap <C-CR> <ESC>:
 cnoremap <C-CR> <ESC>:
 
-let cmode = 0
-if cmode == 0
-  set background=dark
-  let cmode = 1
-else
-  set background=light
-  cmode = 0
-endif
+nnoremap a i
 
+nnoremap <S-s> <ESC>:call ToggleBackground()<CR>
+
+function ToggleBackground()
+	if &background == "dark"
+		set background=light
+	else
+		set background=dark
+	endif
+endfunction
 
 set secure
 
