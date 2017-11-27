@@ -237,7 +237,7 @@ nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| end
 
 let g:ctrlp_map = '<c-f>'
 
-map <C-t> :NERDTreeToggle<CR>                                                   
+map <C-t> :echo "Unmapped key combo <C-t>!"<CR>
 map <C-g> :NERDTreeToggle %<CR><ESC>:wincmd l<CR>
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
@@ -374,10 +374,10 @@ let g:ackhighlight = 1
 let g:ackpreview = 1
 
 " FUN WITH TABS
-nnoremap <C-b> <ESC>:tabedit
-vnoremap <C-b> <ESC>:tabedit
-cnoremap <C-b> <ESC>:tabedit
-inoremap <C-b> <ESC>:tabedit
+nnoremap <C-b> <ESC>:tabedit  
+vnoremap <C-b> <ESC>:tabedit  
+cnoremap <C-b> <ESC>:tabedit  
+inoremap <C-b> <ESC>:tabedit  
 
 vnoremap <S-b> <ESC>gt
 nnoremap <S-b> <ESC>gt
