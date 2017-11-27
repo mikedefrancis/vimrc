@@ -200,6 +200,8 @@ alias ff='nautilus .'
 
 alias v='vim'
 
+alias vim='vim -p'
+
 alias disk=df
 alias chrome='chromium-browser'
 

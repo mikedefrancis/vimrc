@@ -34,7 +34,7 @@ call vundle#begin()
 "
 " ==== PLUGINS ====
 " search index is pretty much required if you want to study large c files
-Bundle 'vim-searchindex'
+Plugin 'google/vim-searchindex'
 " having a built-in search inside of vim is also pretty much required if you
 " want to be able to use it for large projects
 Plugin 'mileszs/ack.vim'
@@ -61,8 +61,8 @@ Plugin 'kien/ctrlp.vim'
 
 " ==== PLUGIN THEMES ====
 "Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-scripts/darktango.vim'
-Plugin 'jonathanfilip/vim-lucius'
+"Plugin 'vim-scripts/darktango.vim'
+"Plugin 'jonathanfilip/vim-lucius'
 Plugin 'morhetz/gruvbox'
 " ==== END PLUGIN THEMES ====
 
@@ -114,6 +114,10 @@ set incsearch
 set autoindent smartindent
 " note that the swapfile is still used here in case your terminal crashes.
 set clipboard=unnamedplus
+
+let g:gruvbox_contrast_dark ='hard'
+let g:gruvbox_contrast_light ='hard'
+let g:gruvbox_number_column_dark ='blue'
 
 " ==== NERDTREE ====
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*', '[a-zA-Z]*egg[a-zA-Z]*', '[a-zA-Z]*cache[a-zA-Z]*']
@@ -234,7 +238,7 @@ nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| end
 let g:ctrlp_map = '<c-f>'
 
 map <C-t> :NERDTreeToggle<CR>                                                   
-map <C-g> :NERDTreeFind<CR>
+map <C-g> :NERDTreeToggle %<CR><ESC>:wincmd l<CR>
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
 inoremap <C-l> <ESC>:call ToggleLines()<CR>
@@ -333,8 +337,13 @@ vnoremap <A-Right> <Tab>
 let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 
+
 noremap cc <ESC>:pwd<CR>
 noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
+
+noremap cd <ESC>:cd 
+
+noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 " @MPD
 " 'starcraft' style bookmarks
@@ -365,13 +374,17 @@ let g:ackhighlight = 1
 let g:ackpreview = 1
 
 " FUN WITH TABS
-nnoremap <C-b> <ESC>:tabnew<CR>                                                   
-vnoremap <C-b> <ESC>:tabnew<CR>                                                   
-cnoremap <C-b> <ESC>:tabnew<CR> 
-inoremap <C-b> <ESC>:tabnew<CR>
+nnoremap <C-b> <ESC>:tabedit
+vnoremap <C-b> <ESC>:tabedit
+cnoremap <C-b> <ESC>:tabedit
+inoremap <C-b> <ESC>:tabedit
 
 vnoremap <S-b> <ESC>gt
 nnoremap <S-b> <ESC>gt
+vnoremap <S-Left> <ESC>gT
+nnoremap <S-Left> <ESC>gT
+vnoremap <S-Right> <ESC>gt
+nnoremap <S-Right> <ESC>gt
 
 inoremap <C-CR> <ESC>:
 nnoremap <C-CR> <ESC>:
