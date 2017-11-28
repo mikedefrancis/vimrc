@@ -237,8 +237,8 @@ nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| end
 
 let g:ctrlp_map = '<c-f>'
 
-map <C-t> :echo "Unmapped key combo <C-t>!"<CR>
-map <C-g> :NERDTreeToggle %<CR><ESC>:wincmd l<CR>
+map <C-t> <ESC>:bufdo e<CR>:echo "Buffers Rereshed"<CR>
+map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
 inoremap <C-l> <ESC>:call ToggleLines()<CR>
