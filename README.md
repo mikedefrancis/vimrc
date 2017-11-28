@@ -16,6 +16,8 @@ I use this directory in order to quickly set up my linux environment on other co
 * There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I broke some of the basic vim functionality in order to make these hotkeys work
 
+![alt text](https://raw.githubusercontent.com/mikedefrancis/ctrl-vim/ctrl-vim.png)
+
 * Navigation
 
       Space                    - toggle center-scroll mode
