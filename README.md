@@ -101,9 +101,14 @@ I use this directory in order to quickly set up my linux environment on other co
 
 ## Installing CTRL-VIM
 
-* UPDATE: Just run the install script after optionally backing up your exiting ~/.vimrc
+* Run the following commands
+
+      git clone https://github.com/mikedefrancis/ctrl-vim ctrl-vim
+      ./install_ctrl_vim
+
 * The install script only works with ubuntu
-* If you already have certain vundle packages installed, or you encounter other problems, please perform the following steps:
+
+* If you encounter problems running the install script, please perform the following steps:
       
       sudo apt-get install vim silversearcher-ag
       mkdir -p ~/.vim/bundle
@@ -112,6 +117,7 @@ I use this directory in order to quickly set up my linux environment on other co
       p .vimrc ~/.vimrc
       vim -c ":PluginInstall" README.md
 
+* theoreticaly this work on other linuxes besides ubuntu but this has not been tested
 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
 
