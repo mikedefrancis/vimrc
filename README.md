@@ -10,13 +10,12 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * TODO: add an option to toggle code-completion options using commented-out plugins
 
+![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP_T4R2Mnc8ja4jZ5pIBk0jlk7enzbcN3VeAFO52-QA3UpABlx)
 
 ## CTRL-VIM
 * I give you a simplified and expanded vim IDE defined by my .vimrc file. 
 * There are shortcuts that make vim a lot easier to use without having to enter many characters to do things like opening files, splitting tabs, etc.
 * I broke some of the basic vim functionality in order to make these hotkeys work
-
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Vimlogo.svg/1022px-Vimlogo.svg.png)
 
 * Navigation
 
@@ -136,3 +135,12 @@ I use this directory in order to quickly set up my linux environment on other co
 * logout, select i3 as the desktop, and log back in. for a tutorial on using i3, see:
 
 * https://fedoramagazine.org/getting-started-i3-window-manager/
+
+
+## REFERENCE
+
+* Vim Cheatsheet For Programmers (note that I broke some of these hotkeys and may consider restoring their functionality later)
+
+![alt text](http://michael.peopleofhonoronly.com/vim/vim_cheat_sheet_for_programmers_screen.png)
+
+
