@@ -12,7 +12,9 @@ sudo apt-get install vim silversearcher-ag
 mkdir -p ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo 'stty -ixon' >> ~/.bashrc
+source ~/.bashrc
 cp .vimrc ~/.vimrc
-vim -c ":PluginInstall" README.md
+vim -c ":PluginInstall" -c "qa!" README.md
+
 
 echo "...install complete."
