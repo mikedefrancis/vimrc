@@ -384,8 +384,6 @@ vnoremap <C-b> <ESC>:tabedit
 cnoremap <C-b> <ESC>:tabedit  
 inoremap <C-b> <ESC>:tabedit  
 
-vnoremap <S-b> <ESC>gt
-nnoremap <S-b> <ESC>gt
 vnoremap <S-Left> <ESC>gT
 nnoremap <S-Left> <ESC>gT
 vnoremap <S-Right> <ESC>gt
