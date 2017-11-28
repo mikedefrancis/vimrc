@@ -18,73 +18,74 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Navigation
 
-    Space                    - toggle center-scroll mode
-    Ctrl+a (or ESCAPE)       - enter normal mode
-    Shift+v                  - enter visual mode
-    ;                        - enter command mode
-    a                        - enter insert mode
-    Alt+Left/Right           - next/previous location
-    Alt+Up/Down              - go up or down 10 lines at a time
-    Ctrl+Left/Right/Up/Down  - move between windows
-    Shift+Left/Right         - move between tab pages
-    Shift+Up/Down            - equal to page up/page down
-    Ctrl+t                   - toggle mouse 
-    Ctrl+l                   - toggle line numbers
+      Space                    - toggle center-scroll mode
+      Ctrl+a (or ESCAPE)       - enter normal mode
+      Shift+v                  - enter visual mode
+      ;                        - enter command mode
+      a                        - enter insert mode
+      Alt+Left/Right           - next/previous location
+      Alt+Up/Down              - go up or down 10 lines at a time
+      Ctrl+Left/Right/Up/Down  - move between windows
+      Shift+Left/Right         - move between tab pages
+      Shift+Up/Down            - equal to page up/page down
+      Ctrl+t                   - toggle mouse 
+      Ctrl+l                   - toggle line numbers
 
 * Windows and Tabs
 
-    Ctrl+b+enter             - create a new tab
-    Ctrl+n                   - create a vertically split window
-    Ctrl+h                   - create a horozontally split window
-    b+{QWERTY} (normal mode) - bookmark the file in the current window to one of {QWERTY}
-    Shift+{QWERTY} (nm)      - jump to {QWERTY} bookmark
-    Shift+s (normal mode)    - switch background color
+      Ctrl+b+enter             - create a new tab
+      Ctrl+n                   - create a vertically split window
+      Ctrl+h                   - create a horozontally split window
+      b+{QWERTY} (normal mode) - bookmark the file in the current window to one of {QWERTY}
+      Shift+{QWERTY} (nm)      - jump to {QWERTY} bookmark
+      Shift+s (normal mode)    - switch background color
 
 * Files and Directories
 
-    Ctrl+s                   - save changes to current file
-    Ctrl+q                   - attempt to save changes to file in current window and quit
-    Ctrl+e                   - open a file in the current window
-    Ctrl+b                   - open a file in a new tab
-    Ctrl+g                   - open nerdtree showing current file (no cursor switch)
-    ls (normal mode)         - open nerdtree showing current working directory
-    cd (normal mode)         - change current working directory to that specified
-    cc (normal mode)         - show current working directory
-    Shift+c (normal mode)    - change current working directory to file in current window   
-    Shift+x (normal mode)    - change write permissions of current file
-    Shift+b (normal mode)    - refresh buffers
+      Ctrl+s                   - save changes to current file
+      Ctrl+q                   - attempt to save changes to file in current window and quit
+      Ctrl+e                   - open a file in the current window
+      Ctrl+b                   - open a file in a new tab
+      Ctrl+g                   - open nerdtree showing current file (no cursor switch)
+      ls (normal mode)         - open nerdtree showing current working directory
+      cd (normal mode)         - change current working directory to that specified
+      cc (normal mode)         - show current working directory
+      Shift+c (normal mode)    - change current working directory to file in current window   
+      Shift+x (normal mode)    - change write permissions of current file
+      Shift+b (normal mode)    - refresh buffers
 
 
 * Basic Editing
 
-    Ctrl+w                   - write a newline from normal mode
-    Ctrl+c                   - yank
-    Ctrl+v                   - paste what is yanked
-    Ctrl+z / Ctrl+u          - undo
-    Ctrl+r                   - redo
-    ,c+Space (normal mode)   - toggle block comments
-
+      Ctrl+w                   - write a newline from normal mode
+      Ctrl+c                   - yank
+      Ctrl+v                   - paste what is yanked
+      Ctrl+z / Ctrl+u          - undo
+      Ctrl+r                   - redo
+      ,c+Space (normal mode)   - toggle block comments
+  
 * Search Tools
 
-    # Note that even though multi-file search looks like it is using Ack!, it really uses ag
-    /                        - find text in file in current window
-    Shift+d (normal mode)    - find text in all files under current working directory (cwd)
-    Ctrl+d                   - find text in files in cwd where filename matches pattern 
-    Ctrl+f                   - fuzzy filename search (Ctrl+p)
-    Shift+f (normal mode)    - find and replace text in file in current window
-    Shift+h                  - toggle search highlighting
+      ...Note that even though multi-file search looks like it is using Ack!, it really uses ag
+      /                        - find text in file in current window
+      Shift+d (normal mode)    - find text in all files under current working directory (cwd)
+      Ctrl+d                   - find text in files in cwd where filename matches pattern 
+      Ctrl+f                   - fuzzy filename search (Ctrl+p)
+      Shift+f (normal mode)    - find and replace text in file in current window
+      Shift+h                  - toggle search highlighting
     
 
 * Miscellaneous
     
-    I constantly update this .vimrc...
-    ...you may find that a hotkey is broken or has been remapped to something else
-    ...you may also find new goodies
-    , is the leader key
-    f controls various easymotion things besides what I remapped
-    I clobbed a lot of regular hotkeys in order to make this usable for me
-    If you hate what I did, feel free to change whatever you want
-    If you have suggestions, let me know
+      I constantly update this .vimrc...
+      ...you may find that a hotkey is broken or has been remapped to something else
+      ...you may also find new goodies
+      , is the leader key
+      f controls various easymotion things besides what I remapped
+      c controls various commenting functions from nerdcommenter
+      I clobbed a lot of regular hotkeys in order to make this usable for me
+      If you hate what I did, feel free to change whatever you want
+      If you have suggestions, let me know
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
@@ -94,12 +95,12 @@ I use this directory in order to quickly set up my linux environment on other co
 * The install script only works with ubuntu
 * If you already have certain vundle packages installed, or you encounter other problems, please perform the following steps:
       
-    sudo apt-get install vim silversearcher-ag
-    mkdir -p ~/.vim/bundle
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    echo 'stty -ixon' >> ~/.bashrc
-    p .vimrc ~/.vimrc
-    im -c ":PluginInstall" README.md
+      sudo apt-get install vim silversearcher-ag
+      mkdir -p ~/.vim/bundle
+      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+      echo 'stty -ixon' >> ~/.bashrc
+      p .vimrc ~/.vimrc
+      im -c ":PluginInstall" README.md
 
 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
