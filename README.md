@@ -101,7 +101,7 @@ I use this directory in order to quickly set up my linux environment on other co
 
 ## Installing CTRL-VIM
 
-* UPDATE: Just run the install script after saving your .vimrc
+* UPDATE: Just run the install script after optionally backing up your exiting ~/.vimrc
 * The install script only works with ubuntu
 * If you already have certain vundle packages installed, or you encounter other problems, please perform the following steps:
       
