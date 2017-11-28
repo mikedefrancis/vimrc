@@ -1,6 +1,6 @@
 #!/bin/sh
-echo -e "\e[1;31mCTRL-VIM by Mikey D\e[0m"
-echo -e "\e[1;31minstalling...\e[0m"
+echo "CTRL-VIM by Mikey D"
+echo "installing..."
 echo "WARNING, This installation will destroy your existing .vimrc file! I suggest making a backup. Do you wish to continue?(y or n) [ENTER]:"
 read choice
 case $choice in
@@ -15,4 +15,4 @@ echo 'stty -ixon' >> ~/.bashrc
 cp .vimrc ~/.vimrc
 vim -c ":PluginInstall" README.md
 
-echo -e "\e[1;31m...install complete.\e[0m"
+echo "...install complete."
