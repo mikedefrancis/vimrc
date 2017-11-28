@@ -237,7 +237,7 @@ nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| end
 
 let g:ctrlp_map = '<c-f>'
 
-map <C-t> <ESC>:bufdo e<CR>:echo "Buffers Rereshed"<CR>
+nnoremap <S-b> <ESC>:bufdo e<CR>:echo "Buffers Rereshed"<CR>
 map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
@@ -245,10 +245,15 @@ inoremap <C-l> <ESC>:call ToggleLines()<CR>
 vnoremap <C-l> <ESC>:call ToggleLines()<CR>
 cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 
-nnoremap <C-d> <ESC>:call ToggleMouse()<CR>
-inoremap <C-d> <ESC>:call ToggleMouse()<CR>
-vnoremap <C-d> <ESC>:call ToggleMouse()<CR>
-cnoremap <C-d> <ESC>:call ToggleMouse()<CR>
+nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+inoremap <C-t> <ESC>:call ToggleMouse()<CR>
+vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+cnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+
+nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+cnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+inoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 
 nnoremap <S-d> <ESC>:Ack! 
 vnoremap <S-d> <ESC>:Ack!
@@ -299,10 +304,10 @@ inoremap <C-r> <ESC>:redo<CR>
 vnoremap <C-r> <ESC>:redo<CR>
 cnoremap <C-r> <ESC>:redo<CR>
 
-inoremap <C-a> <ESC>l
-nnoremap <C-a> <ESC>l
-vnoremap <C-a> <ESC>l
-cnoremap <C-a> <ESC>l
+inoremap <C-a> <ESC>
+nnoremap <C-a> <ESC>
+vnoremap <C-a> <ESC>
+cnoremap <C-a> <ESC>
 
 "using control +z, x, c, v, r for undo, cut, copy, paste, redo
 "like all other programs
