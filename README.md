@@ -87,6 +87,16 @@ I use this directory in order to quickly set up my linux environment on other co
       If you hate what I did, feel free to change whatever you want
       If you have suggestions, let me know
 
+* Help
+     
+      :help                  - view general help
+      :help <key-combo>      - see what default vim commands I clobbered for the key sequence specified
+      :help nerdcommenter    - view commenting plugin help
+      :help nerdtree         - view file searching help
+      :help easymotion       - view navigation plugin help
+      :help ctrlp            - view help for fuzzy file searching
+      :help ack              - view help for ack multi-file search (not accurate if silversearcher-ag is installed which it is by my script)
+
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 
 ## Installing CTRL-VIM
