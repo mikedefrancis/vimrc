@@ -110,7 +110,7 @@ I use this directory in order to quickly set up my linux environment on other co
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
       echo 'stty -ixon' >> ~/.bashrc
       p .vimrc ~/.vimrc
-      im -c ":PluginInstall" README.md
+      vim -c ":PluginInstall" README.md
 
 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
