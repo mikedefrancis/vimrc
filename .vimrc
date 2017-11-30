@@ -409,7 +409,8 @@ endfunction
 " FUN WITH CTAGS!!!
 set tags=./tags,tags;
 
-nnoremap <C-j> <ESC>:!ctags -R --exclude=.git .<CR>
+nnoremap <S-j> <ESC>:tjump 
+nnoremap <C-j><C-j><C-j> <ESC>:!ctags -R --exclude=.git .<CR>
 nnoremap jj <ESC><C-]>
 
 
