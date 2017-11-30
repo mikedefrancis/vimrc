@@ -38,7 +38,7 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+n                   - create a vertically split window
       Ctrl+y                   - create a horozontally split window
       b+{qwerty} (normal mode) - bookmark the file in the current window to one of {qwerty}
-      Shift+{qwerty} ("""")      - jump to {qwerty} bookmark
+      Shift+{qwerty} ("""")    - jump to {qwerty} bookmark
       Shift+s (normal mode)    - switch background color  
 
 * Files and Directories
