@@ -1,7 +1,7 @@
 " there is no warrantee provided for this software, not even any regarding
 " fitness for a particular use.
 " @Author Mike DeFrancis. mike (AT) defrancis (DOT) org.
-set nocompatible              
+set nocompatible
 filetype off                 
 set exrc
 
@@ -238,8 +238,8 @@ nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| end
 
 let g:ctrlp_map = '<c-f>'
 
-nnoremap <S-b> <ESC>:bufdo e<CR>:echo "Buffers Rereshed"<CR>
-map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>
+nnoremap <S-b> <ESC>:marks<CR>
+map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>     
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
 inoremap <C-l> <ESC>:call ToggleLines()<CR>
@@ -254,7 +254,26 @@ nnoremap <Tab>   >>
 vnoremap <Tab>   >><ESC>gv
 nnoremap <S-Tab> <<
 vnoremap <S-Tab> <<<ESC>gv
-  
+
+" adding easy use of an additional copy and paste buffer
+" so that I can cut and paste things around without blowing away 
+" all of that good stuff that I found somewhere to insert
+" [kappa] buffer
+nnoremap <S-k> "ky 
+vnoremap <S-k> "ky
+
+inoremap <C-k> <ESC>"kpi
+vnoremap <C-k> "kp
+cnoremap <C-k> "kp
+nnoremap <C-k> "kp
+
+
+" making it slightly easier to go to the start and end of real text in a line
+" (ignore whitespace)
+nnoremap ge g_
+nnoremap gs _
+nnoremap gf - 
+
 nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 cnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
@@ -273,8 +292,8 @@ inoremap <C-s> <ESC>:w<CR>
 vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
-nnoremap <S-f> <ESC>:%s/<find>/<replace>/g
-vnoremap <S-f> <ESC>:%s/<find>/<replace>/g
+nnoremap <S-f> <ESC>:%s/<find>/<replace>/gc
+vnoremap <S-f> <ESC>:%s/<find>/<replace>/gc
 
 " This is a really fun hack. If you don't have write permissions hit <ESC>shift-x
 nnoremap <S-x> <ESC>:w !sudo tee %<CR>
@@ -417,6 +436,9 @@ endfunction
 nnoremap <S-z><S-z><S-z> <ESC>:qa!<CR>
 nnoremap <S-s><S-s><S-s> <ESC>:xa!<CR>
 
+" recording fun
+nnoremap <S-g> @g
+nnoremap gg qg
 
 " EXECUTION
 nnoremap ' <ESC>:! 

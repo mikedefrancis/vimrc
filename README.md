@@ -45,6 +45,7 @@ I use this directory in order to quickly set up my linux environment on other co
       b+{qwerty} (normal mode) - bookmark the file in the current window to one of {qwerty}
       Shift+{qwerty} ("""")    - jump to {qwerty} bookmark
       Shift+s (normal mode)    - switch background color  
+      Shift+b                  - show all bookmarks
 
 * Files and Directories
 
@@ -75,7 +76,18 @@ I use this directory in order to quickly set up my linux environment on other co
       Tab                      - indent
       Shift+Tab                - unindent
       ,c+Space (normal mode)   - toggle block comments
-  
+      ge                       - go to end of line (excluding training whitespace)
+      gs                       - go to start of line (excluding training whitespace)
+      gf                       - go to first non-whitespace char in previous line
+      Shift+k  (normal or vis) - copy selected text to kappa buffer (wont be overwritten by Ctrl+c)
+      Ctrl+k (any mode)        - paste text in kappa buffer
+
+* Easy Repeated Actions
+
+      gg                       - start recording keystrokes (using register g)
+      q                        - stop recording keystrokes (using register g)
+      Shift+g                  - executed recorded keystrokes (using register g)
+
 * Search Tools
 
       ...Note that even though multi-file search looks like it is using Ack!, it really uses ag
