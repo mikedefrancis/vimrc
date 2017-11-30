@@ -348,8 +348,8 @@ let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 
 
-noremap cc <ESC>:pwd<CR>
-noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
+nnoremap cc <ESC>:pwd<CR>
+nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
 
 nnoremap cd <ESC>:cd 
 
