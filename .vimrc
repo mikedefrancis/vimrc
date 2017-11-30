@@ -406,6 +406,10 @@ function! ToggleBackground()
 	endif
 endfunction
 
+" kill all
+nnoremap <S-z><S-z><S-z> <ESC>:qa!<CR>
+
+
 " EXECUTION
 nnoremap . <ESC>:! 
 

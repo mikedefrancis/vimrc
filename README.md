@@ -49,6 +49,8 @@ I use this directory in order to quickly set up my linux environment on other co
 
       Ctrl+s                   - save changes to current file
       Ctrl+q                   - attempt to save changes to file in current window and quit
+      Shift+z+z+z (normal mode)- force close all windows without saving
+      Shift+s+s+s (normal mode)- force close all windows and save if possible
       Ctrl+e                   - open a file in the current window
       Ctrl+b                   - open a file in a new tab
       Ctrl+g                   - open nerdtree showing current file (no cursor switch)
