@@ -1,5 +1,4 @@
-" This file based off of a .vimrc inside of https://github.com/sebbekarlsson
-" There is no warrantee for this software (implied or otherwise), including
+
 " fitness for a particular use.
 " @Author Mike DeFrancis. mike (AT) defrancis (DOT) org.
 set nocompatible              " be iMproved, required
@@ -352,7 +351,9 @@ nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scro
 noremap cc <ESC>:pwd<CR>
 noremap <S-c> <ESC>:cd %:p:h<CR><ESC>:pwd<CR>
 
-noremap cd <ESC>:cd 
+nnoremap cd <ESC>:cd 
+
+nnoremap bb :cd ..<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
