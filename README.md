@@ -21,7 +21,8 @@ I use this directory in order to quickly set up my linux environment on other co
 
       Ctrl+a (or ESCAPE)       - enter normal mode
       Space  (normal mode)     - toggle center-scroll
-      Shift+v  (normal mode)   - enter visual mode
+      v  (normal mode)         - toggle visual mode
+      Shift+v  (normal mode)   - enter visual-line mode
       ; (normal mode)          - enter command mode
       a (normal mode)          - enter insert mode
       . (normal mode)          - run bash command via ':! <command>' (this one is awesome)
@@ -69,6 +70,7 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+v                   - paste what is yanked
       Ctrl+z / Ctrl+u          - undo
       Ctrl+r                   - redo
+      Ctrl+p (insert mode)     - toggle special paste insert mode for when copying from outside of vim
       Tab                      - indent
       Shift+Tab                - unindent
       ,c+Space (normal mode)   - toggle block comments
