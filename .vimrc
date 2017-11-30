@@ -313,10 +313,10 @@ nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 
-cnoremap <C-u> <ESC>:undo<CR>
-vnoremap <C-u> <ESC>:undo<CR>
-nnoremap <C-u> <ESC>:undo<CR>
-inoremap <C-u> <ESC>:undo<CR>
+" cnoremap <C-u> <ESC>:undo<CR>
+" vnoremap <C-u> <ESC>:undo<CR>
+" nnoremap <C-u> <ESC>:undo<CR>
+" inoremap <C-u> <ESC>:undo<CR>
 
 inoremap <C-z> <ESC>:undo<CR>
 nnoremap <C-z> <ESC>:undo<CR>
@@ -342,7 +342,7 @@ vnoremap <C-c> y
 nnoremap <C-c> yy
 inoremap <C-c> <ESC>yyi
 
-set pastetoggle=<C-p>
+set pastetoggle=<C-u>
 inoremap <C-v> <ESC>pi
 
 nnoremap <C-v> <ESC><Up>p<Down>
@@ -448,7 +448,7 @@ nnoremap ' <ESC>:!
 set tags=./tags,tags;
 
 nnoremap <S-j> <ESC>:tjump 
-nnoremap <C-j><C-j><C-j> <ESC>:!ctags -R --exclude=.git .<CR>
+nnoremap <C-j><C-j><C-j> <ESC>:!ctags -R --exclude=.git .
 nnoremap jj <ESC><C-]>
 
 

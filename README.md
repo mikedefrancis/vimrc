@@ -31,6 +31,9 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+Left/Right/Up/Down  - move between windows
       Shift+Left/Right         - move between tab pages
       Shift+Up/Down            - equal to page up/page down
+      ge                       - go to end of line (excluding training whitespace)
+      gs                       - go to start of line (excluding training whitespace)
+      gf                       - go to first non-whitespace char in previous line
       Ctrl+t                   - toggle mouse 
       Ctrl+l                   - toggle line numbers
       Ctrl+j+j+j               - (re)generate ctags for current working directory (be careful not to do this by accident!)
@@ -66,21 +69,22 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Basic Editing
 
+      Ctrl+p                   - autocomplete word/function/variable name
       dd                       - delete
       Ctrl+w                   - write a newline from normal mode
       Ctrl+c                   - yank
       Ctrl+v                   - paste what is yanked
-      Ctrl+z / Ctrl+u          - undo
+      Ctrl+z                   - undo
       Ctrl+r                   - redo
-      Ctrl+p (insert mode)     - toggle special paste insert mode for when copying from outside of vim
+      Ctrl+u (insert mode)     - toggle special paste insert mode for when copying from outside of vim
       Tab                      - indent
       Shift+Tab                - unindent
       ,c+Space (normal mode)   - toggle block comments
-      ge                       - go to end of line (excluding training whitespace)
-      gs                       - go to start of line (excluding training whitespace)
-      gf                       - go to first non-whitespace char in previous line
       Shift+k  (normal or vis) - copy selected text to kappa buffer (wont be overwritten by Ctrl+c)
       Ctrl+k (any mode)        - paste text in kappa buffer
+      di"                      - delete contents between quation marks and place cursor there
+      di(                      - delete contents between parens and palce cursor there
+      di{                      - delete contents between braces and place cursor there
 
 * Easy Repeated Actions
 
