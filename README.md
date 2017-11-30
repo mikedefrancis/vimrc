@@ -25,7 +25,7 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+v  (normal mode)   - enter visual-line mode
       ; (normal mode)          - enter command mode
       a (normal mode)          - enter insert mode
-      . (normal mode)          - run bash command via ':! <command>' (this one is awesome)
+      ' (normal mode)          - run bash command via ':! <command>' (this one is awesome)
       Alt+Left/Right           - next/previous location
       Alt+Up/Down              - go up or down 10 lines at a time
       Ctrl+Left/Right/Up/Down  - move between windows
@@ -65,6 +65,7 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Basic Editing
 
+      dd                       - delete
       Ctrl+w                   - write a newline from normal mode
       Ctrl+c                   - yank
       Ctrl+v                   - paste what is yanked

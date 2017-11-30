@@ -1,8 +1,8 @@
-
+" there is no warrantee provided for this software, not even any regarding
 " fitness for a particular use.
 " @Author Mike DeFrancis. mike (AT) defrancis (DOT) org.
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible              
+filetype off                 
 set exrc
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -249,11 +249,11 @@ cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 
-inoremap <S-Tab> <ESC><<i
+inoremap <S-Tab> <EVSC><<i
 nnoremap <Tab>   >>
-vnoremap <Tab>   >><ESC>
+vnoremap <Tab>   >><ESC>gv
 nnoremap <S-Tab> <<
-vnoremap <S-Tab> <<<ESC>
+vnoremap <S-Tab> <<<ESC>gv
   
 nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
@@ -419,7 +419,7 @@ nnoremap <S-s><S-s><S-s> <ESC>:xa!<CR>
 
 
 " EXECUTION
-nnoremap . <ESC>:! 
+nnoremap ' <ESC>:! 
 
 
 " FUN WITH CTAGS!!!
