@@ -32,8 +32,9 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+Up/Down            - equal to page up/page down
       Ctrl+t                   - toggle mouse 
       Ctrl+l                   - toggle line numbers
-      Ctrl+j                   - generate ctags for current working directory
-      jj                       - jump to definition of function/variable under cursor (requires prior ctag gen)
+      Ctrl+j                   - (re)generate ctags for current working directory
+      Shift+j                  - jump to the definition of func/variable under cursor if exists, or show all definitions
+      jj                       - (smart) jump to definition of function/variable under cursor (requires prior ctag gen)
 
 * Windows and Tabs
 
