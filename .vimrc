@@ -406,6 +406,10 @@ function! ToggleBackground()
 	endif
 endfunction
 
+" EXECUTION
+nnoremap . <ESC>:! 
+
+
 " FUN WITH CTAGS!!!
 set tags=./tags,tags;
 
