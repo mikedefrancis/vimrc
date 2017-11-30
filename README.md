@@ -113,6 +113,7 @@ I use this directory in order to quickly set up my linux environment on other co
 * Run the following commands
 
       git clone https://github.com/mikedefrancis/ctrl-vim ctrl-vim
+      cd ctrl-vim
       ./install_ctrl_vim
       source ~/.bashrc
 
@@ -121,6 +122,7 @@ I use this directory in order to quickly set up my linux environment on other co
 * If you encounter problems running the install script, please perform the following steps:
       
       git clone https://github.com/mikedefrancis/ctrl-vim ctrl-vim
+      cd ctrl-vim
       sudo apt-get install vim silversearcher-ag
       mkdir -p ~/.vim/bundle
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
