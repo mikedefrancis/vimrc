@@ -69,18 +69,24 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+v                   - paste what is yanked
       Ctrl+z / Ctrl+u          - undo
       Ctrl+r                   - redo
+      Tab                      - indent
+      Shift+Tab                - unindent
       ,c+Space (normal mode)   - toggle block comments
   
 * Search Tools
 
       ...Note that even though multi-file search looks like it is using Ack!, it really uses ag
-      /                        - find text in file in current window
+      
+      /<text>                  - find text in file in current window
+      n (normal mode)          - go to next instance of found text
+      Shift+n (normal mode)    - go to prev instance of found text
+      * (normal mode)          - start a new search for text under cursor (in current file) 
       Shift+d (normal mode)    - find text in all files under current working directory (cwd)
       Ctrl+d                   - find text in files in cwd where filename matches pattern 
       Ctrl+f                   - fuzzy filename search (Ctrl+p)
       Shift+f (normal mode)    - find and replace text in file in current window
       Shift+h                  - toggle search highlighting
-      Ctrl+h                   - scroll through/run vim command history (includes all searches and files)
+      Ctrl+h                   - search through/run vim command history (includes all searches and files)
 
 * Miscellaneous
     

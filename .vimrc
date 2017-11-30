@@ -100,7 +100,9 @@ set tabstop=4
 :set guioptions-=T  "remove toolbar
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
-:set lines=999 columns=999
+
+" I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
+":set lines=999 columns=999
 " more hacks
 " DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
 " I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
@@ -246,10 +248,14 @@ vnoremap <C-l> <ESC>:call ToggleLines()<CR>
 cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 
 nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
-inoremap <C-t> <ESC>:call ToggleMouse()<CR>
 vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
-cnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 
+inoremap <S-Tab> <ESC><<i
+nnoremap <Tab>   >>
+vnoremap <Tab>   >><ESC>
+nnoremap <S-Tab> <<
+vnoremap <S-Tab> <<<ESC>
+  
 nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 cnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
@@ -408,6 +414,7 @@ endfunction
 
 " kill all
 nnoremap <S-z><S-z><S-z> <ESC>:qa!<CR>
+nnoremap <S-s><S-s><S-s> <ESC>:xa!<CR>
 
 
 " EXECUTION
