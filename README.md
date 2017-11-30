@@ -36,10 +36,10 @@ I use this directory in order to quickly set up my linux environment on other co
 
       Ctrl+b+enter             - create a new tab
       Ctrl+n                   - create a vertically split window
-      Ctrl+h                   - create a horozontally split window
+      Ctrl+y                   - create a horozontally split window
       b+{QWERTY} (normal mode) - bookmark the file in the current window to one of {QWERTY}
       Shift+{QWERTY} (nm)      - jump to {QWERTY} bookmark
-      Shift+s (normal mode)    - switch background color
+      Shift+s (normal mode)    - switch background color  
 
 * Files and Directories
 
@@ -74,7 +74,7 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+f                   - fuzzy filename search (Ctrl+p)
       Shift+f (normal mode)    - find and replace text in file in current window
       Shift+h                  - toggle search highlighting
-    
+      Ctrl+h                   - scroll through/run vim command history (includes all searches and files)
 
 * Miscellaneous
     
@@ -97,6 +97,14 @@ I use this directory in order to quickly set up my linux environment on other co
       :help easymotion       - view navigation plugin help
       :help ctrlp            - view help for fuzzy file searching
       :help ack              - view help for ack multi-file search (not accurate if silversearcher-ag is installed which it is by my script)
+
+* Gnome-Terminal Fun (vim and terminal are designed to be used together. do it.)
+      
+      Ctrl+Shift+t           - create a new terminal tab
+      Ctrl+[PageUp/PageDown] - switch between terminal tabs
+      Alt+[number]           - jump to terminal tab # [number]
+
+
 
 * I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
 

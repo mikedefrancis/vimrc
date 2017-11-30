@@ -284,10 +284,10 @@ inoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 
-inoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
-nnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
-vnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
-cnoremap <C-h> <ESC>:split<CR><ESC>:wincmd j<CR>
+inoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 
 cnoremap <C-u> <ESC>:undo<CR>
 vnoremap <C-u> <ESC>:undo<CR>
@@ -389,10 +389,10 @@ nnoremap <S-Left> <ESC>gT
 vnoremap <S-Right> <ESC>gt
 nnoremap <S-Right> <ESC>gt
 
-inoremap <C-CR> <ESC>:
-nnoremap <C-CR> <ESC>:
-vnoremap <C-CR> <ESC>:
-cnoremap <C-CR> <ESC>:
+inoremap <C-h> <ESC>q:
+vnoremap <C-h> <ESC>q:
+cnoremap <C-h> <ESC>q:
+nnoremap <C-h> <ESC>q:
 
 nnoremap a i
 
