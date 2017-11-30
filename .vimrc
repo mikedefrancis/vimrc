@@ -406,5 +406,12 @@ function! ToggleBackground()
 	endif
 endfunction
 
+" FUN WITH CTAGS!!!
+set tags=./tags,tags;
+
+nnoremap <C-j> <ESC>:!ctags -R --exclude=.git .<CR>
+nnoremap jj <ESC><C-]>
+
+
 set secure
 

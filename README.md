@@ -19,11 +19,12 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Navigation
 
-      Space                    - toggle center-scroll mode
       Ctrl+a (or ESCAPE)       - enter normal mode
-      Shift+v                  - enter visual mode
-      ;                        - enter command mode
-      a                        - enter insert mode
+      Space  (normal mode)     - toggle center-scroll
+      Shift+v  (normal mode)   - enter visual mode
+      ; (normal mode)          - enter command mode
+      a (normal mode)          - enter insert mode
+      . (normal mode)          - run bash command via ':! <command>' (this one is awesome)
       Alt+Left/Right           - next/previous location
       Alt+Up/Down              - go up or down 10 lines at a time
       Ctrl+Left/Right/Up/Down  - move between windows
@@ -31,6 +32,8 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+Up/Down            - equal to page up/page down
       Ctrl+t                   - toggle mouse 
       Ctrl+l                   - toggle line numbers
+      Ctrl+j                   - generate ctags for current working directory
+      jj                       - jump to definition of function/variable under cursor (requires prior ctag gen)
 
 * Windows and Tabs
 
@@ -122,8 +125,8 @@ I use this directory in order to quickly set up my linux environment on other co
 * If you encounter problems running the install script, please perform the following steps:
       
       git clone https://github.com/mikedefrancis/ctrl-vim ctrl-vim
-      cd ctrl-vim
-      sudo apt-get install vim silversearcher-ag
+      gcd ctrl-vim
+      sudo apt-get install vim silversearcher-ag exuberant-ctags   
       mkdir -p ~/.vim/bundle
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
       echo 'stty -ixon' >> ~/.bashrc
