@@ -69,10 +69,17 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Basic Editing
 
-      Ctrl+p                   - autocomplete word/function/variable name
+      cw                       - copy word to regular copy buffer
+      cl                       - copy line to regular copy buffer
+      kk                       - copy line/selection to kappa buffer
+      kw                       - copy word to kappa buffer
+      kl                       - copy line to kappa buffer
+      Ctrl+k                   - paste contents of kappa buffer
+      Ctrl+d (insert mode)     - autocomplete word/function/variable name
+      Ctrl+p                   - autocomplete word/function/variable name 
       dd                       - delete
       Ctrl+w                   - write a newline from normal mode
-      Ctrl+c                   - yank
+      Ctrl+c                   - yank (to regular buffer)
       Ctrl+v                   - paste what is yanked
       Ctrl+z                   - undo
       Ctrl+r                   - redo
@@ -85,6 +92,8 @@ I use this directory in order to quickly set up my linux environment on other co
       di"                      - delete contents between quation marks and place cursor there
       di(                      - delete contents between parens and palce cursor there
       di{                      - delete contents between braces and place cursor there
+      #d (normal mode)         - print a block comment line /***...***/
+
 
 * Easy Repeated Actions
 
@@ -95,18 +104,26 @@ I use this directory in order to quickly set up my linux environment on other co
 * Search Tools
 
       ...Note that even though multi-file search looks like it is using Ack!, it really uses ag
-      
+     
+      ff                       - find the word under the cursor (in current file)
       /<text>                  - find text in file in current window
       n (normal mode)          - go to next instance of found text
       Shift+n (normal mode)    - go to prev instance of found text
       * (normal mode)          - start a new search for text under cursor (in current file) 
       Shift+d (normal mode)    - find text in all files under current working directory (cwd)
-      Ctrl+d                   - find text in files in cwd where filename matches pattern 
+      Ctrl+d (normal mode)     - find text in files in cwd where filename matches pattern 
       Ctrl+f                   - fuzzy filename search (Ctrl+p)
       Shift+f (normal mode)    - find and replace text in file in current window
       Shift+h                  - toggle search highlighting
       Ctrl+h                   - search through/run vim command history (includes all searches and files)
 
+* Advanced
+
+      :make                    - run make and capture output
+      :cn                      - jump to file containing make error
+      :cc                      - show make error message
+      Ctrl+i                   - toggle syntastic syntax error checking in file
+      
 * Miscellaneous
     
       I constantly update this .vimrc...

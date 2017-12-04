@@ -38,6 +38,17 @@ Plugin 'google/vim-searchindex'
 " want to be able to use it for large projects
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'itchyny/lightline.vim'
+
+" STAGING LIST TO TRY:
+"better block comments than already in here?
+"Plugin 'tomtom/tcomment_vim'
+"
+"shows git changes in the corresponding files!
+"Plugin 'airblade/vim-gitgutter'
+"
+"python autocomplete:
+Plugin 'Valloric/YouCompleteMe'
 
 " Commenting out some of SK's plugins for speed reasons
 Plugin 'VundleVim/Vundle.vim'
@@ -47,7 +58,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'airblade/vim-gitgutter'
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 "Plugin 'christoomey/vim-conflicted'
 "Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'mattn/emmet-vim'
@@ -126,18 +137,23 @@ let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let g:NERDTreeDirArrows=0
 
-" @MPD I am not using syntastic anymore.
+" UPDATE: I am in fact using syntastic again but only with RECOMMENDED
+" settings https://github.com/vim-syntastic/syntastic 
+" @MPD I am not using syntastic anymore... OR MAYBE I AM?!
 " It is very, very slow, and doesn't always work
 " for my use cases. I think it is better with javascript and other high level
 " stuff. 
 " ==== Syntastic ====
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+
+" I am adding this hack so that I can use syntastic 99% of the time, and
+" disable it when there only when it has a problem with something
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "let g:syntastic_javascript_checkers = ['eslint']
 "let g:syntastic_javascript_mri_args = "--config=$HOME/.jshintrc"
 "let g:syntastic_python_checkers = [ 'pylint', 'flake8', 'pep8', 'pyflakes', 'python']
@@ -174,11 +190,19 @@ nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 
-map <silent> <A-Up> 10k
-map <silent> <A-Down> 10j
+nnoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
+nnoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
+vnoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
+vnoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
+inoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
+inoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
 
-noremap <silent> <A-PageUp> 4<PageUp>
-noremap <silent> <A-PageDown> 4<PageDown>
+nnoremap <silent> <A-PageUp> 4<PageUp>
+nnoremap <silent> <A-PageDown> 4<PageDown>
+vnoremap <silent> <A-PageUp> 4<PageUp>
+vnoremap <silent> <A-PageDown> 4<PageDown>
+inoremap <silent> <A-PageUp> 4<PageUp>
+inoremap <silent> <A-PageDown> 4<PageDown>
 
 
 function! ToggleMouse()
@@ -255,17 +279,25 @@ vnoremap <Tab>   >><ESC>gv
 nnoremap <S-Tab> <<
 vnoremap <S-Tab> <<<ESC>gv
 
-" adding easy use of an additional copy and paste buffer
+    " adding easy use of an additional copy and paste buffer
 " so that I can cut and paste things around without blowing away 
 " all of that good stuff that I found somewhere to insert
 " [kappa] buffer
-nnoremap <S-k> "ky 
-vnoremap <S-k> "ky
+nnoremap kk "ky$
+vnoremap kk "ky
 
-inoremap <C-k> <ESC>"kpi
-vnoremap <C-k> "kp
-cnoremap <C-k> "kp
-nnoremap <C-k> "kp
+nnoremap kw "kyiw 
+vnoremap kw "kyw
+
+nnoremap kl "ky$ 
+vnoremap kl "ky$
+
+
+
+inoremap <C-k> <ESC>"kpi<Right>
+vnoremap <C-k> "kp<Right>
+cnoremap <C-k> "kp<Right>
+nnoremap <C-k> "kp<Right>
 
 
 " making it slightly easier to go to the start and end of real text in a line
@@ -274,10 +306,17 @@ nnoremap ge g_
 nnoremap gs _
 nnoremap gf - 
 
+vnoremap ge g_
+vnoremap gs _
+vnoremap gf - 
+
+nnoremap i :echo "use a for insert and not i!"<CR>
+nnoremap <C-i> :SyntasticToggleMode<CR> 
+
 nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 cnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
-inoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+"inoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 
 nnoremap <S-d> <ESC>:Ack! 
 vnoremap <S-d> <ESC>:Ack!
@@ -304,7 +343,7 @@ vnoremap <C-e> <ESC>:edit
 cnoremap <C-e> <ESC>:edit
 
 nnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-inoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+"inoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 
@@ -343,7 +382,7 @@ nnoremap <C-c> yy
 inoremap <C-c> <ESC>yyi
 
 set pastetoggle=<C-u>
-inoremap <C-v> <ESC>pi
+inoremap <C-v> <ESC>pi<Right>
 
 nnoremap <C-v> <ESC><Up>p<Down>
 vnoremap <C-v> <ESC>pv
@@ -424,7 +463,7 @@ nnoremap a i
 
 nnoremap <S-s> <ESC>:call ToggleBackground()<CR>
 
-function! ToggleBackground()
+    function! ToggleBackground()
 	if &background == "dark"
 		set background=light
 	else
@@ -451,6 +490,19 @@ nnoremap <S-j> <ESC>:tjump
 nnoremap <C-j><C-j><C-j> <ESC>:!ctags -R --exclude=.git .
 nnoremap jj <ESC><C-]>
 
+" SEARCH for word under cursor
+nnoremap ff *
+vnoremap ?? *
+
+inoremap <C-d> <C-n>
+
+nnoremap #d i/****************************************/
+
+nnoremap cw yiw
+vnoremap cw yiw
+
+nnoremap cl yy
+vnoremap cl yy
 
 set secure
 
