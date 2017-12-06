@@ -27,7 +27,8 @@ I use this directory in order to quickly set up my linux environment on other co
       a (normal mode)          - enter insert mode
       ' (normal mode)          - run bash command via ':! <command>' (this one is awesome)
       Alt+Left/Right           - next/previous location
-      Alt+Up/Down              - go up or down 10 lines at a time
+      Alt+Up/Down              - go up or down 3 lines at a time
+      Shift+Up/Down            - go up or down 10 lines at a time
       Ctrl+Left/Right/Up/Down  - move between windows
       Shift+Left/Right         - move between tab pages
       Shift+Up/Down            - equal to page up/page down
