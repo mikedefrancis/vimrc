@@ -204,12 +204,15 @@ nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 
-nnoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
-nnoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
-vnoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
-vnoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
-inoremap <silent> <A-Up> <Up><Up><Up><Up><Up><Up>
-inoremap <silent> <A-Down> <Down><Down><Down><Down><Down><Down>
+nnoremap <silent> <A-Up> 3<Up>
+nnoremap <silent> <A-Down> 3<Down>
+vnoremap <silent> <A-Up> 3<Up>
+vnoremap <silent> <A-Down> 3<Down>
+inoremap <silent> <A-Up> 3<Up>
+inoremap <silent> <A-Down> 3<Down>
+
+nnoremap <silent> <S-Up> 10<Up>
+nnoremap <silent> <S-Down> 10<Down>
 
 nnoremap <silent> <A-PageUp> 4<PageUp>
 nnoremap <silent> <A-PageDown> 4<PageDown>
@@ -217,6 +220,8 @@ vnoremap <silent> <A-PageUp> 4<PageUp>
 vnoremap <silent> <A-PageDown> 4<PageDown>
 inoremap <silent> <A-PageUp> 4<PageUp>
 inoremap <silent> <A-PageDown> 4<PageDown>
+
+nnoremap de d$
 
 
 function! ToggleMouse()
