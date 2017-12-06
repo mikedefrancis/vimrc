@@ -120,6 +120,7 @@ fi
 # warning! undefining something does not remove the alias from shells that have previously sourced this
 alias tt='gnome-terminal'
 alias save='pushd .'
+alias sret='pushd .'
 alias ret='popd;ls'
 alias back='cd -;ls'
 alias home='pushd .; cd ~;ls'
@@ -144,7 +145,7 @@ alias c='clear'
 # save standard err and standard out to make output file:    
 alias make='make'
 alias mmake='make |& tee latest_make_output.txt'
-alias i='ifconfig -a'    
+alias i='efconfig -a'    
 alias ifconfig='ifconfig -a'    
 alias ggrep='grep --color -rni'    
 alias ffind='find -type f -name'    
@@ -207,4 +208,17 @@ alias chrome='chromium-browser'
 
 
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
+stty -ixon
 stty -ixon
