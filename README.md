@@ -34,6 +34,8 @@ I use this directory in order to quickly set up my linux environment on other co
       ge                       - go to end of line (excluding training whitespace)
       gs                       - go to start of line (excluding training whitespace)
       gf                       - go to first non-whitespace char in previous line
+      gt                       - go to top of file
+      gb                       - go to bottom of file
       Ctrl+t                   - toggle mouse 
       Ctrl+l                   - toggle line numbers
       Ctrl+j+j+j               - (re)generate ctags for current working directory (be careful not to do this by accident!)
@@ -65,7 +67,8 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+c (normal mode)    - change current working directory to file in current window   
       Shift+x (normal mode)    - change write permissions of current file
       Shift+b (normal mode)    - refresh buffers
-
+      pp (normal mode)         - browse previously opened files (hit q and then type file number from list)
+      oo (normal mode)         - open files matching pattern in cwd into new tabs(e.g., oo *.c<enter>)
 
 * Basic Editing
 
@@ -122,8 +125,13 @@ I use this directory in order to quickly set up my linux environment on other co
       :make                    - run make and capture output
       :cn                      - jump to file containing make error
       :cc                      - show make error message
-      Ctrl+i                   - toggle syntastic syntax error checking in file
-      
+      Tab (normal mode)        - toggle syntastic syntax error checking in file
+      Tab (insert mode)        - autocomplete line
+      Ctrl+o                   - insert snippet (e.g., for<Ctrl-o> creates for loop)
+      :retab                   - convert all existing tabs into spaces
+      ww (normal mode)         - toggle show whitespace chars
+      hh (normal mode)         - toggle binary editing (hex editor mode)
+
 * Miscellaneous
     
       I constantly update this .vimrc...

@@ -25,7 +25,7 @@ changed and new values in kernel config option format.
 If no config files are specified, .config and .config.old are used.
 
 Example usage:
- $ diffconfig .config config-with-some-changes
+$ diffconfig .config config-with-some-changes
 -EXT2_FS_XATTR  n
 -EXT2_FS_XIP  n
  CRAMFS  n -> y

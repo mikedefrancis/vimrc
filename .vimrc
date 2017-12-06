@@ -48,7 +48,8 @@ Plugin 'itchyny/lightline.vim'
 "Plugin 'airblade/vim-gitgutter'
 "
 "python autocomplete:
-Plugin 'Valloric/YouCompleteMe'
+"THIS IS COOL BUT THERE ARE SOME ISSUES WITH IT SOMETIMES
+"Plugin 'Valloric/YouCompleteMe'
 
 " Commenting out some of SK's plugins for speed reasons
 Plugin 'VundleVim/Vundle.vim'
@@ -75,6 +76,19 @@ Plugin 'kien/ctrlp.vim'
 "Plugin 'jonathanfilip/vim-lucius'
 Plugin 'morhetz/gruvbox'
 " ==== END PLUGIN THEMES ====
+
+" ======== SNIPMATE ==
+"SnipMate Plugins (code snippet completion using tabs
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+" Optional:
+Plugin 'honza/vim-snippets'
+" =================
+
+Plugin 'ervandew/supertab'
+
 
 " ==== PLUGIN SYNTAXES ====
 "Plugin 'cakebaker/scss-syntax.vim'
@@ -149,7 +163,7 @@ let g:NERDTreeDirArrows=0
 " disable it when there only when it has a problem with something
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -273,7 +287,7 @@ cnoremap <C-l> <ESC>:call ToggleLines()<CR>
 nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 
-inoremap <S-Tab> <EVSC><<i
+"inoremap <S-Tab> <EVS><<i
 nnoremap <Tab>   >>
 vnoremap <Tab>   >><ESC>gv
 nnoremap <S-Tab> <<
@@ -283,13 +297,13 @@ vnoremap <S-Tab> <<<ESC>gv
 " so that I can cut and paste things around without blowing away 
 " all of that good stuff that I found somewhere to insert
 " [kappa] buffer
-nnoremap kk "ky$
+nnoremap kk "kyil
 vnoremap kk "ky
 
 nnoremap kw "kyiw 
 vnoremap kw "kyw
 
-nnoremap kl "ky$ 
+nnoremap kl "kyil
 vnoremap kl "ky$
 
 
@@ -311,7 +325,7 @@ vnoremap gs _
 vnoremap gf - 
 
 nnoremap i :echo "use a for insert and not i!"<CR>
-nnoremap <C-i> :SyntasticToggleMode<CR> 
+nnoremap <C-i> :SyntasticToggleMode<CR>
 
 nnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
 vnoremap <C-d> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
@@ -417,7 +431,7 @@ noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 " @MPD
 " 'starcraft' style bookmarks
-nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark B"<CR>
+nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
 nnoremap <S-q> 'Q
 
 nnoremap bw <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
@@ -482,7 +496,6 @@ nnoremap gg qg
 " EXECUTION
 nnoremap ' <ESC>:! 
 
-
 " FUN WITH CTAGS!!!
 set tags=./tags,tags;
 
@@ -503,6 +516,93 @@ vnoremap cw yiw
 
 nnoremap cl yy
 vnoremap cl yy
+
+"toggle whitespace chars with ww
+nnoremap ww <ESC>:set list!<CR>
+
+"Toggle Hexmode Fun
+
+nnoremap hh :Hexmode<CR>
+
+" ex command for toggling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries 
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+  "elf files
+  au BufReadPre  *.elf let &bin=1
+  au BufReadPost *.elf if &bin | %!xxd
+  au BufReadPost *.elf set ft=xxd | endif
+  au BufWritePre *.elf if &bin | %!xxd -r
+  au BufWritePre *.elf endif
+  au BufWritePost *.elf if &bin | %!xxd
+  au BufWritePost *.elf set nomod | endif
+augroup END
+
+" FUN WITH TABS!!
+imap <C-o> <Plug>snipMateNextOrTrigger
+inoremap <Tab> <Plug>SuperTabForward
+
+nnoremap gt <ESC>:0<CR>
+nnoremap gb <ESC>:99999999<CR>
+
+"let g:UltiSnipsExpandTrigger="<C-i>"
+
+" OPEN PREVIOUS FILES
+nnoremap pp <ESC>:browse oldfiles!<CR>
+
+
+com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
+
+nnoremap oo <ESC>:Edit 
 
 set secure
 
