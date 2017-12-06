@@ -209,16 +209,3 @@ alias chrome='chromium-browser'
 
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
-stty -ixon
