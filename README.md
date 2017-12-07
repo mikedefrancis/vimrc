@@ -184,9 +184,9 @@ I use this directory in order to quickly set up my linux environment on other co
       mkdir -p ~/.vim/bundle
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
       echo 'stty -ixon' >> ~/.bashrc
-      p .vimrc ~/.vimrc
-      vim -c ":PluginInstall" -c ":qa!" README.md
       source ~/.bashrc
+      cp .vimrc ~/.vimrc
+      vim -c ":PluginInstall" -c ":qa!" README.md
       
 
 * theoreticaly this work on other linuxes besides ubuntu but this has not been tested
