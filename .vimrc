@@ -2,7 +2,7 @@
 " fitness for a particular use.
 " @Author Mike DeFrancis. mike (AT) defrancis (DOT) org.
 set nocompatible
-filetype off                 
+filetype off
 set exrc
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -204,15 +204,23 @@ nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 
-nnoremap <silent> <A-Up> 3<Up>
-nnoremap <silent> <A-Down> 3<Down>
-vnoremap <silent> <A-Up> 3<Up>
-vnoremap <silent> <A-Down> 3<Down>
-inoremap <silent> <A-Up> 3<Up>
-inoremap <silent> <A-Down> 3<Down>
+nnoremap <silent> <A-Up> 6<Up>
+nnoremap <silent> <A-Down> 6<Down>
+vnoremap <silent> <A-Up> 6<Up>
+vnoremap <silent> <A-Down> 6<Down>
+inoremap <silent> <A-Up> <ESC>6<Up>i
+inoremap <silent> <A-Down> <ESC>6<Down>i
 
-nnoremap <silent> <S-Up> 10<Up>
-nnoremap <silent> <S-Down> 10<Down>
+nnoremap <silent> <S-Up> 32<Up>
+nnoremap <silent> <S-Down> 32<Down>
+inoremap <silent> <S-Up> <ESC>32<Up>i
+inoremap <silent> <S-Down> <ESC>32<Down>i
+
+" In insert mode, left and right arrows move cursor very fast
+" inoremap <A-Left> <ESC>6<Left>i
+inoremap <S-Left> <ESC>16<Left>i
+" inoremap <A-Right> <ESC>6<Right>i
+inoremap <S-Right> <ESC>16<Right>i
 
 nnoremap <silent> <A-PageUp> 4<PageUp>
 nnoremap <silent> <A-PageDown> 4<PageDown>
@@ -302,16 +310,14 @@ vnoremap <S-Tab> <<<ESC>gv
 " so that I can cut and paste things around without blowing away 
 " all of that good stuff that I found somewhere to insert
 " [kappa] buffer
-nnoremap kk "kyil
-vnoremap kk "ky
+nnoremap kk <Home>"ky$
+vnoremap kk <Home>"ky$
 
 nnoremap kw "kyiw 
 vnoremap kw "kyw
 
-nnoremap kl "kyil
-vnoremap kl "ky$
-
-
+nnoremap kl <Home>"ky$ 
+vnoremap kl <Home>"ky$ 
 
 inoremap <C-k> <ESC>"kpi<Right>
 vnoremap <C-k> "kp<Right>
@@ -367,14 +373,9 @@ vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 
 inoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
-nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+"nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
-
-" cnoremap <C-u> <ESC>:undo<CR>
-" vnoremap <C-u> <ESC>:undo<CR>
-" nnoremap <C-u> <ESC>:undo<CR>
-" inoremap <C-u> <ESC>:undo<CR>
 
 inoremap <C-z> <ESC>:undo<CR>
 nnoremap <C-z> <ESC>:undo<CR>
@@ -386,10 +387,11 @@ inoremap <C-r> <ESC>:redo<CR>
 vnoremap <C-r> <ESC>:redo<CR>
 cnoremap <C-r> <ESC>:redo<CR>
 
-inoremap <C-a> <ESC>
-nnoremap <C-a> <ESC>
-vnoremap <C-a> <ESC>
-cnoremap <C-a> <ESC>
+
+inoremap <C-a> <ESC>l
+nnoremap <C-a> <ESC><ESC>
+vnoremap <C-a> <ESC>l
+cnoremap <C-a> <C-c><ESC><ESC>
 
 "using control +z, x, c, v, r for undo, cut, copy, paste, redo
 "like all other programs
@@ -397,23 +399,24 @@ cnoremap <C-a> <ESC>
 "because vim uses yank instead of copy
 "also note that you need to be in visual mode to block copy
 vnoremap <C-c> y
-nnoremap <C-c> yy
-inoremap <C-c> <ESC>yyi
+nnoremap <C-c> <Home>y$
+inoremap <C-c> <ESC><Home>y$i
 
 set pastetoggle=<C-u>
 inoremap <C-v> <ESC>pi<Right>
 
-nnoremap <C-v> <ESC><Up>p<Down>
+nnoremap <C-v> <ESC>p<Right>
 vnoremap <C-v> <ESC>pv
 
 vnoremap <C-x> d
-nnoremap <C-x> dd
-inoremap <C-x> <ESC>ddi
+nnoremap <C-x> <Home>d$
+" weird issue with this one...
+"inoremap <C-x> <ESC><Home>d$i
 
 nnoremap <C-w> i<CR><ESC>
 
 " prev and next location cycling
-inoremap <A-Left> <C-o>
+"inoremap <A-Left> <C-o>
 nnoremap <A-Left> <C-o>
 vnoremap <A-Left> <C-o>
 
@@ -480,6 +483,9 @@ nnoremap <C-h> <ESC>q:
 
 nnoremap a i
 
+
+"nnoremap <ESC> <ESC><Right>
+
 nnoremap <S-s> <ESC>:call ToggleBackground()<CR>
 
     function! ToggleBackground()
@@ -516,11 +522,14 @@ inoremap <C-d> <C-n>
 
 nnoremap #d i/****************************************/
 
-nnoremap cw yiw
-vnoremap cw yiw
+nnoremap yw yiw
+nnoremap yl yy
 
-nnoremap cl yy
-vnoremap cl yy
+"nnoremap cw yiw
+"vnoremap cw yiw
+
+"nnoremap cl yy
+"vnoremap cl yy
 
 "toggle whitespace chars with ww
 nnoremap ww <ESC>:set list!<CR>
@@ -608,6 +617,26 @@ nnoremap pp <ESC>:browse oldfiles!<CR>
 com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
 
 nnoremap oo <ESC>:Edit 
+
+" Change cursors on INSERT mode
+
+"function! ChangeToInsertCursor()
+
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
+"endfunction
+
+
+nnoremap cw ciw
 
 set secure
 
