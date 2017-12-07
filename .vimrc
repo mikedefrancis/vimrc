@@ -75,6 +75,7 @@
 " ci{'"{[(}      change inside quotes/braces/etc.
 " b+{qwerty}     create qwerty bookmark 
 " dd             cut line
+" de             cut to end of current line
 " dw             delete word under cursor
 " hhhh           toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
 " z+Left         go 10 chars to the left
@@ -118,13 +119,20 @@
 " ;           Enter command mode (:<command)
 " '           Run external command (:!<command>)
 " Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
+" ,           Leader
+" ,c<Space>   Toggle comment/uncomment selected line(s)
 "
 " SOME USEFUL COMMANDS NOT REMAPPED:
 "  :make      Run make and capture output
 "  :cn        Jump to file containing make error
 "  :cc        Show make error message
 "
-" SEE README.md FOR THE COMPLETE LIST
+" PLUGINS:
+"   I am using Vundle to install my plugins
+"   Please look through this file to see which plugins have been added
+"   (they are all included in one block of text down there so it should be
+"   obvious)
+"
 "
 " PLEASE NOT THAT:
 "  - I love vim, but I am no vim guru. I needed to make it usable fast.
@@ -361,12 +369,7 @@ inoremap <silent> <A-PageDown> 4<PageDown>
 nnoremap z<Left> 10<Left>
 nnoremap z<Right> 10<Right>
 
-
-
-" ==== MIKE (@MPD) EXTRA STUFF ====
-
 nnoremap de d$
-
 
 function! ToggleMouse()
     if &mouse == 'a'
