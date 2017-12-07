@@ -17,7 +17,7 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * Mappings for copy, paste, save, quit, etc. now match most IDEs so you dont have to relearn them.
 
-* I broke some of the basic vim functionality in order to make these hotkeys work.
+* I broke some of the basic vim functionality in order to make these hotkeys work, but don't worry - all of the really cool things that set vim apart from other editors still work (really, does anyone use EX mode?)
 
 
 * GOAL:
