@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "CAVIM by Mikey D"
+echo "installing..."
+echo "WARNING, This installation will destroy your existing .vimrc file! \nDo you wish to continue?(y or n) [ENTER]:"
+read choice
+case $choice in
+    [Nn]* ) echo 'Aborting.'; exit;;
+    [Yy]* ) echo "proceeding with install. you have chosen wisely.";;
+    * ) echo 'Aborting.'; exit;; 
+esac
+
+sudo apt-get install vim silversearcher-ag exuberant-ctags
+mkdir -p ~/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo 'stty -ixon' >> ~/.bashrc
+cp .vimrc ~/.vimrc
+vim -c ":PluginInstall" -c "qa!" README.md
+
+
+echo "...install complete. Enjoy! ~Mike"
+echo "IMPORTANT: you must run 'source ~/.bashrc' to enable all features"
