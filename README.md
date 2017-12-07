@@ -6,14 +6,18 @@ I use this directory in order to quickly set up my linux environment on other co
 
 * There are some useful tools and aliases in .bashrc
 
-* You do not need my .bashrc to use ctrl-vim. You only need to use my .vimrc. You may need to add a line to your existing .bashrc.. my install script appends this line to the end of your .vimrc automatically.
+* You do not need my .bashrc to use cavim. You only need to use my .vimrc. You may need to add a line to your existing .bashrc.. my install script appends this line to the end of your .vimrc automatically.
 
 * TODO: add an option to toggle code-completion options using commented-out plugins
 
 ![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP_T4R2Mnc8ja4jZ5pIBk0jlk7enzbcN3VeAFO52-QA3UpABlx)
 
 ## CAVIM
-* I broke some of the basic vim functionality in order to make these hotkeys work
+* Named CA-VIM because Ctrl+A returns the user to normal mode. The Ctrl key is used a lot.
+
+* Mappings for copy, paste, save, quit, etc. now match most IDEs so you dont have to relearn them.
+
+* I broke some of the basic vim functionality in order to make these hotkeys work.
 
 
 * GOAL:
@@ -124,8 +128,9 @@ I use this directory in order to quickly set up my linux environment on other co
       ,           Leader
       ,c<Space>   Toggle comment/uncomment selected line(s)
            
-* SOME USEFUL COMMANDS NOT REMAPPED:
+* SOME USEFUL COMMANDS NOT MAPPED:
 
+      :<number>  Goto line number
       :make      Run make and capture output
       :cn        Jump to file containing make error
       :cc        Show make error message
@@ -177,7 +182,7 @@ I use this directory in order to quickly set up my linux environment on other co
 
       git clone https://github.com/mikedefrancis/cavim cavim
       cd cavim
-      ./install_ctrl_vim
+      ./install_cavim
       source ~/.bashrc
 
 * Make double-sure that you resourced your .bashrc file or some functionality will be lost.

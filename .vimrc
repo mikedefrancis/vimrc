@@ -241,46 +241,8 @@ Plugin 'ervandew/supertab'
 call vundle#end()
 filetype plugin indent on
 
-" ==== END PLUGINS ====
-
-
-
-" ==== BASIC ====
+" PLUGIN CONFIGURATIONS...
 colorscheme gruvbox
-"colorscheme solarized
-syntax enable
-set background=dark
-set guifont=Monospace\ 10
-set fillchars+=vert:\$
-set ruler
-set hidden
-set number
-set laststatus=2
-set smartindent
-set st=4 sw=4 et
-set shiftwidth=4
-set tabstop=4
-"let &colorcolumn="80"
-:set guioptions-=m  "remove menu bar
-:set guioptions-=T  "remove toolbar
-:set guioptions-=r  "remove right-hand scroll bar
-:set guioptions-=L  "remove left-hand scroll bar
-
-" I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
-":set lines=999 columns=999
-" more hacks
-" DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
-" I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
-set history=1000
-set undolevels=1000
-set title
-set nobackup
-" this is an awesome one. makes all '/' searches non-case sensitive unless the search contains an upper case letter
-set ignorecase smartcase 
-set incsearch
-set autoindent smartindent
-" note that the swapfile is still used here in case your terminal crashes.
-set clipboard=unnamedplus
 
 let g:gruvbox_contrast_dark ='hard'
 let g:gruvbox_contrast_light ='hard'
@@ -341,6 +303,114 @@ nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
 nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
 nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 
+
+"NERDCOMMENTER
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+cnoreabbrev Ack Ack!
+cnoreabbrev ag Ack!
+
+let hlstate=1
+nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+
+let g:ctrlp_map = '<c-f>'
+map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>    
+
+
+
+nnoremap <C-i> :SyntasticToggleMode<CR>
+
+nnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+vnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+cnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+"inoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
+
+nnoremap <S-d> <ESC>:Ack! 
+vnoremap <S-d> <ESC>:Ack!
+
+
+nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
+nnoremap bb :cd ..<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
+noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
+
+
+"let g:UltiSnipsExpandTrigger="<C-i>"
+
+imap <C-o> <Plug>snipMateNextOrTrigger
+inoremap <Tab> <Plug>SuperTabForward
+
+" ==== END PLUGINS ====
+
+
+
+
+" ______________________________________________________________ "
+
+
+
+
+
+" ==== BASIC ====
+
+"colorscheme solarized
+syntax enable
+set background=dark
+set guifont=Monospace\ 10
+set fillchars+=vert:\$
+set ruler
+set hidden
+set number
+set laststatus=2
+set smartindent
+set st=4 sw=4 et
+set shiftwidth=4
+set tabstop=4
+"let &colorcolumn="80"
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+:set guioptions-=r  "remove right-hand scroll bar
+:set guioptions-=L  "remove left-hand scroll bar
+
+" I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
+":set lines=999 columns=999
+" more hacks
+" DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
+" I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
+set history=1000
+set undolevels=1000
+set title
+set nobackup
+" this is an awesome one. makes all '/' searches non-case sensitive unless the search contains an upper case letter
+set ignorecase smartcase 
+set incsearch
+set autoindent smartindent
+" note that the swapfile is still used here in case your terminal crashes.
+set clipboard=unnamedplus
+
 nnoremap <silent> <A-Up> 32<Up>
 nnoremap <silent> <A-Down> 32<Down>
 vnoremap <silent> <A-Up> 32<Up>
@@ -383,34 +453,6 @@ function! ToggleLines()
     set invnumber
 endfunc
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-cnoreabbrev Ack Ack!
-cnoreabbrev ag Ack!
-
-"NERDCOMMENTER
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
 
 
 " CUSTOM KEY MAPPINGS
@@ -423,13 +465,9 @@ let g:NERDTrimTrailingWhitespace = 1
 " cnoremap - command line mode
 " onoremap - operator pending mode
 
-let hlstate=1
-nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
-
-let g:ctrlp_map = '<c-f>'
 
 nnoremap <S-m> <ESC>:marks<CR>
-map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>     
+
 
 nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
 inoremap <C-l> <ESC>:call ToggleLines()<CR>
@@ -440,12 +478,12 @@ nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 
 "inoremap <S-Tab> <EVS><<i
-nnoremap <Tab>   >>
+"nnoremap <Tab>   >>
 vnoremap <Tab>   >><ESC>gv
-nnoremap <S-Tab> <<
+"nnoremap <S-Tab> <<
 vnoremap <S-Tab> <<<ESC>gv
 
-    " adding easy use of an additional copy and paste buffer
+" adding easy use of an additional copy and paste buffer
 " so that I can cut and paste things around without blowing away 
 " all of that good stuff that I found somewhere to insert
 " [kappa] buffer
@@ -477,15 +515,6 @@ vnoremap gs _
 vnoremap gf - 
 
 nnoremap i :echo "use a for insert and not i!"<CR>
-nnoremap <C-i> :SyntasticToggleMode<CR>
-
-nnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
-vnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
-cnoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
-"inoremap <C-p> <ESC>:Ack! <search> -G ".*(<filepat>)$" 
-
-nnoremap <S-d> <ESC>:Ack! 
-vnoremap <S-d> <ESC>:Ack!
 
 nnoremap <C-d> <Delete>
 inoremap <C-d> <Delete>
@@ -576,15 +605,9 @@ nnoremap <S-s> <Tab>
 let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 
-
 nnoremap cc <ESC>:pwd<CR>
-nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
+nnoremap cd <ESC>:cd
 
-nnoremap cd <ESC>:cd 
-
-nnoremap bb :cd ..<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
-
-noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 " @MPD
 " 'starcraft' style bookmarks
@@ -749,13 +772,9 @@ augroup Binary
 augroup END
 
 " FUN WITH TABS!!
-imap <C-o> <Plug>snipMateNextOrTrigger
-inoremap <Tab> <Plug>SuperTabForward
 
 nnoremap gt <ESC>:0<CR>
 nnoremap gb <ESC>:99999999<CR>
-
-"let g:UltiSnipsExpandTrigger="<C-i>"
 
 " OPEN PREVIOUS FILES
 nnoremap pp <ESC>:browse oldfiles!<CR>
