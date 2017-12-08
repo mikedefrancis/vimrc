@@ -166,6 +166,11 @@ call vundle#begin()
 " All plugins using vundle
 Plugin 'VundleVim/Vundle.vim'
 
+" useful tools for renaming files, etc.
+" :Rename, :Mkdir, :Delete, :Wall, :SudoEdit, :SudoWrite, :Move, :Chmod,
+" :Find, etc.
+Plugin 'tpope/vim-eunuch'
+
 " search index is pretty much required if you want to study large c files
 Plugin 'google/vim-searchindex'
 " having a built-in search inside of vim is also pretty much required if you
@@ -806,6 +811,10 @@ nnoremap cw ciw
 
 nnoremap <S-i> <ESC>:edit ~/.vimrc<CR>
 nnoremap <S-b> <ESC>:edit ~/.bashrc<CR>
+nnoremap <S-u> <ESC>:edit ~/.notes.notes<CR>
+
+nnoremap rn <ESC>:Rename 
+nnoremap mv <ESC>:Move 
 
 set secure
 

@@ -86,7 +86,9 @@ I use this directory in order to quickly set up my linux environment on other co
       z+Right        go 10 chars to the right
       pp             open previous files
       oo             open file type(s) in current working directory in tabs
-           
+      rn             rename file in buffer
+      mv             move file in buffer
+
 * SHIFT KEY REMAPPINGS FOR NORMAL MODE:
 
       Shift+z+z+z:   close all windows and tabs without saving
@@ -95,6 +97,7 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+{qwerty} go to qwerty bookmark
       Shift+d        find in files using ACK/AG
       Shift+f        find and replace in current file
+      Shift+u        edit notes file ~/.notes.txe
       Shift+i        edit this file ~/.vimrc
       Shift+v        enter visual line/block mode
       Shift+b        edit ~/.bashrc
@@ -134,6 +137,10 @@ I use this directory in order to quickly set up my linux environment on other co
       :make      Run make and capture output
       :cn        Jump to file containing make error
       :cc        Show make error message
+      :Delete    delete file in buffer
+      :SudoEdit  edit a file using sudo
+      :Find      use find and output results to quickfix window
+      :Chmod     change the permission of the current file
            
 * PLUGINS:
 
