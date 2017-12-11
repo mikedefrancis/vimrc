@@ -24,107 +24,120 @@
 " 1) is easy to learn.
 " 2) implements the essential features of IDEs like eclipse/sublime.
 " 3) improves coding/editing speed beyond that of standard IDEs.
-"
+
 " CONTROL KEY REMAPPINGS FOR ALL MODES:
-" Ctrl+a/a: goto normal/insert mode, accordingly
-" Ctrl+q:   save and quit (one window/tab at a time)
-" Ctrl+s:   save
-" Ctrl+e:   edit (open) a file
-" Ctrl+x:   cut
-" Ctrl+c:   copy
-" Ctrl+v:   paste
-" Ctrl+d:   delete
-" Ctrl+j:   backspace
-" Ctrl+z:   undo
-" Ctrl+r:   redo
-" Ctrl+l:   toggle line numbers
-" Ctrl+n:   new window
-" Ctrl+b:   new tab
-" Ctrl+f:   ctrlp fuzzy file find
-" Ctrl+w:   insert newline
-" Ctrl+t:   toggle mouse
-" Ctrl+y:   new horozontal window
-" Ctrl+u:   toggle insert paste mode
-" Ctrl+i:   toggle syntastic
-" Ctrl+h:   show command history
-" Ctrl+g:   toggle nerdtree
-" Ctrl+k:   paste register k
-" Ctrl+p:   find in certain files (ACK/AG/REGEX)
-" Ctrl+Left: go to window to the Left
-" Ctrl+Right:go to window to the Right
-" Ctrl+Up:   go to window to the Up
-" Ctrl+Down: go to window to the Down
+"
+"       Ctrl+a/a: goto normal/insert mode, accordingly
+"       Ctrl+q:   save and quit (one window/tab at a time)
+"       Ctrl+s:   save
+"       Ctrl+e:   edit (open) a file
+"       Ctrl+x:   cut
+"       Ctrl+c:   copy
+"       Ctrl+v:   paste
+"       Ctrl+d:   delete
+"       Ctrl+j:   backspace
+"       Ctrl+z:   undo
+"       Ctrl+r:   redo
+"       Ctrl+l:   toggle line numbers
+"       Ctrl+n:   new window
+"       Ctrl+b:   new tab
+"       Ctrl+f:   ctrlp fuzzy file find
+"       Ctrl+w:   insert newline
+"       Ctrl+t:   toggle mouse
+"       Ctrl+y:   new horozontal window
+"       Ctrl+u:   toggle insert paste mode
+"       Ctrl+i:   toggle syntastic
+"       Ctrl+h:   show command history
+"       Ctrl+g:   toggle nerdtree
+"       Ctrl+k:   paste register k
+"       Ctrl+p:   find in certain files (ACK/AG/REGEX)
+"       Ctrl+Left: go to window to the Left
+"       Ctrl+Right:go to window to the Right
+"       Ctrl+Up:   go to window to the Up
+"       Ctrl+Down: go to window to the Down
 "
 " LETTER KEY REMAPPINGS FOR NORMAL MODE:
-" gg/q           start/stop recording macro g
-" ff             search for text under cursor in file
-" ww             show whitespace characters
-" cc             show current working directory
-" ls             show current working directory in nerdtree
-" cd             change directory using :cd command
-" bb             go back one directory and show in nerdtree
-" jj             jump to ctag definition of text under cursor
-" kk             copy line under cursor to register k
-" kw             copy word under cursor to register k
-" gt             goto top of file
-" gb             goto bottom of file
-" gs             goto start of line
-" gl             goto start of line (exclude whitespace)
-" ga             insert at the of current line
-" cw             change word under cursor
-" ci{'"{[(}      change inside quotes/braces/etc.
-" b+{qwerty}     create qwerty bookmark 
-" dd             cut line
-" de             cut to end of current line
-" dw             delete word under cursor
-" z+Left         go 10 chars to the left
-" z+Right        go 10 chars to the right
-" pp             open previous files
-" oo             open file type(s) in current working directory in tabs
+"
+"       gg/q           start/stop recording macro g
+"       ff             search for text under cursor in file
+"       ww             show whitespace characters
+"       cc             show current working directory
+"       ls             show current working directory in nerdtree
+"       cd             change directory using :cd command
+"       bb             go back one directory and show in nerdtree
+"       gt             goto top of file
+"       gb             goto bottom of file
+"       gs             goto start of line
+"       gl             goto start of line (exclude whitespace)
+"       ga             insert at the of current line
+"       cw             change word under cursor
+"       ci{'"{[(}      change inside quotes/braces/etc.
+"       b+{qwerty}     create qwerty bookmark
+"       dd             cut line
+"       de             cut to end of current line
+"       dw             delete word under cursor
+"       hm             toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
+"       z+Left         go 10 chars to the left
+"       z+Right        go 10 chars to the right
+"       pp             open previous files
+"       oo             open file type(s) in current working directory in tabs
+"       rn             rename file in buffer
+"       mv             move file in buffer
+"       tag            regenerate ctags for current working directory
 "
 " SHIFT KEY REMAPPINGS FOR NORMAL MODE:
-" Shift+z+z+z:   close all windows and tabs without saving
-" Shift+x+x+x:   close all windows and tabs and save all
-" Shift+j+j+j:   regenerate ctags for current working directory
-" Shift+{qwerty} go to qwerty bookmark
-" Shift+d        find in files using ACK/AG
-" Shift+f        find and replace in current file
-" Shift+i        edit this file ~/.vimrc
-" Shift+v        enter visual line/block mode
-" Shift+b        edit ~/.bashrc
-" Shift+c        set current working directory to current file
-" Shift+g        run macro g
-" Shift+a        back
-" Shift+s        forward
-" Shift+h        toggle line highlight
-" Shift+l        toggle background color (light/dark)
-" shift+j        tjump to definitions for text under cursor (ctags)  
-" Shift+n        go to previous search result in file
-" Shift+m        show bookmarks {qwerty + other}
-" Shift+o        set write permissions on current file using sudo
-" Shift+Left     go to previous tab
-" Shift+Right    go to next tap
-" Shift+Up       go up 6 lines
-" Shift+Down     go down 6 lines
-" Shift+Tab      unindent (visual mode)
+"
+"       Shift+z+z+z:   close all windows and tabs without saving
+"       Shift+x+x+x:   close all windows and tabs and save all
+"       Shift+{qwerty} go to qwerty bookmark
+"       Shift+d        find in files using ACK/AG
+"       Shift+f        find and replace in current file
+"       Shift+u        edit notes file ~/.notes.txe
+"       Shift+i        edit this file ~/.vimrc
+"       Shift+v        enter visual line/block mode
+"       Shift+b        edit ~/.bashrc
+"       Shift+j        jump to ctag definition of text under cursor
+"       Shift+c        set current working directory to current file
+"       Shift+g        run macro g
+"       Shift+a        back
+"       Shift+s        forward
+"       Shift+k        copy contents into k register
+"       Shift+h        toggle line highlight
+"       Shift+l        toggle background color (light/dark)
+"       shift+j        tjump to definitions for text under cursor (ctags)
+"       Shift+n        go to previous search result in file
+"       Shift+m        show bookmarks {qwerty + other}
+"       Shift+o        set write permissions on current file using sudo
+"       Shift+Left     go to previous tab
+"       Shift+Right    go to next tap
+"       Shift+Up       go up 6 lines
+"       Shift+Down     go down 6 lines
+"       Shift+Tab      unindent (visual mode)
 "
 " OTHER KEY REMAPPINGS:
-" Alt+Left    back
-" Alt+Right   forward
-" Tab         autocomplete text (insert mode)
-" Tab         toggle syntastic (normal mode)
-" Tab         indent (visual mode)
-" Space       toggle center-scroll (normal mode)
-" ;           Enter command mode (:<command)
-" '           Run external command (:!<command>)
-" Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
-" ,           Leader
-" ,c<Space>   Toggle comment/uncomment selected line(s)
 "
-" SOME USEFUL COMMANDS NOT REMAPPED:
-"  :make      Run make and capture output
-"  :cn        Jump to file containing make error
-"  :cc        Show make error message
+"       Alt+Left    back
+"       Alt+Right   forward
+"       Tab         autocomplete text (insert mode)
+"       Tab         toggle syntastic (normal mode)
+"       Tab         indent (visual mode)
+"       Space       toggle center-scroll (normal mode)
+"       ;           Enter command mode (:<command)
+"       '           Run external command (:!<command>)
+"       Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
+"       ,           Leader
+"       ,c<Space>   Toggle comment/uncomment selected line(s)
+"
+" SOME USEFUL COMMANDS NOT MAPPED:
+"
+"       :<number>  Goto line number
+"       :make      Run make and capture output
+"       :cn        Jump to file containing make error
+"       :cc        Show make error message
+"       :Delete    delete file in buffer
+"       :SudoEdit  edit a file using sudo
+"       :Find      use find and output results to quickfix window
+"       :Chmod     change the permission of the current file
 "
 " PLUGINS:
 "   I am using Vundle to install my plugins
