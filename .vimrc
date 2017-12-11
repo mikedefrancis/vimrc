@@ -77,7 +77,6 @@
 " dd             cut line
 " de             cut to end of current line
 " dw             delete word under cursor
-" hhhh           toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
 " z+Left         go 10 chars to the left
 " z+Right        go 10 chars to the right
 " pp             open previous files
@@ -492,19 +491,20 @@ vnoremap <S-Tab> <<<ESC>gv
 " so that I can cut and paste things around without blowing away 
 " all of that good stuff that I found somewhere to insert
 " [kappa] buffer
-nnoremap kk <Home>"ky$
-vnoremap kk <Home>"ky$
+" nnoremap kk <Home>"ky$
+" vnoremap kk <Home>"ky$
 
-nnoremap kw "kyiw 
-vnoremap kw "kyw
+" removing this one so that k is faster for movement
+" nnoremap kw "kyiw
+" vnoremap kw "kyw
 
-nnoremap kl <Home>"ky$ 
-vnoremap kl <Home>"ky$ 
+nnoremap <S-k> <Home>"ky$<ESC>:echo "copied line to k register"<CR> 
+vnoremap <S-k> "ky<ESC>:echo "copied selection to k register"<CR>
 
-inoremap <C-k> <ESC>"kpi<Right>
-vnoremap <C-k> "kp<Right>
-cnoremap <C-k> "kp<Right>
-nnoremap <C-k> "kp<Right>
+inoremap <C-k> <ESC>"kpi<Right><ESC>:echo "pasted contents from k register"<CR>
+vnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
+cnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
+nnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
 
 
 " making it slightly easier to go to the start and end of real text in a line
@@ -661,6 +661,13 @@ nnoremap <C-h> <ESC>q:
 nnoremap a i
 
 
+" == REMAPPING HJKL KEYS FOR FASTER MOVEMENT
+nnoremap h 10h
+nnoremap j 10j
+nnoremap k 10k
+nnoremap l 10l
+
+
 "nnoremap <ESC> <ESC><Right>
 
 nnoremap <S-l> <ESC>:call ToggleBackground()<CR>
@@ -687,9 +694,9 @@ nnoremap ' <ESC>:!
 " FUN WITH CTAGS!!!
 set tags=./tags,tags;
 
-nnoremap <S-j> <ESC>:tjump 
-nnoremap <S-j><S-j><S-j> <ESC>:!ctags -R --exclude=.git .
-nnoremap jj <ESC><C-]>
+nnoremap <S-j> <ESC>:tjump<CR> 
+nnoremap tag <ESC>:!ctags -R --exclude=.git .
+" nnoremap <C-j> <ESC><C-]>
 
 " SEARCH for word under cursor
 nnoremap ff *
@@ -711,7 +718,7 @@ nnoremap ww <ESC>:set list!<CR>
 
 "Toggle Hexmode Fun
 
-nnoremap hhhh :Hexmode<CR>
+nnoremap hm <ESC>:Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
 command! -bar Hexmode call ToggleHex()

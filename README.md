@@ -67,9 +67,6 @@ I use this directory in order to quickly set up my linux environment on other co
       ls             show current working directory in nerdtree
       cd             change directory using :cd command
       bb             go back one directory and show in nerdtree
-      jj             jump to ctag definition of text under cursor
-      kk             copy line under cursor to register k
-      kw             copy word under cursor to register k
       gt             goto top of file
       gb             goto bottom of file
       gs             goto start of line
@@ -81,19 +78,19 @@ I use this directory in order to quickly set up my linux environment on other co
       dd             cut line
       de             cut to end of current line
       dw             delete word under cursor
-      hhhh           toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
+      hm             toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
       z+Left         go 10 chars to the left
       z+Right        go 10 chars to the right
       pp             open previous files
       oo             open file type(s) in current working directory in tabs
       rn             rename file in buffer
       mv             move file in buffer
+      tag            regenerate ctags for current working directory
 
 * SHIFT KEY REMAPPINGS FOR NORMAL MODE:
 
       Shift+z+z+z:   close all windows and tabs without saving
       Shift+x+x+x:   close all windows and tabs and save all
-      Shift+j+j+j:   regenerate ctags for current working directory
       Shift+{qwerty} go to qwerty bookmark
       Shift+d        find in files using ACK/AG
       Shift+f        find and replace in current file
@@ -101,10 +98,12 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+i        edit this file ~/.vimrc
       Shift+v        enter visual line/block mode
       Shift+b        edit ~/.bashrc
+      Shift+j        jump to ctag definition of text under cursor
       Shift+c        set current working directory to current file
       Shift+g        run macro g
       Shift+a        back
       Shift+s        forward
+      Shift+k        copy contents into k register
       Shift+h        toggle line highlight
       Shift+l        toggle background color (light/dark)
       shift+j        tjump to definitions for text under cursor (ctags)  
