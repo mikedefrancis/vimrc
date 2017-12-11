@@ -679,7 +679,10 @@ nnoremap h 10h
 nnoremap j 10j
 nnoremap k 10k
 nnoremap l 10l
-
+vnoremap h 10h
+vnoremap j 10j
+vnoremap k 10k
+vnoremap l 10l
 
 "nnoremap <ESC> <ESC><Right>
 
