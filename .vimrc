@@ -352,7 +352,7 @@ cnoreabbrev Ack Ack!
 cnoreabbrev ag Ack!
 
 let hlstate=1
-nnoremap <S-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+nnoremap <C-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
 
 let g:ctrlp_map = '<c-f>'
 map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>    
@@ -379,6 +379,8 @@ noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 imap <C-o> <Plug>snipMateNextOrTrigger
 inoremap <Tab> <Plug>SuperTabForward
+
+
 
 " ==== END PLUGINS ====
 
@@ -511,8 +513,8 @@ vnoremap <S-Tab> <<<ESC>gv
 " nnoremap kw "kyiw
 " vnoremap kw "kyw
 
-nnoremap <S-k> <Home>"ky$<ESC>:echo "copied line to k register"<CR> 
-vnoremap <S-k> "ky<ESC>:echo "copied selection to k register"<CR>
+nnoremap ck <Home>"ky$<ESC>:echo "copied line to k register"<CR> 
+vnoremap ck "ky<ESC>:echo "copied selection to k register"<CR>
 
 inoremap <C-k> <ESC>"kpi<Right><ESC>:echo "pasted contents from k register"<CR>
 vnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
@@ -624,7 +626,7 @@ let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 
 nnoremap cc <ESC>:pwd<CR>
-nnoremap cd <ESC>:cd
+nnoremap cd <ESC>:cd 
 
 
 " @MPD
@@ -666,29 +668,39 @@ nnoremap <S-Left> <ESC>gT
 vnoremap <S-Right> <ESC>gt
 nnoremap <S-Right> <ESC>gt
 
-inoremap <C-h> <ESC>q:
-vnoremap <C-h> <ESC>q:
-cnoremap <C-h> <ESC>q:
-nnoremap <C-h> <ESC>q:
+" inoremap <C-h> <ESC>q:
+" vnoremap <C-h> <ESC>q:
+" cnoremap <C-h> <ESC>q:
+" nnoremap <C-h> <ESC>q:
 
 nnoremap a i
 
 
 " == REMAPPING HJKL KEYS FOR FASTER MOVEMENT
-nnoremap h 10h
-nnoremap j 10j
-nnoremap k 10k
-nnoremap l 10l
-vnoremap h 10h
-vnoremap j 10j
-vnoremap k 10k
-vnoremap l 10l
+" nnoremap j 10j
+" vnoremap j 10j
+" nnoremap h 10h
+" nnoremap k 10k
+" nnoremap l 10l
+" vnoremap h 10h
+" vnoremap k 10k
+" vnoremap l 10l
+
+vnoremap <S-j> 10j
+nnoremap <S-j> 10j
+vnoremap <S-h> 10h
+nnoremap <S-h> 10h
+
+vnoremap <S-k> 10k
+nnoremap <S-k> 10k
+vnoremap <S-l> 10l
+nnoremap <S-l> 10l
 
 "nnoremap <ESC> <ESC><Right>
 
-nnoremap <S-l> <ESC>:call ToggleBackground()<CR>
+nnoremap <S-p> <ESC>:call ToggleBackground()<CR>
 
-    function! ToggleBackground()
+function! ToggleBackground()
 	if &background == "dark"
 		set background=light
 	else
@@ -710,12 +722,12 @@ nnoremap ' <ESC>:!
 " FUN WITH CTAGS!!!
 set tags=./tags,tags;
 
-nnoremap <S-j> <ESC>:tjump<CR> 
+nnoremap gj <ESC><C-]> 
 nnoremap tag <ESC>:!ctags -R --exclude=.git .
 " nnoremap <C-j> <ESC><C-]>
 
 " SEARCH for word under cursor
-nnoremap ff *
+nnoremap ff g*
 vnoremap ?? *
 
 nnoremap #d i/****************************************/

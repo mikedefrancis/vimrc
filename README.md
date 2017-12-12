@@ -26,7 +26,32 @@ I use this directory in order to quickly set up my linux environment on other co
       1) is easy to learn.
       2) implements the essential features of IDEs like eclipse/sublime.
       3) improves coding/editing speed beyond that of standard IDEs.
-           
+
+* MOVEMENT KEY REMAPPINGS:
+      
+      h/j/k/l:     Left/down/up/right
+      Shift+h:     Left 10 chars
+      Shift+l:     Right 10 chars
+      Shift+j:     Down 10 lines
+      Shift+k:     Up 10 lines
+      
+      Up/Down/Left/Right arrows also move cursor
+      
+      Shift+Up:    Up 6 lines
+      Shift+Down:  Down 6 lines
+      Shift+Right: Right 10 chars
+      Shift+Left:  Left 10 chars
+     
+      Alt+Down:    Down 32 lines
+      Alt+Up:      Up 32 lines
+      Alt+Left     Back
+      Alt+Right    Forward
+      
+      Ctrl+Left:   Go to window to the Left
+      Ctrl+Right:  Go to window to the Right
+      Ctrl+Up:     Go to window to the Up
+      Ctrl+Down:   Go to window to the Down
+
 * CONTROL KEY REMAPPINGS FOR ALL MODES:
 
       Ctrl+a/a: goto normal/insert mode, accordingly
@@ -49,15 +74,11 @@ I use this directory in order to quickly set up my linux environment on other co
       Ctrl+y:   new horozontal window
       Ctrl+u:   toggle insert paste mode
       Ctrl+i:   toggle syntastic
-      Ctrl+h:   show command history
       Ctrl+g:   toggle nerdtree
       Ctrl+k:   paste register k
       Ctrl+p:   find in certain files (ACK/AG/REGEX)
-      Ctrl+Left: go to window to the Left
-      Ctrl+Right:go to window to the Right
-      Ctrl+Up:   go to window to the Up
-      Ctrl+Down: go to window to the Down
-           
+      Ctrl+h:   toggle line highlight
+
 * LETTER KEY REMAPPINGS FOR NORMAL MODE:
 
       gg/q           start/stop recording macro g
@@ -86,9 +107,13 @@ I use this directory in order to quickly set up my linux environment on other co
       rn             rename file in buffer
       mv             move file in buffer
       tag            regenerate ctags for current working directory
+      gj             go jump to ctag definition of text under cursor
+      ck             copy contents into k register
 
 * SHIFT KEY REMAPPINGS FOR NORMAL MODE:
 
+      Shift+a        back
+      Shift+s        forward
       Shift+z+z+z:   close all windows and tabs without saving
       Shift+x+x+x:   close all windows and tabs and save all
       Shift+{qwerty} go to qwerty bookmark
@@ -98,14 +123,9 @@ I use this directory in order to quickly set up my linux environment on other co
       Shift+i        edit this file ~/.vimrc
       Shift+v        enter visual line/block mode
       Shift+b        edit ~/.bashrc
-      Shift+j        jump to ctag definition of text under cursor
       Shift+c        set current working directory to current file
       Shift+g        run macro g
-      Shift+a        back
-      Shift+s        forward
-      Shift+k        copy contents into k register
-      Shift+h        toggle line highlight
-      Shift+l        toggle background color (light/dark)
+      Shift+p        toggle background color (light/dark)
       shift+j        tjump to definitions for text under cursor (ctags)  
       Shift+n        go to previous search result in file
       Shift+m        show bookmarks {qwerty + other}
@@ -118,8 +138,6 @@ I use this directory in order to quickly set up my linux environment on other co
            
 * OTHER KEY REMAPPINGS:
 
-      Alt+Left    back
-      Alt+Right   forward
       Tab         autocomplete text (insert mode)
       Tab         toggle syntastic (normal mode)
       Tab         indent (visual mode)
