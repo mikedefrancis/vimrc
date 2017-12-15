@@ -212,5 +212,8 @@ alias vmware='vmware-user-suid-wrapper'
 alias vmware-user='vmware-user-suid-wrapper'
 alias vmware-fix='vmware-user-suid-wrapper'
 
+alias calc='gnome-calculator'
+alias calculator='gnome-calculator'
+
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
