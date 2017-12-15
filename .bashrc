@@ -1,5 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+'# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
 # If not running interactively, don't do anything
@@ -136,9 +136,10 @@ alias untarj='tar -xjf'
 
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
+alias ...='cd ../..'
+alias ....='cd ../../../'
 alias .....='cd ../../../../'
+alias ......='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 alias c='clear'
