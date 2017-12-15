@@ -145,7 +145,7 @@ alias c='clear'
 # save standard err and standard out to make output file:    
 alias make='make'
 alias mmake='make |& tee latest_make_output.txt'
-alias i='efconfig -a'    
+alias i='ifconfig -a'    
 alias ifconfig='ifconfig -a'    
 alias ggrep='grep --color -rni'    
 alias ffind='find -type f -name'    
@@ -206,6 +206,11 @@ alias vim='vim -p'
 alias disk=df
 alias chrome='chromium-browser'
 
+
+alias vmware-restart='vmware-user-suid-wrapper'
+alias vmware='vmware-user-suid-wrapper'
+alias vmware-user='vmware-user-suid-wrapper'
+alias vmware-fix='vmware-user-suid-wrapper'
 
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
