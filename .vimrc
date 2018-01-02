@@ -1,3 +1,7 @@
+
+
+
+
 "
 " ==============================
 " ============ CAVIM ===========
@@ -547,7 +551,7 @@ vnoremap <C-q> <ESC>:x!<CR>
 cnoremap <C-q> <ESC>:x!<CR>
 
 nnoremap <C-s> <ESC>:w<CR>
-inoremap <C-s> <ESC>:w<CR>
+inoremap <C-s> <ESC>:w<CR>l
 vnoremap <C-s> <ESC>:w<CR>
 cnoremap <C-s> <ESC>:w<CR>
 
@@ -593,9 +597,9 @@ cnoremap <C-a> <C-c><ESC><ESC>
 "note that for copy paste compatibility with other editors is broken
 "because vim uses yank instead of copy
 "also note that you need to be in visual mode to block copy
-vnoremap <C-c> y
-nnoremap <C-c> <Home>y$
-inoremap <C-c> <ESC><Home>y$i
+vnoremap <C-c> y+
+nnoremap <C-c> <Home>y$+
+inoremap <C-c> <ESC><Home>y$i+
 
 set pastetoggle=<C-u>
 inoremap <C-v> <ESC>pi<Right>
@@ -603,8 +607,8 @@ inoremap <C-v> <ESC>pi<Right>
 nnoremap <C-v> <ESC>p<Right>
 vnoremap <C-v> <ESC>pv
 
-vnoremap <C-x> d
-nnoremap <C-x> <Home>d$
+vnoremap <C-x> d+
+nnoremap <C-x> <Home>d$+
 " weird issue with this one...
 "inoremap <C-x> <ESC><Home>d$i
 
@@ -640,7 +644,7 @@ nnoremap <S-w> 'W
 nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
 nnoremap <S-e> 'E
 
-nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+ noremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
 nnoremap <S-r> 'R
 
 nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
@@ -658,10 +662,10 @@ let g:ackhighlight = 1
 let g:ackpreview = 1
 
 " FUN WITH TABS
-nnoremap <C-b> <ESC>:tabedit  
-vnoremap <C-b> <ESC>:tabedit  
-cnoremap <C-b> <ESC>:tabedit  
-inoremap <C-b> <ESC>:tabedit  
+nnoremap <C-b> <ESC>:tabedit<CR>  
+vnoremap <C-b> <ESC>:tabedit<CR>  
+cnoremap <C-b> <ESC>:tabedit<CR>  
+inoremap <C-b> <ESC>:tabedit<CR>  
 
 vnoremap <S-Left> <ESC>gT
 nnoremap <S-Left> <ESC>gT
@@ -709,8 +713,8 @@ function! ToggleBackground()
 endfunction
 
 " kill all
-nnoremap <S-z><S-z><S-z> <ESC>:qa!<CR>
-nnoremap <S-x><S-x><S-x> <ESC>:xa!<CR>
+nnoremap <S-z><S-z> <ESC>:qa!<CR>
+nnoremap <S-x><S-x> <ESC>:xa!<CR>
 
 " recording fun
 nnoremap <S-g> @g
@@ -811,10 +815,18 @@ augroup Binary
   au BufWritePost *.elf set nomod | endif
 augroup END
 
-" FUN WITH TABS!!
+" Note that the following gg and G are remapped later in this, but work for go
+" top and go bottom listed below.
+nnoremap gt gg
+nnoremap gb G
 
-nnoremap gt <ESC>:0<CR>
-nnoremap gb <ESC>:99999999<CR>
+vnoremap gt gg
+vnoremap gb G
+
+
+" nnoremap gt <ESC>:0<CR>
+" nnoremap gb <ESC>:99999999<CR>
+
 
 " OPEN PREVIOUS FILES
 nnoremap pp <ESC>:browse oldfiles!<CR>
@@ -850,6 +862,9 @@ nnoremap <S-u> <ESC>:edit ~/.notes.notes<CR>
 
 nnoremap rn <ESC>:Rename 
 nnoremap mv <ESC>:Move 
+
+" Adding this line to allow manpage viewing
+runtime ftplugin/man.vim
 
 set secure
 
