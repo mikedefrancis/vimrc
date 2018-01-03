@@ -1,18 +1,4 @@
-# CAVIM & FRIENDS
-
-I use this directory in order to quickly set up my linux environment on other computers. Anyone is welcome to copy this configuration including my .bashrc.
-
-* These tools assume you are using Ubuntu 16.04
-
-* There are some useful tools and aliases in .bashrc
-
-* You do not need my .bashrc to use cavim. You only need to use my .vimrc. You may need to add a line to your existing .bashrc.. my install script appends this line to the end of your .vimrc automatically.
-
-* TODO: add an option to toggle code-completion options using commented-out plugins
-
-![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP_T4R2Mnc8ja4jZ5pIBk0jlk7enzbcN3VeAFO52-QA3UpABlx)
-
-## CAVIM
+# CAVIM
 * Named CA-VIM because Ctrl+A returns the user to normal mode. The Ctrl key is used a lot.
 
 * Mappings for copy, paste, save, quit, etc. now match most IDEs so you dont have to relearn them.
