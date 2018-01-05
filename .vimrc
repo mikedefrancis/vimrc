@@ -857,8 +857,10 @@ inoremap <C-j> <Backspace>
 nnoremap cw ciw
 
 nnoremap <S-i> <ESC>:edit ~/.vimrc<CR>
-nnoremap <S-b> <ESC>:edit ~/.bashrc<CR>
+nnoremap bash <ESC>:edit ~/.bashrc<CR>
+nnoremap zsh <ESC>:edit ~/.zshrc<CR>
 nnoremap <S-u> <ESC>:edit ~/.notes.notes<CR>
+nnoremap <S-b> <ESC>:tabedit 
 
 nnoremap rn <ESC>:Rename 
 nnoremap mv <ESC>:Move 
