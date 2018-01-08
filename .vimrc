@@ -1,8 +1,3 @@
-
-
-
-
-"
 " ==============================
 " ============ CAVIM ===========
 "
@@ -856,10 +851,10 @@ inoremap <C-j> <Backspace>
 
 nnoremap cw ciw
 
-nnoremap <S-i> <ESC>:edit ~/.vimrc<CR>
+nnoremap vim <ESC>:edit ~/.vimrc<CR>
 nnoremap bash <ESC>:edit ~/.bashrc<CR>
 nnoremap zsh <ESC>:edit ~/.zshrc<CR>
-nnoremap <S-u> <ESC>:edit ~/.notes.notes<CR>
+nnoremap notes <ESC>:edit ~/.notes.txt<CR>Gi
 nnoremap <S-b> <ESC>:tabedit 
 
 nnoremap rn <ESC>:Rename 
