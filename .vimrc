@@ -566,8 +566,8 @@ nnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 
-inoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
-"nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+" inoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 
