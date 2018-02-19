@@ -622,9 +622,8 @@ nnoremap <S-a> <C-o>
 nnoremap <S-s> <Tab>
 
 let scrollstate=1
+nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 set scrolloff=999
-
-nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=0 \| else \| set scrolloff=999 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 
 nnoremap cc <ESC>:pwd<CR>
 nnoremap cd <ESC>:cd 
