@@ -40,7 +40,8 @@
 "       Ctrl+l:   toggle line numbers
 "       Ctrl+n:   new window
 "       Ctrl+b:   new tab
-"       Ctrl+f:   ctrlp fuzzy file find
+"       ff:       ctrlp fuzzy file find
+"       Ctrl+f:   find in open file (same as /)
 "       Ctrl+w:   insert newline
 "       Ctrl+t:   toggle mouse
 "       Ctrl+y:   new horozontal window
@@ -350,13 +351,13 @@ endif
 cnoreabbrev Ack Ack!
 cnoreabbrev ag Ack!
 
-let hlstate=1
+let hlstate=0
 nnoremap <C-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+set hlsearch
 
-let g:ctrlp_map = '<c-f>'
+let g:ctrlp_map = 'ff'
 map <C-g> <ESC>:NERDTreeToggle %<CR><ESC>:wincmd l<CR>    
-
-
+nnoremap <C-f> /
 
 nnoremap <C-i> :SyntasticToggleMode<CR>
 
@@ -426,7 +427,11 @@ set nobackup
 set ignorecase smartcase 
 set incsearch
 set autoindent smartindent
-" note that the swapfile is still used here in case your terminal crashes.
+
+" DANGER WILL ROBINSON! SWAP FILES ARE REALLY ANNOYING WHEN SOMETHING CLOSES
+" IMPROPERLY AND VIM THINKS IT IS STILL OPEN.
+" SAVE AND BACKUP YOUR WORK MANUALLY ALL OF THE TIME INSTEAD!
+set noswapfile
 set clipboard=unnamedplus
 
 nnoremap <silent> <A-Up> 32<Up>
