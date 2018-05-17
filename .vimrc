@@ -59,7 +59,8 @@
 " LETTER KEY REMAPPINGS FOR NORMAL MODE:
 "
 "       gg/q           start/stop recording macro g
-"       ff             search for text under cursor in file
+"       fd             search for text under cursor
+"       ff             ctrlp find in files
 "       ww             show whitespace characters
 "       cc             show current working directory
 "       ls             show current working directory in nerdtree
@@ -80,7 +81,7 @@
 "       z+Left         go 10 chars to the left
 "       z+Right        go 10 chars to the right
 "       pp             open previous files
-"       oo             open file type(s) in current working directory in tabs
+
 "       rn             rename file in buffer
 "       mv             move file in buffer
 "       tag            regenerate ctags for current working directory
@@ -232,8 +233,7 @@ Plugin 'honza/vim-snippets'
 
 "press tab to autocomplete anything you are typing.
 "This one is awesome
-Plugin 'ervandew/supertab'
-
+" Plugin 'ervandew/supertab'
 
 " ==== PLUGIN SYNTAXES ====
 "Plugin 'cakebaker/scss-syntax.vim'
@@ -271,13 +271,8 @@ let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let g:NERDTreeDirArrows=0
 
-" UPDATE: I am in fact using syntastic again but only with RECOMMENDED
-" settings https://github.com/vim-syntastic/syntastic 
-" SYNTAX checking is not performed at file open. You need to hit tab!
 " ==== Syntastic ====
-
-" I am adding this hack so that I can use syntastic 99% of the time, and
-" disable it when there only when it has a problem with something
+" Only use syntastic when there is a problem. Set it to passive by default.
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -285,9 +280,11 @@ let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 "let g:syntastic_javascript_checkers = ['eslint']
 "let g:syntastic_javascript_mri_args = "--config=$HOME/.jshintrc"
-"let g:syntastic_python_checkers = [ 'pylint', 'flake8', 'pep8', 'pyflakes', 'python']
+let g:syntastic_python_checkers = [ 'pylint', 'python']
+" let g:syntastic_python_checkers = [ 'pylint', 'flake8', 'pep8', 'pyflakes', 'python']
 "let g:syntastic_yaml_checkers = ['jsyaml']
 "let g:syntastic_html_tidy_exec = 'tidy5'
 
@@ -378,20 +375,12 @@ noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 "let g:UltiSnipsExpandTrigger="<C-i>"
 
 imap <C-o> <Plug>snipMateNextOrTrigger
-inoremap <Tab> <Plug>SuperTabForward
-
+" inoremap <Tab> <Plug>SuperTabForward
 
 
 " ==== END PLUGINS ====
 
-
-
-
 " ______________________________________________________________ "
-
-
-
-
 
 " ==== BASIC ====
 
@@ -434,17 +423,17 @@ set autoindent smartindent
 set noswapfile
 set clipboard=unnamedplus
 
-nnoremap <silent> <A-Up> 32<Up>
-nnoremap <silent> <A-Down> 32<Down>
-vnoremap <silent> <A-Up> 32<Up>
-vnoremap <silent> <A-Down> 32<Down>
-inoremap <silent> <A-Up> <ESC>32<Up>i
-inoremap <silent> <A-Down> <ESC>32<Down>i
+nnoremap <silent> <A-Up> 128<Up>
+nnoremap <silent> <A-Down> 128<Down>
+vnoremap <silent> <A-Up> 128<Up>
+vnoremap <silent> <A-Down> 128<Down>
+inoremap <silent> <A-Up> <ESC>128<Up>i
+inoremap <silent> <A-Down> <ESC>128<Down>i
 
-nnoremap <silent> <S-Up> 6<Up>
-nnoremap <silent> <S-Down> 6<Down>
-inoremap <silent> <S-Up> <ESC>6<Up>i
-inoremap <silent> <S-Down> <ESC>6<Down>i
+nnoremap <silent> <S-Up> 10<Up>
+nnoremap <silent> <S-Down> 10<Down>
+inoremap <silent> <S-Up> <ESC>10<Up>i
+inoremap <silent> <S-Down> <ESC>10<Down>i
 
 " In insert mode, left and right arrows move cursor very fast
 " inoremap <A-Left> <ESC>6<Left>i
@@ -475,7 +464,6 @@ endfunc
 function! ToggleLines()
     set invnumber
 endfunc
-
 
 
 " CUSTOM KEY MAPPINGS
@@ -530,7 +518,7 @@ nnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
 " (ignore whitespace)
 nnoremap ge g_
 nnoremap gl _
-nnoremap gs 0
+nnoremap gs 0i
 nnoremap gf - 
 nnoremap ga g_i<Right>
 
@@ -566,10 +554,12 @@ inoremap <C-e> <ESC>:edit
 vnoremap <C-e> <ESC>:edit
 cnoremap <C-e> <ESC>:edit
 
-nnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-"inoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-vnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-cnoremap <C-n> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+nnoremap <leader>n:vsplit<CR><ESC>:wincmd l<CR>
+
+nnoremap <C-m> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+"inoremap <C-m> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+vnoremap <C-m> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+cnoremap <C-m> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 
 " inoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
@@ -645,7 +635,7 @@ nnoremap <S-w> 'W
 nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
 nnoremap <S-e> 'E
 
- noremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
 nnoremap <S-r> 'R
 
 nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
@@ -673,23 +663,7 @@ nnoremap <S-Left> <ESC>gT
 vnoremap <S-Right> <ESC>gt
 nnoremap <S-Right> <ESC>gt
 
-" inoremap <C-h> <ESC>q:
-" vnoremap <C-h> <ESC>q:
-" cnoremap <C-h> <ESC>q:
-" nnoremap <C-h> <ESC>q:
-
 nnoremap a i
-
-
-" == REMAPPING HJKL KEYS FOR FASTER MOVEMENT
-" nnoremap j 10j
-" vnoremap j 10j
-" nnoremap h 10h
-" nnoremap k 10k
-" nnoremap l 10l
-" vnoremap h 10h
-" vnoremap k 10k
-" vnoremap l 10l
 
 vnoremap <S-j> 10j
 nnoremap <S-j> 10j
@@ -740,11 +714,6 @@ nnoremap #d i/****************************************/
 nnoremap yw yiw
 nnoremap yl yy
 
-"nnoremap cw yiw
-"vnoremap cw yiw
-
-"nnoremap cl yy
-"vnoremap cl yy
 
 "toggle whitespace chars with ww
 nnoremap ww <ESC>:set list!<CR>
@@ -821,13 +790,7 @@ augroup END
 nnoremap gt gg
 nnoremap gb G
 
-vnoremap gt gg
-vnoremap gb G
-
-
-" nnoremap gt <ESC>:0<CR>
-" nnoremap gb <ESC>:99999999<CR>
-
+nnoremap fd gd
 
 " OPEN PREVIOUS FILES
 nnoremap pp <ESC>:browse oldfiles!<CR>
