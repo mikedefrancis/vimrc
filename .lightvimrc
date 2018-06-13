@@ -1,0 +1,589 @@
+" ==============================
+" ============ CAVIM ===========
+"
+" Copyright 2017, Mike DeFrancis. mike(AT)defrancis(dot)org
+"
+" @Warrantee
+" There is no warrantee provided for this software, not even an implied
+" warrantee regarding fitness for a particular use.
+"
+" @Description
+" CAVIM is a modified version of VIM
+" All of the modifications are contained within this .vimrc (except plugins)
+" This has been tested within gnome-terminal on ubuntu 16.04 but may work on
+" other systems. This version of vim uses Ctrl+a for switching to normal mode
+" hence the name C-A-VIM. In order to make this possible, your bashrc must be
+" modified to allow remapping of Ctrl-a. To do this, add the following line to 
+" your .bashrc file and then resource it:
+" 
+" stty -ixon
+"
+" GOAL:
+" The goal of CAVIM is to create a highly usable vim that:
+" 1) is easy to learn.
+" 2) implements the essential features of IDEs like eclipse/sublime.
+" 3) improves coding/editing speed beyond that of standard IDEs.
+
+" CONTROL KEY REMAPPINGS FOR ALL MODES:
+"
+"       Ctrl+a/a: goto normal/insert mode, accordingly
+"       Ctrl+q:   save and quit (one window/tab at a time)
+"       Ctrl+s:   save
+"       Ctrl+e:   edit (open) a file
+"       Ctrl+x:   cut
+"       Ctrl+c:   copy
+"       Ctrl+v:   paste
+"       Ctrl+d:   delete
+"       Ctrl+j:   backspace
+"       Ctrl+z:   undo
+"       Ctrl+r:   redo
+"       Ctrl+l:   toggle line numbers
+"       Ctrl+n:   new window
+"       Ctrl+b:   new tab
+"       ff:       ctrlp fuzzy file find
+"       Ctrl+f:   find in open file (same as /)
+"       Ctrl+w:   insert newline
+"       Ctrl+t:   toggle mouse
+"       Ctrl+y:   new horozontal window
+"       Ctrl+u:   toggle insert paste mode
+"       Ctrl+i:   toggle syntastic
+"       Ctrl+h:   show command history
+"       Ctrl+g:   toggle nerdtree
+"       Ctrl+k:   paste register k
+"       Ctrl+p:   find in certain files (ACK/AG/REGEX)
+"       Ctrl+Left: go to window to the Left
+"       Ctrl+Right:go to window to the Right
+"       Ctrl+Up:   go to window to the Up
+"       Ctrl+Down: go to window to the Down
+"
+" LETTER KEY REMAPPINGS FOR NORMAL MODE:
+"
+"       gg/q           start/stop recording macro g
+"       fd             search for text under cursor
+"       ff             ctrlp find in files
+"       ww             show whitespace characters
+"       cc             show current working directory
+"       ls             show current working directory in nerdtree
+"       cd             change directory using :cd command
+"       bb             go back one directory and show in nerdtree
+"       gt             goto top of file
+"       gb             goto bottom of file
+"       gs             goto start of line
+"       gl             goto start of line (exclude whitespace)
+"       ga             insert at the of current line
+"       cw             change word under cursor
+"       ci{'"{[(}      change inside quotes/braces/etc.
+"       b+{qwerty}     create qwerty bookmark
+"       dd             cut line
+"       de             cut to end of current line
+"       dw             delete word under cursor
+"       hm             toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
+"       z+Left         go 10 chars to the left
+"       z+Right        go 10 chars to the right
+"       pp             open previous files
+
+"       rn             rename file in buffer
+"       mv             move file in buffer
+"       tag            regenerate ctags for current working directory
+"
+" SHIFT KEY REMAPPINGS FOR NORMAL MODE:
+"
+"       Shift+z+z+z:   close all windows and tabs without saving
+"       Shift+x+x+x:   close all windows and tabs and save all
+"       Shift+{qwerty} go to qwerty bookmark
+"       Shift+d        find in files using ACK/AG
+"       Shift+f        find and replace in current file
+"       Shift+u        edit notes file ~/.notes.txe
+"       Shift+i        edit this file ~/.vimrc
+"       Shift+v        enter visual line/block mode
+"       Shift+b        edit ~/.bashrc
+"       Shift+j        jump to ctag definition of text under cursor
+"       Shift+c        set current working directory to current file
+"       Shift+g        run macro g
+"       Shift+a        back
+"       Shift+s        forward
+"       Shift+k        copy contents into k register
+"       Shift+h        toggle line highlight
+"       Shift+l        toggle background color (light/dark)
+"       shift+j        tjump to definitions for text under cursor (ctags)
+"       Shift+n        go to previous search result in file
+"       Shift+m        show bookmarks {qwerty + other}
+"       Shift+o        set write permissions on current file using sudo
+"       Shift+Left     go to previous tab
+"       Shift+Right    go to next tap
+"       Shift+Up       go up 6 lines
+"       Shift+Down     go down 6 lines
+"       Shift+Tab      unindent (visual mode)
+"
+" OTHER KEY REMAPPINGS:
+"
+"       Alt+Left    back
+"       Alt+Right   forward
+"       Tab         autocomplete text (insert mode)
+"       Tab         toggle syntastic (normal mode)
+"       Tab         indent (visual mode)
+"       Space       toggle center-scroll (normal mode)
+"       ;           Enter command mode (:<command)
+"       '           Run external command (:!<command>)
+"       Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
+"       ,           Leader
+"       ,c<Space>   Toggle comment/uncomment selected line(s)
+"
+" SOME USEFUL COMMANDS NOT MAPPED:
+"
+"       :<number>  Goto line number
+"       :make      Run make and capture output
+"       :cn        Jump to file containing make error
+"       :cc        Show make error message
+"       :Delete    delete file in buffer
+"       :SudoEdit  edit a file using sudo
+"       :Find      use find and output results to quickfix window
+"       :Chmod     change the permission of the current file
+"
+" PLUGINS:
+"   I am using Vundle to install my plugins
+"   Please look through this file to see which plugins have been added
+"   (they are all included in one block of text down there so it should be
+"   obvious)
+"
+"
+" PLEASE NOT THAT:
+"  - I love vim, but I am no vim guru. I needed to make it usable fast.
+"  - dont care that I am removing some regular vim functionality
+"    usability is more important than features I hardly use
+"  - have some plugins in here and a lot of them are commented out
+"    speed of vim is more important than resource heavy features
+"    exception is nerdtree and cntrlp because they are so useful 
+"    that it is worth the speed trade-off!
+"  - vim is designed to use <ESC>: (command) or <ESC>(command) for much of 
+"    its regular functionality. I find this clunky, because"     A) it requires memorizing a lot of key combinations
+"     B) it requires a lot of typing 
+"    THEREFORE (as name implies), I created a lot of ctrl+{key} shortcuts
+"  - I am not responsible for any pain in your pinky caused by use of 
+"    these ctrl+{key} shortcuts!
+"  - Feel free to enable the extra plugins and try them out, add your own,
+"    etc. Some plugins are really awesome like syntastic but very slow.
+"    so I don't always use them. If someone thinks that I should add one to this
+"    list, please send me a message. I appreciate input.
+
+nnoremap <C-f> /
+
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
+
+" adding to navigate between windows even in insert mode
+inoremap <silent> <C-Up> <ESC>:wincmd k<CR>
+inoremap <silent> <C-Left> <ESC>:wincmd h<CR>
+inoremap <silent> <C-Down> <ESC>:wincmd j<CR>
+inoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+
+nnoremap <silent> <C-Up> <ESC>:wincmd k<CR>
+nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
+nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
+nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+" ______________________________________________________________ "
+
+" ==== BASIC ====
+
+"colorscheme solarized
+syntax enable
+set background=dark
+set guifont=Monospace\ 10
+set fillchars+=vert:\$
+set ruler
+set hidden
+set number
+set laststatus=2
+set smartindent
+set st=4 sw=4 et
+set shiftwidth=4
+set tabstop=4
+"let &colorcolumn="80"
+:set guioptions-=m  "remove menu bar
+:set guioptions-=T  "remove toolbar
+:set guioptions-=r  "remove right-hand scroll bar
+:set guioptions-=L  "remove left-hand scroll bar
+
+" I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
+":set lines=999 columns=999
+" more hacks
+" DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
+" I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
+set history=1000
+set undolevels=1000
+set title
+set nobackup
+" this is an awesome one. makes all '/' searches non-case sensitive unless the search contains an upper case letter
+set ignorecase smartcase 
+set incsearch
+set autoindent smartindent
+
+" DANGER WILL ROBINSON! SWAP FILES ARE REALLY ANNOYING WHEN SOMETHING CLOSES
+" IMPROPERLY AND VIM THINKS IT IS STILL OPEN.
+" SAVE AND BACKUP YOUR WORK MANUALLY ALL OF THE TIME INSTEAD!
+set noswapfile
+set clipboard=unnamedplus
+
+nnoremap <silent> <A-Up> 128<Up>
+nnoremap <silent> <A-Down> 128<Down>
+vnoremap <silent> <A-Up> 128<Up>
+vnoremap <silent> <A-Down> 128<Down>
+inoremap <silent> <A-Up> <ESC>128<Up>i
+inoremap <silent> <A-Down> <ESC>128<Down>i
+
+nnoremap <silent> <S-Up> 10<Up>
+nnoremap <silent> <S-Down> 10<Down>
+inoremap <silent> <S-Up> <ESC>10<Up>i
+inoremap <silent> <S-Down> <ESC>10<Down>i
+
+nnoremap <silent> <A-PageUp> 4<PageUp>
+nnoremap <silent> <A-PageDown> 4<PageDown>
+vnoremap <silent> <A-PageUp> 4<PageUp>
+vnoremap <silent> <A-PageDown> 4<PageDown>
+inoremap <silent> <A-PageUp> 4<PageUp>
+inoremap <silent> <A-PageDown> 4<PageDown>
+
+" delete to end of line with de
+nnoremap de d$
+
+" CUSTOM KEY MAPPINGS
+" mode switches (hotkeys only available when the correct switch used):
+" nnoremap - normal mode
+" inoremap - insert mode
+" vnoremap - visual and select mode
+" xnoremap - visual mode
+" snoremap - select mode
+" cnoremap - command line mode
+" onoremap - operator pending mode
+
+" toggle line numbers 
+nnoremap <C-l> <ESC>:call ToggleLines()<CR>                                               
+inoremap <C-l> <ESC>:call ToggleLines()<CR>
+vnoremap <C-l> <ESC>:call ToggleLines()<CR>
+cnoremap <C-l> <ESC>:call ToggleLines()<CR>
+
+" toggle mouse
+nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+
+" indent things with tab in visual mode
+vnoremap <Tab>   >><ESC>gv
+vnoremap <S-Tab> <<<ESC>gv
+
+" KAPPA BUFFER SPECIAL COPY PASTE
+" adding easy use of an additional copy and paste buffer
+" so that I can cut and paste things around without blowing away 
+" all of that good stuff that I found somewhere to insert
+" [kappa] buffer
+nnoremap ck <Home>"ky$<ESC>:echo "copied line to k register"<CR> 
+vnoremap ck "ky<ESC>:echo "copied selection to k register"<CR>
+inoremap <C-k> <ESC>"kpi<Right><ESC>:echo "pasted contents from k register"<CR>
+vnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
+cnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
+nnoremap <C-k> "kp<Right><ESC>:echo "pasted contents from k register"<CR>
+
+" OVERRIDE STANDARD G KEY MOVEMENT BECAUSE I LIKE THIS FUNCTIONALITY MORE
+" making it slightly easier to go to the start and end of real text in a line
+" (ignore whitespace)
+nnoremap ge g_
+nnoremap gl _
+nnoremap gs 0i
+nnoremap gf - 
+nnoremap ga g_i<Right>
+vnoremap ge g_
+vnoremap gs _
+vnoremap gf - 
+
+" CHANGE IN WORD
+nnoremap cw ciw
+
+nnoremap i <ESC>:edit 
+nnoremap <C-e> <ESC>:edit 
+inoremap <C-e> <ESC>:edit
+vnoremap <C-e> <ESC>:edit
+cnoremap <C-e> <ESC>:edit
+
+nnoremap <C-d> <Delete>
+inoremap <C-d> <Delete>
+vnoremap <C-d> <Delete>
+cnoremap <C-d> <Delete>
+
+nnoremap <S-f> <ESC>:%s/<find>/<replace>/gc
+vnoremap <S-f> <ESC>:%s/<find>/<replace>/gc
+
+" This is a really fun hack. If you don't have write permissions hit <ESC>shift-x
+nnoremap <S-o> <ESC>:w !sudo tee %<CR>
+
+" WINDOWS AND TABS
+nnoremap <C-o> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+vnoremap <C-o> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+cnoremap <C-o> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+"tabs
+nnoremap <C-b> <ESC>:tabedit<CR>  
+vnoremap <C-b> <ESC>:tabedit<CR>  
+cnoremap <C-b> <ESC>:tabedit<CR>  
+inoremap <C-b> <ESC>:tabedit<CR>  
+vnoremap <S-Left> <ESC>gT
+nnoremap <S-Left> <ESC>gT
+vnoremap <S-Right> <ESC>gt
+nnoremap <S-Right> <ESC>gt
+
+" UNDO AND REDO
+inoremap <C-z> <ESC>:undo<CR>
+nnoremap <C-z> <ESC>:undo<CR>
+vnoremap <C-z> <ESC>:undo<CR>
+cnoremap <C-z> <ESC>:undo<CR>
+nnoremap <C-r> <ESC>:redo<CR>
+inoremap <C-r> <ESC>:redo<CR>
+vnoremap <C-r> <ESC>:redo<CR>
+cnoremap <C-r> <ESC>:redo<CR>
+
+" INSERT AND REGULAR MODE SWITCH
+nnoremap a i
+inoremap <C-a> <ESC>l
+nnoremap <C-a> <ESC><ESC>
+vnoremap <C-a> <ESC>l
+cnoremap <C-a> <C-c><ESC><ESC>
+
+" COPY, CUT, PASTE, REDO, UNDO
+"using control +z, x, c, v, r for undo, cut, copy, paste, redo
+"like all other programs
+"note that for copy paste compatibility with other editors is broken
+"because vim uses yank instead of copy
+"also note that you need to be in visual mode to block copy
+vnoremap <C-c> y+
+nnoremap <C-c> <Home>y$+
+inoremap <C-c> <ESC><Home>y$i+
+set pastetoggle=<C-u>
+"TODO: CHANGE FIX PASTE MODE VERSIONS OF OTHER THINGS
+inoremap <C-v> <ESC>pi<Right>
+nnoremap <C-v> <ESC>p<Right>
+vnoremap <C-v> <ESC>pv
+vnoremap <C-x> d+
+nnoremap <C-x> <Home>d$+
+nnoremap <C-w> i<CR><ESC>
+
+" prev and next location
+nnoremap <S-a> <C-o>
+nnoremap <S-s> <Tab>
+
+" SEARCH HIGHLIGHT
+let hlstate=0
+nnoremap <C-h> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+set hlsearch
+
+" toggle auto scroll using shift key
+let scrollstate=1
+nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
+set scrolloff=999
+nnoremap cc <ESC>:pwd<CR>
+nnoremap cd <ESC>:cd 
+
+" @MPD
+" 'starcraft' style bookmarks
+nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
+nnoremap <S-q> 'Q
+nnoremap bw <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
+nnoremap <S-w> 'W
+nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
+nnoremap <S-e> 'E
+nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+nnoremap <S-r> 'R
+nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
+nnoremap <S-t> 'T
+nnoremap by <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
+nnoremap <S-y> 'Y
+"==== END @MPD EXTRA STUFF ==== 
+
+" some more hacks
+nnoremap ; :
+let mapleader=","
+
+" CHANGE THESE THEY ARE FOR A PLUGIN SO MOVE TO TOP OF PLUGIN VERSION
+let g:ackhighlight = 1
+let g:ackpreview = 1
+
+" MOVEMENT
+vnoremap <S-j> 10j
+nnoremap <S-j> 10j
+vnoremap <S-h> 10h
+nnoremap <S-h> 10h
+vnoremap <S-k> 10k
+nnoremap <S-k> 10k
+vnoremap <S-l> 10l
+nnoremap <S-l> 10l
+
+" BACKGROUND
+nnoremap <S-p> <ESC>:call ToggleBackground()<CR>
+
+" kill all
+nnoremap <S-z><S-z> <ESC>:qa!<CR>
+nnoremap <S-x><S-x> <ESC>:xa!<CR>
+
+" recording fun
+" MAYBE CHANGE THESE
+nnoremap <S-g> @g
+nnoremap gg qg
+
+" EXECUTION
+nnoremap ' <ESC>:! 
+
+" FUN WITH CTAGS!!!
+" MAYBE REMOVE THIS ONE
+"set tags=./tags,tags;
+"nnoremap gj <ESC><C-]> 
+"nnoremap tag <ESC>:!ctags -R --exclude=.git .
+" nnoremap <C-j> <ESC><C-]>
+
+" SEARCH for word under cursor
+" nnoremap ff g*
+nnoremap ff gd
+vnoremap ?? *
+" nnoremap fd gd
+
+nnoremap yw yiw
+nnoremap yl yy
+
+" MACRO RECORDING SHORTCUT
+" Note that the following gg and G are remapped later in this, but work for go
+" top and go bottom listed below.
+nnoremap gt gg
+nnoremap gb G
+
+
+" OPEN PREVIOUS FILES
+nnoremap pp <ESC>:browse oldfiles!<CR>
+
+
+nnoremap vim <ESC>:edit ~/.vimrc<CR>
+nnoremap bash <ESC>:edit ~/.bashrc<CR>
+nnoremap zsh <ESC>:edit ~/.zshrc<CR>
+nnoremap notes <ESC>:edit ~/.notes.txt<CR>Gi
+nnoremap <S-b> <ESC>:tabedit 
+
+" some cool server thing probably slows things down
+"com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
+
+"toggle whitespace chars with ww
+"change this one
+nnoremap ww <ESC>:set list!<CR>
+
+"Toggle Hexmode Fun
+nnoremap hm <ESC>:Hexmode<CR>
+
+" ex command for toggling hex mode - define mapping if desired
+command! -bar Hexmode call ToggleHex()
+
+" FUNCTIONS:
+function! ToggleBackground()
+	if &background == "dark"
+		set background=light
+	else
+		set background=dark
+	endif
+endfunction
+
+function! ToggleMouse()
+    if &mouse == 'a'
+        set mouse=
+    else
+        set mouse=a
+    endif
+endfunc
+
+function! ToggleLines()
+    set invnumber
+endfunc
+
+" helper function to toggle hex mode
+function! ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries 
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+  "elf files
+  au BufReadPre  *.elf let &bin=1
+  au BufReadPost *.elf if &bin | %!xxd
+  au BufReadPost *.elf set ft=xxd | endif
+  au BufWritePre *.elf if &bin | %!xxd -r
+  au BufWritePre *.elf endif
+  au BufWritePost *.elf if &bin | %!xxd
+  au BufWritePost *.elf set nomod | endif
+augroup END
+
+" Change cursors on INSERT mode
+
+"function! ChangeToInsertCursor()
+
+" MAYBE REMOVE THIS BELOW
+"if has("autocmd")
+"  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+"  au InsertEnter,InsertChange *
+"    \ if v:insertmode == 'i' | 
+"    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+"    \ endif
+"  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+"endif
+
+"endfunction
+
+" nnoremap <C-j> <Backspace>
+" inoremap <C-j> <Backspace>
+
+
+" nnoremap rn <ESC>:Rename 
+" nnoremap mv <ESC>:Move 
+" Adding this line to allow manpage viewing
+" runtime ftplugin/man.vim
+
+set secure
+
