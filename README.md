@@ -1,216 +1,167 @@
-# CAVIM
-* Named CA-VIM because Ctrl+A returns the user to normal mode. The Ctrl key is used a lot.
+" ================================
+" ============ GUNGNIR ===========
+"
+" Copyright 2017, Mike DeFrancis. mike(AT)defrancis(dot)org
+"
+" @Warrantee
+" There is no warrantee provided for this software, not even an implied
+" warrantee regarding fitness for a particular use. I am not responsible
+" for anything bad that happens when you use this .vimrc or any of the
+" corresponding scripts from the containing repository. FOR INSTANCE:
+" I DISABLED SWAP FILES. THEY ARE NOT NECESSARY IF YOU REMEMBER TO SAVE OFTEN.
+" I AM NOT RESPONSIBLE FOR YOUR LOST DATA!
+"
+" @Description
+" GUNGNIR is a heavily edited vim configuration.
+" Sometimes, Stock vim will do.
+" Sometimes, you need the spear of odin.
+" All of the modifications are contained within this .vimrc (except plugins)
+" This has been tested within gnome-terminal on ubuntu 16.04 but may work on
+" other systems. This version of vim uses Ctrl+a for switching to normal mode
+" and a to switch to insert mode. In order to make this possible, your bashrc must be
+" modified to allow remapping of Ctrl-a. To do this, add the following line to 
+" your .bashrc file and then resource it.
+"
+" WARNING: You MUST add the following line to your .vimrc:
+" stty -ixon
+"
+" GOAL:
+" GUNGNIR is my personal vim configuration. You are welcome to try it out for yourself.
+"
+" NOTE:
+"       The KEY REMAPPINGS listed BELOW may be OUT OF DATE (I am a bit lazy)
+"       LOOK AT THE SOURCE IN THIS FILE TO BE SURE.
+"
+" CONTROL KEY REMAPPINGS FOR ALL MODES:
+"
+"       Ctrl+a: goto normal/insert mode, accordingly
+"       Ctrl+q:   save and quit (one window/tab at a time)
+"       Ctrl+s:   save
+"       Ctrl+e:   edit (open) a file
+"       Ctrl+x:   cut
+"       Ctrl+c:   copy
+"       Ctrl+v:   paste
+"       Ctrl+d:   delete
+"       Ctrl+z:   undo
+"       Ctrl+r:   redo
+"       Ctrl+o:   toggle line numbers
+"       Ctrl+w:   new window
+"       Ctrl+y:   new horozontal window
+"       Ctrl+b:   new tab
+"       Ctrl+f:   find in open file (same as /)
+"       Ctrl+w:   insert newline
+"       Ctrl+t:   toggle mouse
+"       Ctrl+u:   toggle insert paste mode
+"       Ctrl+g:   toggle nerdtree
+"       Ctrl+p:   paste register p
+"       Ctrl+{h,j,k,l}: go left, down, up, right by 100 lines at a time
+"       Ctrl+Left: go to window to the Left (requires easymotion plugin)
+"       Ctrl+Right:go to window to the Right(requires easymotion plugin)
+"       Ctrl+Up:   go to window to the Up   (requires easymotion plugin)
+"       Ctrl+Down: go to window to the Down (requires easymotion plugin)
+"
+" LETTER KEY REMAPPINGS FOR NORMAL MODE:
 
-* Mappings for copy, paste, save, quit, etc. now match most IDEs so you dont have to relearn them.
+"       a              insert mode
+"       ff             find word under cursor in open file
+"       gg/q           start/stop recording macro g
+"       i              ctrlp find in files
+"       ww             show whitespace characters
+"       cc             show current working directory
+"       ls             show current working directory in nerdtree
+"       cd             change directory using :cd command
+"       bb             go back one directory and show in nerdtree
+"       gt             goto top of file
+"       gb             goto bottom of file
+"       gs             goto start of line
+"       gl             goto start of line (exclude whitespace)
+"       ga             insert at the of current line
+"       cw             change word under cursor
+"       ci{'"{[(}      change inside quotes/braces/etc.
+"       b+{qwerty}     create qwerty bookmark
+"       dd             cut line
+"       de             cut to end of current line
+"       dw             delete word under cursor
+"       hm             toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
+"       pp             open previous files
+"       cp             copy current line into p register
+"
+" SHIFT KEY REMAPPINGS FOR NORMAL MODE:
+"
+"       Shift+z+z:   close all windows and tabs without saving
+"       Shift+x+x:   close all windows and tabs and save all
+"       Shift+{qwerty} go to qwerty bookmark
+"       Shift+p        toggle colors (dark/light)
+"       Shift+d        find in files using ACK/AG (REQUIRES PLUGIN)
+"       Shift+f        find and replace in current file
+"       Shift+u        edit notes file ~/.notes.txe
+"       Shift+i        toggle search highlight
+"       Shift+v        enter visual line/block mode
+"       Shift+b        tabedit
+"       Shift+c        set current working directory to current file (REQUIRES NERDTREE PLUGIN)
+"       Shift+g        run macro g
+"       Shift+a        back to prev location
+"       Shift+s        forward to next location
+"       Shift+h        toggle line highlight
+"       Shift+l        toggle background color (light/dark)
+"       shift+j        tjump to definitions for text under cursor (ctags)
+"       Shift+n        go to previous search result in file
+"       Shift+o        set write permissions on current file using sudo
+"       Shift+Left     go to previous tab
+"       Shift+Right    go to next tap
+"       Shift+Up       go up 6 lines
+"       Shift+Down     go down 6 lines
+"       Shift+Tab      unindent (visual mode)
+"
+" OTHER KEY REMAPPINGS:
+"
+"       Alt+Left    back
+"       Alt+Right   forward
+"       Tab         autocomplete text (insert mode)
+"       Tab         toggle syntastic (normal mode)
+"       Tab         indent (visual mode)
+"       Space       toggle center-scroll (normal mode)
+"       ;           Enter command mode (:<command)
+"       '           Run external command (:!<command>)
+"       Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
+"       ,           Leader
+"       ,c<Space>   Toggle comment/uncomment selected line(s)
+"
+" SOME USEFUL COMMANDS NOT MAPPED:
+"
+"       :<number>  Goto line number
+"       :make      Run make and capture output
+"       :cn        Jump to file containing make error
+"       :cc        Show make error message
+"       :Delete    delete file in buffer
+"       :SudoEdit  edit a file using sudo
+"       :Find      use find and output results to quickfix window
+"       :Chmod     change the permission of the current file
+"
+" PLUGINS:
+"   I am using Vundle to install my plugins
+"   THERE IS A SEPARATE VERSION OF THIS FILE FOR THE PLUGINS BECAUSE IT CONTAINS PLUGIN REMAPS
+"   Please look through this file to see which plugins have been added
+"   (they are all included in one block of text down there so it should be
+"   obvious)
+"
+"
+" PLEASE NOT THAT:
+"  - I love vim, but I am no vim guru. I needed to make it usable fast.
+"  - I am removing some regular vim functionality
+"    (usability is more important than features I hardly use)
+"  - This vim may be used with or without plugins. The plugin version has remappings for the plugins.
+"  - vim is designed to use <ESC>: (command) or <ESC>(command) for much of 
+"    its regular functionality. I find this clunky, because" A) it requires memorizing a lot of key combinations
+"     B) it requires a lot of typing 
+"    THEREFORE, I created a lot of ctrl+{key} shortcuts
+"  - I am not responsible for any pain in your pinky caused by use of 
+"    these ctrl+{key} shortcuts!
+"  - Feel free to enable the extra plugins and try them out, add your own,
+"    etc. Some plugins are really awesome like syntastic but very slow.
+"    so I don't always use them. If someone thinks that I should add one to this
+"    list, please send me a message. I appreciate input.
 
-* I broke some of the basic vim functionality in order to make these hotkeys work, but don't worry - all of the really cool things that set vim apart from other editors still work (really, does anyone use EX mode?)
-
-
-* GOAL:
- 
-      The goal of CAVIM is to create a highly usable vim that:
-      1) is easy to learn.
-      2) implements the essential features of IDEs like eclipse/sublime.
-      3) improves coding/editing speed beyond that of standard IDEs.
-
-* MOVEMENT KEY REMAPPINGS:
-      
-      h/j/k/l:     Left/down/up/right
-      Shift+h:     Left 10 chars
-      Shift+l:     Right 10 chars
-      Shift+j:     Down 10 lines
-      Shift+k:     Up 10 lines
-      
-      Up/Down/Left/Right arrows also move cursor
-      
-      Shift+Up:    Up 6 lines
-      Shift+Down:  Down 6 lines
-      Shift+Right: Right 10 chars
-      Shift+Left:  Left 10 chars
-     
-      Alt+Down:    Down 32 lines
-      Alt+Up:      Up 32 lines
-      Alt+Left     Back
-      Alt+Right    Forward
-      
-      Ctrl+Left:   Go to window to the Left
-      Ctrl+Right:  Go to window to the Right
-      Ctrl+Up:     Go to window to the Up
-      Ctrl+Down:   Go to window to the Down
-
-* CONTROL KEY REMAPPINGS FOR ALL MODES:
-
-      Ctrl+a/a: goto normal/insert mode, accordingly
-      Ctrl+q:   save and quit (one window/tab at a time)
-      Ctrl+s:   save
-      Ctrl+e:   edit (open) a file
-      Ctrl+x:   cut
-      Ctrl+c:   copy
-      Ctrl+v:   paste
-      Ctrl+d:   delete
-      Ctrl+j:   backspace
-      Ctrl+z:   undo
-      Ctrl+r:   redo
-      Ctrl+l:   toggle line numbers
-      Ctrl+n:   new window
-      Ctrl+b:   new tab
-      Ctrl+f:   ctrlp fuzzy file find
-      Ctrl+w:   insert newline
-      Ctrl+t:   toggle mouse
-      Ctrl+y:   new horozontal window
-      Ctrl+u:   toggle insert paste mode
-      Ctrl+i:   toggle syntastic
-      Ctrl+g:   toggle nerdtree
-      Ctrl+k:   paste register k
-      Ctrl+p:   find in certain files (ACK/AG/REGEX)
-      Ctrl+h:   toggle line highlight
-
-* LETTER KEY REMAPPINGS FOR NORMAL MODE:
-
-      gg/q           start/stop recording macro g
-      ff             search for text under cursor in file
-      ww             show whitespace characters
-      cc             show current working directory
-      ls             show current working directory in nerdtree
-      cd             change directory using :cd command
-      bb             go back one directory and show in nerdtree
-      gt             goto top of file
-      gb             goto bottom of file
-      gs             goto start of line
-      gl             goto start of line (exclude whitespace)
-      ga             insert at the of current line
-      cw             change word under cursor
-      ci{'"{[(}      change inside quotes/braces/etc.
-      b+{qwerty}     create qwerty bookmark 
-      dd             cut line
-      de             cut to end of current line
-      dw             delete word under cursor
-      hm             toggle hex editing mode (DANGEROUS FOR NON BIN FILES!)
-      z+Left         go 10 chars to the left
-      z+Right        go 10 chars to the right
-      pp             open previous files
-      oo             open file type(s) in current working directory in tabs
-      rn             rename file in buffer
-      mv             move file in buffer
-      tag            regenerate ctags for current working directory
-      gj             go jump to ctag definition of text under cursor
-      ck             copy contents into k register
-
-* SHIFT KEY REMAPPINGS FOR NORMAL MODE:
-
-      Shift+a        back
-      Shift+s        forward
-      Shift+z+z+z:   close all windows and tabs without saving
-      Shift+x+x+x:   close all windows and tabs and save all
-      Shift+{qwerty} go to qwerty bookmark
-      Shift+d        find in files using ACK/AG
-      Shift+f        find and replace in current file
-      Shift+u        edit notes file ~/.notes.txe
-      Shift+i        edit this file ~/.vimrc
-      Shift+v        enter visual line/block mode
-      Shift+b        edit ~/.bashrc
-      Shift+c        set current working directory to current file
-      Shift+g        run macro g
-      Shift+p        toggle background color (light/dark)
-      shift+j        tjump to definitions for text under cursor (ctags)  
-      Shift+n        go to previous search result in file
-      Shift+m        show bookmarks {qwerty + other}
-      Shift+o        set write permissions on current file using sudo
-      Shift+Left     go to previous tab
-      Shift+Right    go to next tap
-      Shift+Up       go up 6 lines
-      Shift+Down     go down 6 lines
-      Shift+Tab      unindent (visual mode)
-           
-* OTHER KEY REMAPPINGS:
-
-      Tab         autocomplete text (insert mode)
-      Tab         toggle syntastic (normal mode)
-      Tab         indent (visual mode)
-      Space       toggle center-scroll (normal mode)
-      ;           Enter command mode (:<command)
-      '           Run external command (:!<command>)
-      Ctrl+o      Insert snippet (for/while loop/struct/etc.) (insert mode)
-      ,           Leader
-      ,c<Space>   Toggle comment/uncomment selected line(s)
-           
-* SOME USEFUL COMMANDS NOT MAPPED:
-
-      :<number>  Goto line number
-      :make      Run make and capture output
-      :cn        Jump to file containing make error
-      :cc        Show make error message
-      :Delete    delete file in buffer
-      :SudoEdit  edit a file using sudo
-      :Find      use find and output results to quickfix window
-      :Chmod     change the permission of the current file
-           
-* PLUGINS:
-
-      I am using Vundle to install my plugins
-      Please look through this file to see which plugins have been added
-      (they are all included in one block of text down there so it should be
-      obvious)
-      
-* MISCELLANEOUS
-    
-      I constantly update this .vimrc...
-      ...you may find that a hotkey is broken or has been remapped to something else
-      ...you may also find new goodies
-      , is the leader key
-      f controls various easymotion things besides what I remapped
-      c controls various commenting functions from nerdcommenter
-      I clobbed a lot of regular hotkeys in order to make this usable for me
-      If you hate what I did, feel free to change whatever you want
-      If you have suggestions, let me know
-
-* HELP
-     
-      :help                  - view general help
-      :help <key-combo>      - see what default vim commands I clobbered for the key sequence specified
-      :help nerdcommenter    - view commenting plugin help
-      :help nerdtree         - view file searching help
-      :help easymotion       - view navigation plugin help
-      :help ctrlp            - view help for fuzzy file searching
-      :help ack              - view help for ack multi-file search (not accurate if silversearcher-ag is installed which it is by my script)
-
-* Gnome-Terminal Fun (vim and terminal are designed to be used together. do it.)
-      
-      Ctrl+Shift+t           - create a new terminal tab
-      Ctrl+[PageUp/PageDown] - switch between terminal tabs
-      Alt+[number]           - jump to terminal tab # [number]
-
-
-
-* I believe that people should get credit for making the internet a better place. Many props to Sebastian Karlson from whom the vim stuff on this page has been copied and tweaked (https://github.com/sebbekarlsson)
-
-## Installing CAVIM
-
-* Save your existing .vimrc file. For safety, you may also wish to save your .bashrc file too.
-
-* Run the following commands
-
-      git clone https://github.com/mikedefrancis/cavim cavim
-      cd cavim
-      ./install_cavim
-      source ~/.bashrc
-
-* Make double-sure that you resourced your .bashrc file or some functionality will be lost.
-
-* The install script only works with ubuntu
-
-* If you encounter problems running the install script, please perform the following steps:
-      
-      git clone https://github.com/mikedefrancis/cavim cavim
-      cd cavim
-      sudo apt-get install vim silversearcher-ag exuberant-ctags   
-      mkdir -p ~/.vim/bundle
-      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-      echo 'stty -ixon' >> ~/.bashrc
-      source ~/.bashrc
-      cp .vimrc ~/.vimrc
-      vim -c ":PluginInstall" -c ":qa!" README.md
-      
 
 * theoreticaly this work on other linuxes besides ubuntu but this has not been tested
 
