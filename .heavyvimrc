@@ -1,4 +1,4 @@
-" ================================
+"ifeq ($(ARCH),X86) ================================
 " ============ GUNGNIR ===========
 "
 " Copyright 2017, Mike DeFrancis. mike(AT)defrancis(dot)org
@@ -54,7 +54,7 @@
 "       Ctrl+u:   toggle insert paste mode
 "       Ctrl+g:   toggle nerdtree
 "       Ctrl+p:   paste register p
-"       Ctrl+{h,j,k,l}: go left, down, up, right by 100 lines at a time
+"       Ctrl+{h,j,k,l}: go left, down, up, right by 3 lines at a time
 "       Ctrl+Left: go to window to the Left (requires easymotion plugin)
 "       Ctrl+Right:go to window to the Right(requires easymotion plugin)
 "       Ctrl+Up:   go to window to the Up   (requires easymotion plugin)
@@ -351,12 +351,11 @@ cnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 nnoremap <S-d> <ESC>:Ack! 
 vnoremap <S-d> <ESC>:Ack!
 
-nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
-nnoremap bb :cd ..<CR><ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
+nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
 noremap ls <ESC>:NERDTree .<CR><ESC>:wincmd l<CR>
 
 " ==== END PLUGINS ====
-
+ 
 
 " ______________________________________________________________ "
 " ==== PROPERTIES ====
@@ -412,8 +411,11 @@ let mapleader=","
 " ______________________________________________________________ "
 " ==== KEY BINDINGS ====
 
+
+
 "===========
 """" BASICS (KNOW ALL OF THESE)
+nnoremap bb :cd ..<CR><ESC>:pwd<CR>
 " in general using Control+Key mappings to avoid
 " clobbering existing functionality of vim
 " CLOSE ALL WINDOWS AND BUFFERS
@@ -505,15 +507,15 @@ vnoremap <S-k> 10k
 nnoremap <S-k> 10k
 vnoremap <S-l> 10l
 nnoremap <S-l> 10l
-" 100 lines at a time
-vnoremap <C-j> 100j
-nnoremap <C-j> 100j
-vnoremap <C-h> 100h
-nnoremap <C-h> 100h
-vnoremap <C-k> 100k
-nnoremap <C-k> 100k
-vnoremap <C-l> 100l
-nnoremap <C-l> 100l
+" 3 lines at a time
+vnoremap <C-j> 3j
+nnoremap <C-j> 3j
+vnoremap <C-h> 3h
+nnoremap <C-h> 3h
+vnoremap <C-k> 3k
+nnoremap <C-k> 3k
+vnoremap <C-l> 3l
+nnoremap <C-l> 3l
 
 "===========
 " FILE // WINDOW NAVIGATION
@@ -607,22 +609,33 @@ nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set sc
 set scrolloff=999
 " show current directory
 nnoremap cc <ESC>:pwd<CR>
+
+" show full path of current file
+nnoremap cv <ESC>:echo expand('%:p')<CR>
+
 " change current directory
 nnoremap cd <ESC>:cd 
 
 " STARCRAFT-STYLE
+nnoremap qq 'Q
+nnoremap ww 'W
+nnoremap ee 'E
+nnoremap rr 'R
+nnoremap tt 'T
+nnoremap yy 'Y
+
 nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
-nnoremap <S-q> 'Q
+nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
 nnoremap bw <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
-nnoremap <S-w> 'W
+nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
 nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
-nnoremap <S-e> 'E
+nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
 nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
-nnoremap <S-r> 'R
+nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
 nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
-nnoremap <S-t> 'T
+nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
 nnoremap by <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
-nnoremap <S-y> 'Y
+nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 
 " recording fun
 " MAYBE CHANGE THESE

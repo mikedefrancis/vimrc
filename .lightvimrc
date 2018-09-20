@@ -1,4 +1,4 @@
-" ================================
+"ifeq ($(ARCH),X86) ================================
 " ============ GUNGNIR ===========
 "
 " Copyright 2017, Mike DeFrancis. mike(AT)defrancis(dot)org
@@ -54,7 +54,7 @@
 "       Ctrl+u:   toggle insert paste mode
 "       Ctrl+g:   toggle nerdtree
 "       Ctrl+p:   paste register p
-"       Ctrl+{h,j,k,l}: go left, down, up, right by 100 lines at a time
+"       Ctrl+{h,j,k,l}: go left, down, up, right by 3 lines at a time
 "       Ctrl+Left: go to window to the Left (requires easymotion plugin)
 "       Ctrl+Right:go to window to the Right(requires easymotion plugin)
 "       Ctrl+Up:   go to window to the Up   (requires easymotion plugin)
@@ -65,7 +65,7 @@
 "       a              insert mode
 "       ff             find word under cursor in open file
 "       gg/q           start/stop recording macro g
-"       i              ctrlp find in files
+"       fd             ctrlp find in files
 "       ww             show whitespace characters
 "       cc             show current working directory
 "       ls             show current working directory in nerdtree
@@ -138,14 +138,6 @@
 "       :Find      use find and output results to quickfix window
 "       :Chmod     change the permission of the current file
 "
-" PLUGINS:
-"   I am using Vundle to install my plugins
-"   THERE IS A SEPARATE VERSION OF THIS FILE FOR THE PLUGINS BECAUSE IT CONTAINS PLUGIN REMAPS
-"   Please look through this file to see which plugins have been added
-"   (they are all included in one block of text down there so it should be
-"   obvious)
-"
-"
 " PLEASE NOT THAT:
 "  - I love vim, but I am no vim guru. I needed to make it usable fast.
 "  - I am removing some regular vim functionality
@@ -161,6 +153,8 @@
 "    etc. Some plugins are really awesome like syntastic but very slow.
 "    so I don't always use them. If someone thinks that I should add one to this
 "    list, please send me a message. I appreciate input.
+
+nnoremap <S-c> <ESC>:cd %:p:h<CR><ESC>:wincmd l<CR><ESC>:pwd<CR>
 
 " ______________________________________________________________ "
 " ==== PROPERTIES ====
@@ -218,6 +212,7 @@ let mapleader=","
 
 "===========
 """" BASICS (KNOW ALL OF THESE)
+nnoremap bb :cd ..<CR><ESC>:pwd<CR>
 " in general using Control+Key mappings to avoid
 " clobbering existing functionality of vim
 " CLOSE ALL WINDOWS AND BUFFERS
@@ -284,18 +279,6 @@ nnoremap <C-x> <Home>d$+
 "===========
 """" MOVEMENT
 " arrow keys
-nmap <silent> <C-Up> :wincmd k<CR>
-nmap <silent> <C-Down> :wincmd j<CR>
-nmap <silent> <C-Left> :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
-inoremap <silent> <C-Up> <ESC>:wincmd k<CR>
-inoremap <silent> <C-Left> <ESC>:wincmd h<CR>
-inoremap <silent> <C-Down> <ESC>:wincmd j<CR>
-inoremap <silent> <C-Right> <ESC>:wincmd l<CR>
-nnoremap <silent> <C-Up> <ESC>:wincmd k<CR>
-nnoremap <silent> <C-Left> <ESC>:wincmd h<CR>
-nnoremap <silent> <C-Down> <ESC>:wincmd j<CR>
-nnoremap <silent> <C-Right> <ESC>:wincmd l<CR>
 nnoremap <silent> <A-Up> 128<Up>
 nnoremap <silent> <A-Down> 128<Down>
 vnoremap <silent> <A-Up> 128<Up>
@@ -321,15 +304,15 @@ vnoremap <S-k> 10k
 nnoremap <S-k> 10k
 vnoremap <S-l> 10l
 nnoremap <S-l> 10l
-" 100 lines at a time
-vnoremap <C-j> 100j
-nnoremap <C-j> 100j
-vnoremap <C-h> 100h
-nnoremap <C-h> 100h
-vnoremap <C-k> 100k
-nnoremap <C-k> 100k
-vnoremap <C-l> 100l
-nnoremap <C-l> 100l
+" 3 lines at a time
+vnoremap <C-j> 3j
+nnoremap <C-j> 3j
+vnoremap <C-h> 3h
+nnoremap <C-h> 3h
+vnoremap <C-k> 3k
+nnoremap <C-k> 3k
+vnoremap <C-l> 3l
+nnoremap <C-l> 3l
 
 "===========
 " FILE // WINDOW NAVIGATION
@@ -423,22 +406,33 @@ nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set sc
 set scrolloff=999
 " show current directory
 nnoremap cc <ESC>:pwd<CR>
+
+" show full path of current file
+nnoremap cv <ESC>:echo expand('%:p')<CR>
+
 " change current directory
 nnoremap cd <ESC>:cd 
 
 " STARCRAFT-STYLE
+nnoremap qq 'Q
+nnoremap ww 'W
+nnoremap ee 'E
+nnoremap rr 'R
+nnoremap tt 'T
+nnoremap yy 'Y
+
 nnoremap bq <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
-nnoremap <S-q> 'Q
+nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
 nnoremap bw <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
-nnoremap <S-w> 'W
+nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
 nnoremap be <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
-nnoremap <S-e> 'E
+nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
 nnoremap br <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
-nnoremap <S-r> 'R
+nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
 nnoremap bt <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
-nnoremap <S-t> 'T
+nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
 nnoremap by <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
-nnoremap <S-y> 'Y
+nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 
 " recording fun
 " MAYBE CHANGE THESE
