@@ -295,24 +295,28 @@ vnoremap <silent> <A-PageUp> 4<PageUp>
 vnoremap <silent> <A-PageDown> 4<PageDown>
 inoremap <silent> <A-PageUp> 4<PageUp>
 inoremap <silent> <A-PageDown> 4<PageDown>
-" 10 lines at atime
-vnoremap <S-j> 10j
-nnoremap <S-j> 10j
-vnoremap <S-h> 10h
-nnoremap <S-h> 10h
-vnoremap <S-k> 10k
-nnoremap <S-k> 10k
-vnoremap <S-l> 10l
-nnoremap <S-l> 10l
-" 3 lines at a time
-vnoremap <C-j> 3j
-nnoremap <C-j> 3j
-vnoremap <C-h> 3h
-nnoremap <C-h> 3h
-vnoremap <C-k> 3k
-nnoremap <C-k> 3k
-vnoremap <C-l> 3l
-nnoremap <C-l> 3l
+
+" Shift nav
+vnoremap <S-j> 16j
+nnoremap <S-j> 16j
+vnoremap <S-k> 16k
+nnoremap <S-k> 16k
+
+" tab switch
+vnoremap <S-h> <ESC>gT
+nnoremap <S-h> <ESC>gT
+vnoremap <S-l> <ESC>gt
+nnoremap <S-l> <ESC>gt
+
+" Ctrl nav
+vnoremap <C-j> 4j
+nnoremap <C-j> 4j
+vnoremap <C-h> 8h
+nnoremap <C-h> 8h
+vnoremap <C-k> 4k
+nnoremap <C-k> 4k
+vnoremap <C-l> 8l
+nnoremap <C-l> 8l
 
 "===========
 " FILE // WINDOW NAVIGATION
@@ -328,10 +332,6 @@ nnoremap <C-b> <ESC>:tabedit<CR>
 vnoremap <C-b> <ESC>:tabedit<CR>  
 cnoremap <C-b> <ESC>:tabedit<CR>  
 inoremap <C-b> <ESC>:tabedit<CR>  
-vnoremap <S-Left> <ESC>gT
-nnoremap <S-Left> <ESC>gT
-vnoremap <S-Right> <ESC>gt
-nnoremap <S-Right> <ESC>gt
 " prev and next location
 nnoremap <S-a> <C-o>
 nnoremap <S-s> <Tab>
