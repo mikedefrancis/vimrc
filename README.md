@@ -1,23 +1,40 @@
-* See the comments at hte top of the .heavyvimrc and .lightvimrc to understand how to use these
+# WARPCORE
+                                             _..--------.._
+   ________________________              _.-~        ||    ~-._
+ /'                    \ ||`\         /'    \\  |      |  |   ^\
+|:    ===               -||:  )      /'   \   _.--~~~~--._     / ^\
+ \.____________________/_||../     /'  \    /~            ~\ /  /  ^\
+    |       |                     ||    \ /'     \||  |/    ^\       \
+    |    || ^\     ___-----------/~\  \  /    \           /   \  /    \
+     \    \\  \.-~~   \  |  /   /|  | - |   \   .-~~~~-.    /  \     - ;
+     |           \  \     |  _/' |O |  |~\ __./'        ^\   _  | - _  |
+     |O    /____________..--~ [] |__|- | [] ..   .---._   |  -  | _   _|
+     |   ===____________ --|]=====__|  | [] ..  ( D>   )  |  _  |  _  =|
+     |O    \  /    /    ~~--. [] |  | -| []__    ---'~    |  _  |  -  ~|
+     |           /   /    |  ^\  |O |  |_/   ^\          /      | -    |
+     /    //  .-.__   / |   \  ^\|  | _ |   /  -.____.-'   \  /    \  ;
+    |    ||  /     ~~~------------\_/     \   /            \   /      /
+   _|_______|______________       || /    \      /|  | |\    /  \    /
+ /'                    \ ||`\     \   / / ^\_             /'  \    /
+|:   ===                -||:  )     ^\        ~-__    __.-~ \  \  /'
+ \.____________________/_||../        ^\  /   /   ~~~~ |        /'
+                                        -._     |  ||    \ _.-'
+                                            ~-..________..-~
 
-* The .lightvimrc has no plugins. The .heavyvimrc uses plugins. The plugins probaly only work on certain debian distros.
+Warpcore is a heavily modified .vimrc file. It remaps many things, and allows you to use Ctrl-s, Ctrl-q, etc. to save,
+quit, copy, paste, undo, redo, etc. like the other editors. It does this without removing too much of the stock vim
+functionality. In fact, I find this .vimrc much more functional than stock vim. It is easier to make bookmarks, create
+macros, find and replace text, etc. Only a minimal number of plugins are used, and none of them are required.
 
+* See the comments at hte top of the .warcore_vimrc to understand all of my hotkey remaps
+* Some older versions of this .vimrc are provided (heavy_vimrc and light_vimrc) for reference.
 * install simply by running the script corresponding to the version of the vimrc that you want
-
-* theoreticaly this work on other linuxes besides ubuntu but this has not been tested
-
+* These have only been tested on ubuntu 16.04 but should work on 18.04 as well and other versions of linux 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
 
-## OPTIONAL: install i3
+## RECOMMENDED: i3 Window Manager
 
-          sudo apt-get install i3
-
-* there are better ways to install and configure i3, but this works on ubuntu
-
-* logout, select i3 as the desktop, and log back in. for a tutorial on using i3, see:
-
-* https://fedoramagazine.org/getting-started-i3-window-manager/
-
+* see my stuff at https://www.github.com/mikedefrancis/ubuntu-i3
 
 ## REFERENCE
 
