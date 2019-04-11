@@ -1,4 +1,4 @@
-# WARPCORE
+# WARPCORE VIMRC
                                                  _..--------.._
        ________________________              _.-~        ||    ~-._
      /'                    \ ||`\         /'    \\  |      |  |   ^\
@@ -31,6 +31,14 @@ macros, find and replace text, etc. Only a minimal number of plugins are used, a
 * install simply by running the script corresponding to the version of the vimrc that you want
 * These have only been tested on ubuntu 16.04 but should work on 18.04 as well and other versions of linux 
 * see https://www.youtube.com/watch?v=zF9EcpYb1KE for details using vundle and vim
+
+## TO INSTALL
+
+To back up your old .vimrc and install warpcore, run the following command. Note, you should also back up your .vimrc file yourself because I don't want to be responsible for your heartache in case something crashes.
+
+          ./warpcore_installer
+
+This installer will replace your existing .vimrc with warpcore. It will additionally install necessary plugins and programs that are used by warpcore.
 
 ## RECOMMENDED: i3 Window Manager
 
