@@ -20,8 +20,10 @@
 " modified to allow remapping of Ctrl-a. To do this, add the following line to 
 " your .bashrc file and then resource it.
 "
-" WARNING: You MUST add the following line to your .vimrc:
-" stty -ixon
+" WARNING: You MUST add the following line to THE END of your .bashrc (or .zshrc). Note
+" that my install scripts attempt to add this line to your .bashrc for you
+" automatically.:
+"     stty -ixon
 "
 " GOAL:
 " WARPCORE is my personal vim configuration. You are welcome to try it out for yourself.
