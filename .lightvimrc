@@ -1,7 +1,4 @@
-"ifeq ($(ARCH),X86) ================================
-" ============ GUNGNIR ===========
-"
-" Copyright 2017, Mike DeFrancis. mike(AT)defrancis(dot)org
+" ============ LIGHT VIMRC ===========
 "
 " @Warrantee
 " There is no warrantee provided for this software, not even an implied

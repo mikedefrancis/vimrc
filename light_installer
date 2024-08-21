@@ -12,5 +12,5 @@ esac
 echo 'stty -ixon' >> ~/.bashrc
 cp .lightvimrc ~/.vimrc
 
-echo "...install complete. Enjoy! ~Mike"
+echo "...install complete. Enjoy!"
 echo "IMPORTANT: you must run 'source ~/.bashrc' to enable all features"

@@ -17,5 +17,5 @@ cp .heavyvimrc ~/.vimrc
 vim -c ":PluginInstall" -c "qa!" README.md
 
 
-echo "...install complete. Enjoy! ~Mike"
+echo "...install complete. Enjoy!"
 echo "IMPORTANT: you must run 'source ~/.bashrc' to enable all features"

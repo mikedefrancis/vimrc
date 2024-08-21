@@ -40,10 +40,6 @@ To back up your old .vimrc and install warpcore, run the following command. Note
 
 This installer will replace your existing .vimrc with warpcore. It will additionally install necessary plugins and programs that are used by warpcore.
 
-## RECOMMENDED: i3 Window Manager
-
-* see my stuff at https://www.github.com/mikedefrancis/ubuntu-i3
-
 ## REFERENCE
 
 * Vim Cheatsheet For Programmers (note that I broke some of these hotkeys and may consider restoring their functionality later)

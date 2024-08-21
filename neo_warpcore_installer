@@ -10,12 +10,13 @@ case $choice in
 esac
 
 sudo apt-get install vim silversearcher-ag exuberant-ctags
-mkdir -p ~/.vim/bundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p ~/.config/nvim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 echo 'stty -ixon' >> ~/.bashrc
-cp ~/.vimrc ~/.vimrc_warpcore_bak
-cp .warpcore_vimrc ~/.vimrc
-vim -c ":PluginInstall" -c "qa!" README.md
+echo 'stty -ixon' >> ~/.zshrc
+cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.back
+cp neovim_init.vim ~/.config/nvim/init.vim
+nvim -c ":PluginInstall" -c "qa!" README.md
 
 
 echo "...install complete. Enjoy!"
