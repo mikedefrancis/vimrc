@@ -162,9 +162,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'easymotion/vim-easymotion'
 
-" ctrlp is my favorite plugin as it provides fuzzy file search within vim
-Plugin 'kien/ctrlp.vim'
+" This can be used in place of fzf if for some reason I don't have fzf
+" available
+" Plugin 'kien/ctrlp.vim'
 
+" ctrlp is my favorite plugin as it provides fuzzy file search within vim
 " More fuzzy file search because more is better
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -228,7 +230,7 @@ cnoreabbrev Ack Ack!
 cnoreabbrev ag Ack!
 
 " this is very important
-let g:ctrlp_map = 'fd'
+" let g:ctrlp_map = 'fd'
 
 nnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 vnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
@@ -539,9 +541,14 @@ nnoremap ' <ESC>:!
 nnoremap gt gg
 nnoremap gb G
 
-" OPEN PREVIOUS FILES
+" FZF SEARCH!
 nnoremap <S-f> <ESC>:Files<CR>
 vnoremap <S-f> <ESC>:Files<CR>
+
+" FZF HISTORY VIEW
+nnoremap fd <ESC>:History<CR>
+vnoremap fd <ESC>:History<CR>
+
 " nnoremap pp <ESC>:browse oldfiles!<CR>
 
 " open some favorite files like cake
