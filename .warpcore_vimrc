@@ -39,9 +39,8 @@
 "       Ctrl+x:   cut
 "       Ctrl+c:   copy
 "       Ctrl+v:   paste
-"       Ctrl+d:   delete
-"       Ctrl+z:   undo
-"       Ctrl+r:   redo
+"       Ctrl+d:   fine and replace in file
+"       Ctrl+z:   undo"       Ctrl+r:   redo
 "       Ctrl+o:   toggle line numbers
 "       Ctrl+w:   new window
 "       Ctrl+y:   new horozontal window
@@ -58,7 +57,7 @@
 "       Ctrl+Down: go to window to the Down (requires easymotion plugin)
 "       Ctrl+h   goto tab to the left
 "       Ctrl+l   goto tab to the right
-"       Ctrl-g/q           start/stop recording macro g
+"       Ctrl-m           start/stop recording macro m
 "
 " LETTER KEY REMAPPINGS FOR NORMAL MODE:
 
@@ -90,11 +89,11 @@
 "       Shift+z+z:     close all windows and tabs without saving
 "       Shift+x+x:     close all windows and tabs and save all
 "       Shift+p        toggle colors (dark/light)
-"       Shift+d        find in files using ACK/AG (REQUIRES PLUGIN)
-"       Shift+f        find and replace in current file
+"       Shift+d        Use fzf to find and open files in the current dir
+"       Shift+f        Use ripgrep
 "       Shift+i        toggle search highlight
 "       Shift+v        enter visual line/block mode
-"       Shift+g        run macro g
+"       Shift+m        run macro m
 "       Shift+a        back to prev location
 "       Shift+s        forward to next location
 "       Shift+h        toggle line highlight
@@ -229,17 +228,11 @@ endif
 cnoreabbrev Ack Ack!
 cnoreabbrev ag Ack!
 
-" this is very important
+" this is very important if using ctrlp
 " let g:ctrlp_map = 'fd'
 
 nnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 vnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
-
-
-" scratchpad
-nnoremap <S-d> <ESC>:edit ~/.scratchpad<CR>
-vnoremap <S-d> <ESC>:edit ~/.scratchpad<CR>
-
 
 " ==== END PLUGINS ====
 
@@ -327,10 +320,10 @@ nnoremap ff gd
 vnoremap ?? *
 " nnoremap fd gd
 " EDIT AND DELETE
-nnoremap <C-e> <ESC>:edit
-inoremap <C-e> <ESC>:edit
-vnoremap <C-e> <ESC>:edit
-cnoremap <C-e> <ESC>:edit
+nnoremap <C-e> <ESC>:edit<Space>
+inoremap <C-e> <ESC>:edit<Space>
+vnoremap <C-e> <ESC>:edit<Space>
+cnoremap <C-e> <ESC>:edit<Space>
 " nnoremap <C-d> <Delete>
 " inoremap <C-d> <Delete>
 " vnoremap <C-d> <Delete>
@@ -508,7 +501,7 @@ nnoremap cc <ESC>:pwd<CR>
 nnoremap cv <ESC>:echo expand('%:p')<CR>
 
 " change current directory
-nnoremap cd <ESC>:cd
+nnoremap cd <ESC>:cd<Space>
 
 """""""""""""""""""""""""""""""""""
 " STARCRAFT-STYLE CONTROL GROUPS
@@ -529,9 +522,9 @@ nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 
 "MACRO HOTKEY
 " toggle start/stop recording
-nnoremap <C-g> qg
+nnoremap <C-m> qm
 " replay recorded macro
-nnoremap <S-g> @g
+nnoremap <S-m> @m
 
 " execute shell command
 nnoremap ' <ESC>:!
@@ -542,12 +535,20 @@ nnoremap gt gg
 nnoremap gb G
 
 " FZF SEARCH!
-nnoremap <S-f> <ESC>:Files<CR>
-vnoremap <S-f> <ESC>:Files<CR>
+nnoremap <S-d> <ESC>:Files<CR>
+vnoremap <S-d> <ESC>:Files<CR>
 
 " FZF HISTORY VIEW
 nnoremap fd <ESC>:History<CR>
 vnoremap fd <ESC>:History<CR>
+
+" RIPGREP SEARCH!
+nnoremap <S-f> <ESC>:Rg<Space>
+vnoremap <S-f> <ESC>:Rg<Space>
+
+" SCRATCHPAD
+nnoremap <S-g> <ESC>:edit ~/.scratchpad<CR>
+vnoremap <S-g> <ESC>:edit ~/.scratchpad<CR>
 
 " nnoremap pp <ESC>:browse oldfiles!<CR>
 
