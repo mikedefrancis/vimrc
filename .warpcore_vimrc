@@ -165,6 +165,10 @@ Plugin 'easymotion/vim-easymotion'
 " ctrlp is my favorite plugin as it provides fuzzy file search within vim
 Plugin 'kien/ctrlp.vim'
 
+" More fuzzy file search because more is better
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
 " ==== COOLOR THEMES ====
 Plugin 'tomasr/molokai'
 " ==== END PLUGIN THEMES ====
@@ -228,13 +232,11 @@ let g:ctrlp_map = 'fd'
 
 nnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 vnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
-cnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 
 
 " scratchpad
 nnoremap <S-d> <ESC>:edit ~/.scratchpad<CR>
 vnoremap <S-d> <ESC>:edit ~/.scratchpad<CR>
-cnoremap <S-d> <ESC>:edit ~/.scratchpad<CR>
 
 
 " ==== END PLUGINS ====
@@ -262,6 +264,9 @@ set softtabstop=4
 :set guioptions-=T  "remove toolbar
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
+
+"thi slets us save file history
+set viminfo='100,<50,s10,h
 
 " I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
 ":set lines=999 columns=999
@@ -324,10 +329,10 @@ nnoremap <C-e> <ESC>:edit
 inoremap <C-e> <ESC>:edit
 vnoremap <C-e> <ESC>:edit
 cnoremap <C-e> <ESC>:edit
-nnoremap <C-d> <Delete>
-inoremap <C-d> <Delete>
-vnoremap <C-d> <Delete>
-cnoremap <C-d> <Delete>
+" nnoremap <C-d> <Delete>
+" inoremap <C-d> <Delete>
+" vnoremap <C-d> <Delete>
+" cnoremap <C-d> <Delete>
 " SAVE AND QUIT
 nnoremap <C-q> <ESC>:x!<CR>
 inoremap <C-q> <ESC>:x!<CR>
@@ -417,14 +422,11 @@ nnoremap <S-h> 8h
 " windows and tabs
 nnoremap <C-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 vnoremap <C-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-cnoremap <C-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
-cnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 "tabs
 nnoremap <C-b> <ESC>:tabedit<CR>
 vnoremap <C-b> <ESC>:tabedit<CR>
-cnoremap <C-b> <ESC>:tabedit<CR>
 inoremap <C-b> <ESC>:tabedit<CR>
 " prev and next location
 nnoremap <S-a> <C-o>
@@ -462,7 +464,6 @@ nnoremap cw ciw
 nnoremap <C-o> <ESC>:call ToggleLines()<CR>
 inoremap <C-o> <ESC>:call ToggleLines()<CR>
 vnoremap <C-o> <ESC>:call ToggleLines()<CR>
-cnoremap <C-o> <ESC>:call ToggleLines()<CR>
 " toggle mouse
 nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
@@ -482,7 +483,6 @@ nnoremap cp <Home>"ky$<ESC>:echo "copied line to p register"<CR>
 vnoremap cp "ky<ESC>:echo "copied selection to p register"<CR>
 inoremap <C-p> <ESC>"kpi<Right><ESC>:echo "pasted contents from p register"<CR>
 vnoremap <C-p> "kp<Right><ESC>:echo "pasted contents from p register"<CR>
-cnoremap <C-p> "kp<Right><ESC>:echo "pasted contents from p register"<CR>
 nnoremap <C-p> "kp<Right><ESC>:echo "pasted contents from p register"<CR>
 " FIND AND REPLACE WITHIN FILE
 nnoremap <C-d> <ESC>:%s/<find>/<replace>/gc
@@ -540,9 +540,8 @@ nnoremap gt gg
 nnoremap gb G
 
 " OPEN PREVIOUS FILES
-nnoremap <S-f> <ESC>:browse oldfiles!<CR>
-vnoremap <S-f> <ESC>:browse oldfiles!<CR>
-cnoremap <S-f> <ESC>:browse oldfiles!<CR>
+nnoremap <S-f> <ESC>:Files<CR>
+vnoremap <S-f> <ESC>:Files<CR>
 " nnoremap pp <ESC>:browse oldfiles!<CR>
 
 " open some favorite files like cake
