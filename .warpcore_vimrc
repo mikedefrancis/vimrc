@@ -161,6 +161,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'easymotion/vim-easymotion'
 
+Plugin 'tpope/vim-fugitive'
+
 " This can be used in place of fzf if for some reason I don't have fzf
 " available
 " Plugin 'kien/ctrlp.vim'
@@ -239,6 +241,7 @@ vnoremap fp <ESC>:Ack! <search> -G ".*(<filepat>)$"
 
 " ______________________________________________________________ "
 " ==== PROPERTIES ====
+set shell=/usr/bin/zsh
 
 " colorscheme solarized
 syntax enable
@@ -268,8 +271,8 @@ set viminfo='100,<50,s10,h
 " more hacks
 " DANGER WILL ROBINSON! I do not like the backup files vim creates. It is a clunky system and causes problems.
 " I am disabling the backup files here. Do not break your files. Save them using git or something frequently!
-set history=1000
-set undolevels=1000
+set history=100
+set undolevels=100
 set title
 set nobackup
 " this is an awesome one. makes all '/' searches non-case sensitive unless the search contains an upper case letter
@@ -304,9 +307,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " clobbering existing functionality of vim
 " CLOSE ALL WINDOWS AND BUFFERS
 "close all without save
-nnoremap <S-z><S-z> <ESC>:qa!<CR>
+" nnoremap <S-z><S-z> <ESC>:qa!<CR>
 "save and close all
-nnoremap <S-x><S-x> <ESC>:xa!<CR>
+" nnoremap <S-x><S-x> <ESC>:xa!<CR>
 " INSERT AND REGULAR MODE SWITCH
 nnoremap a i
 inoremap <C-a> <ESC>l
@@ -362,6 +365,8 @@ nnoremap <C-v> <ESC>p
 vnoremap <C-v> <ESC>pv
 vnoremap <C-x> d
 nnoremap <C-x> <Home>d$
+
+
 
 "===========
 """" MOVEMENT
@@ -460,8 +465,8 @@ nnoremap <C-o> <ESC>:call ToggleLines()<CR>
 inoremap <C-o> <ESC>:call ToggleLines()<CR>
 vnoremap <C-o> <ESC>:call ToggleLines()<CR>
 " toggle mouse
-nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
-vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+" nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+" vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
 " CHANGE BACKGROUND COLOR WITH SHIFT P
 nnoremap <S-p> <ESC>:call ToggleBackground()<CR>
 "toggle whitespace chars with i
@@ -494,37 +499,75 @@ set hlsearch
 let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 set scrolloff=999
-" show current directory
-nnoremap cc <ESC>:pwd<CR>
 
-" show full path of current file
-nnoremap cv <ESC>:echo expand('%:p')<CR>
 
 " change current directory
 nnoremap cd <ESC>:cd<Space>
 
 """""""""""""""""""""""""""""""""""
 " STARCRAFT-STYLE CONTROL GROUPS
-nnoremap qq 'Q
-nnoremap ww 'W
-nnoremap ee 'E
-nnoremap rr 'R
-nnoremap tt 'T
-nnoremap yy 'Y
+nnoremap `` 'A<ESC>:echo expand('%:p')<CR>
+nnoremap 11 'S<ESC>:echo expand('%:p')<CR>
+nnoremap 22 'D<ESC>:echo expand('%:p')<CR>
+nnoremap 33 'F<ESC>:echo expand('%:p')<CR>
+nnoremap 44 'G<ESC>:echo expand('%:p')<CR>
+nnoremap 55 'H<ESC>:echo expand('%:p')<CR>
+nnoremap 66 'J<ESC>:echo expand('%:p')<CR>
 
-nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
-nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
-nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
-nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
-nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
-nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
+nnoremap ~ <ESC>mA<ESC>:echo "mapped bookmark 0"<CR>
+nnoremap ! <ESC>mS<ESC>:echo "mapped bookmark 1"<CR>
+nnoremap @ <ESC>mD<ESC>:echo "mapped bookmark 2"<CR>
+nnoremap # <ESC>mF<ESC>:echo "mapped bookmark 3"<CR>
+nnoremap $ <ESC>mG<ESC>:echo "mapped bookmark 4"<CR>
+nnoremap % <ESC>mH<ESC>:echo "mapped bookmark 5"<CR>
+nnoremap ^ <ESC>mJ<ESC>:echo "mapped bookmark 6"<CR>
+
+"OLD. DEPRECATED. THESE CAN BE USED FOR GREATER THINGS.
+"QWERTY-STYLE BOOKMARKS
+" nnoremap qq 'Q<ESC>:echo "bookmark Q"<CR>
+" nnoremap ww 'W<ESC>:echo "bookmark W"<CR>
+" nnoremap ee 'E<ESC>:echo "bookmark E"<CR>
+" nnoremap rr 'R<ESC>:echo "bookmark R"<CR>
+" nnoremap tt 'T<ESC>:echo "bookmark T"<CR>
+" nnoremap yy 'Y<ESC>:echo "bookmark Y"<CR>
+"
+" nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
+" nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
+" nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
+" nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
+" nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
+" nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" prompt
+nnoremap <S-q> <ESC>:
+
+" set current directory to that of the currently open file
+nnoremap <S-w> <ESC>:cd %:p:h<CR><ESC>:echo expand('%:p')<CR>
+
+" run terminal inside of vim for quick things.. autoset dir to current
+nnoremap <S-e> <ESC>:cd %:p:h<ESC>:terminal<CR>
+
+" show side by side git diff within vim
+nnoremap <S-r> <ESC>:Gdiffsplit<CR>
+
+" temporary scratch file
+nnoremap <S-t> <ESC>:edit ~/.scratchpad<CR>
+
+" temporary scratch file
+nnoremap <S-y> <ESC>:edit ~/.yellowsun<CR>
+
+" temporary scratch file
+nnoremap <S-n> <ESC>:edit ~/.notes.txt<CR>
+
+
+
 
 "MACRO HOTKEY
 " toggle start/stop recording
-nnoremap <C-m> qm
+nnoremap <C-g> qg
 " replay recorded macro
-nnoremap <S-m> @m
+nnoremap <S-g> @g
 
 " execute shell command
 nnoremap ' <ESC>:!
@@ -536,19 +579,23 @@ nnoremap gb G
 
 " FZF SEARCH!
 nnoremap <S-d> <ESC>:Files<CR>
-vnoremap <S-d> <ESC>:Files<CR>
 
 " FZF HISTORY VIEW
-nnoremap fd <ESC>:History<CR>
-vnoremap fd <ESC>:History<CR>
+nnoremap <S-z> <ESC>:History<CR>
 
 " RIPGREP SEARCH!
 nnoremap <S-f> <ESC>:Rg<Space>
-vnoremap <S-f> <ESC>:Rg<Space>
 
-" SCRATCHPAD
-nnoremap <S-g> <ESC>:edit ~/.scratchpad<CR>
-vnoremap <S-g> <ESC>:edit ~/.scratchpad<CR>
+
+" show current directory
+nnoremap <S-x> <ESC>:echo expand('%:p')<CR>
+nnoremap <S-c> <ESC>:pwd<CR>
+
+" NOT SURE IF I WANT THIS.
+" TERMINAL FROM WITHIN VIM
+" nnoremap <S-z> <ESC>:terminal<CR>
+" tnoremap <Esc> <C-\><C-n>
+" tnoremap <C-a> <C-\><C-n>
 
 " nnoremap pp <ESC>:browse oldfiles!<CR>
 
