@@ -251,7 +251,6 @@ set autoindent smartindent
 
 " DANGERWILLROBINSON
 set noswapfile
-set clipboard=unnamedplus
 
 " maybe move these somewhere else
 let g:ackhighlight = 1
@@ -268,6 +267,7 @@ let mapleader=","
 
 " automatically delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+autocmd FileType man only
 
 " run yapf formatting on the current file
 nnoremap yy :silent !yapf -i %<CR>:edit!<CR>
@@ -293,7 +293,6 @@ vnoremap <C-d> <Delete>
 cnoremap <C-d> <Delete>
 " EDIT AND DELETE
 nnoremap <S-e> <ESC>:edit<Space>
-inoremap <S-e> <ESC>:edit<Space>
 vnoremap <S-e> <ESC>:edit<Space>
 cnoremap <S-e> <ESC>:edit<Space>
 " SAVE AND QUIT
@@ -316,22 +315,49 @@ nnoremap <C-r> <ESC>:redo<CR>
 inoremap <C-r> <ESC>:redo<CR>
 vnoremap <C-r> <ESC>:redo<CR>
 cnoremap <C-r> <ESC>:redo<CR>
+
+
+
+""============SYSTEM CLIPBOARD AND FRIENDS===========
 " COPY, CUT, PASTE, REDO, UNDO
 "using control +z, x, c, v, r for undo, cut, copy, paste, redo
 "like all other programs
 "note that for copy paste compatibility with other editors is broken
 "because vim uses yank instead of copy
 "also note that you need to be in visual mode to block copy
-vnoremap <C-c> y'] `]
-nnoremap <C-c> <Home>y$
-inoremap <C-c> <ESC><Home>y$i
-" set pastetoggle=<C-u>
-"TODO: CHANGE FIX PASTE MODE VERSIONS OF OTHER THINGS
-inoremap <C-v> <ESC>:set paste<CR><ESC>pi<Right><ESC>:set nopaste<CR>a
-nnoremap <C-v> <ESC>:set paste<ESC>p<ESC>:set nopaste<CR>
-vnoremap <C-v> <ESC>:set paste<ESC>pv<ESC>:set nopaste<CR>
-vnoremap <C-x> d
-nnoremap <C-x> <Home>d$
+"
+"" Use system clipboard by default
+set clipboard=unnamedplus
+" Mappings for easier manual control (optional but nice)
+ " Ctrl-c to copy selected text       " Ctrl-v to paste in insert mode
+vnoremap <C-c> "+y
+" Ctrl-c to copy current line
+nnoremap <C-c> "+yy
+" Ctrl-v to paste in normal mode
+nnoremap <C-v> "+p
+" Ctrl-v to paste in insert mode
+inoremap <C-v> <C-r>+
+" Ctrl-v to paste in command mode
+cnoremap <C-v> <C-r>+
+"" Cut selected text (Visual mode) to clipboard with Ctrl-x
+vnoremap <C-x> "+d
+" Cut current line (Normal mode) to clipboard with Ctrl-x
+nnoremap <C-x> "+dd
+"
+"
+""" OLD DEPRECATED HACKS:
+" vnoremap <C-c> y'] `]
+" nnoremap <C-c> <Home>y$
+" inoremap <C-c> <ESC><Home>y$i
+" " set pastetoggle=<C-u>
+" "TODO: CHANGE FIX PASTE MODE VERSIONS OF OTHER THINGS
+" inoremap <C-v> <ESC>:set paste<CR><ESC>pi<Right><ESC>:set nopaste<CR>a
+" nnoremap <C-v> <ESC>:set paste<ESC>P<ESC>:set nopaste<CR>
+" vnoremap <C-v> <ESC>:set paste<ESC>Pv<ESC>:set nopaste<CR>
+" vnoremap <C-x> d
+" nnoremap <C-x> <Home>d$
+""============END CLIPBOARD AND FRIENDS===========
+
 
 "===========
 """" MOVEMENT
@@ -523,24 +549,8 @@ nnoremap * <ESC>mL<ESC>:echo "mapped bookmark 8"<CR>
 nnoremap ( <ESC>mZ<ESC>:echo "mapped bookmark 9"<CR>
 nnoremap ) <ESC>mX<ESC>:echo "mapped bookmark 10"<CR>
 
-"OLD. DEPRECATED. THESE CAN BE USED FOR GREATER THINGS.
-"QWERTY-STYLE BOOKMARKS
-" nnoremap qq 'Q<ESC>:echo "bookmark Q"<CR>
-" nnoremap ww 'W<ESC>:echo "bookmark W"<CR>
-" nnoremap ee 'E<ESC>:echo "bookmark E"<CR>
-" nnoremap rr 'R<ESC>:echo "bookmark R"<CR>
-" nnoremap tt 'T<ESC>:echo "bookmark T"<CR>
-" nnoremap yy 'Y<ESC>:echo "bookmark Y"<CR>
-"
-" nnoremap <S-q> <ESC>mQ<ESC>:echo "mapped bookmark Q"<CR>
-" nnoremap <S-w> <ESC>mW<ESC>:echo "mapped bookmark W"<CR>
-" nnoremap <S-e> <ESC>mE<ESC>:echo "mapped bookmark E"<CR>
-" nnoremap <S-r> <ESC>mR<ESC>:echo "mapped bookmark R"<CR>
-" nnoremap <S-t> <ESC>mT<ESC>:echo "mapped bookmark T"<CR>
-" nnoremap <S-y> <ESC>mY<ESC>:echo "mapped bookmark Y"<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"GREATER THINGS
 "ignore q keypress in normal mode if not used with other keys
 nnoremap q <ESC>
 
@@ -556,8 +566,8 @@ nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
 " NEW AND IMPROVED REG BUFFER
 nnoremap <S-r> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
 vnoremap <S-r> "ky<ESC>:echo "copied selection to r register"<CR>
-vnoremap rr <ESC>:set paste<CR>"kp<ESC>:set nopaste<CR>
-nnoremap rr <ESC>:set paste<CR>"kp<ESC>:set nopaste<CR>
+vnoremap rr <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
+nnoremap rr <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
 
 " todo file
 nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
@@ -599,14 +609,11 @@ nnoremap fd <ESC>:Lines<CR>'
 nnoremap fg <ESC>:History/<CR>'
 nnoremap fc <ESC>:History:<CR>'
 
-
 nnoremap gg <ESC>:Commits<CR>'
 nnoremap gf <ESC>:BCommits<CR>'
 
-
 " RIPGREP SEARCH!
 nnoremap <S-f> <ESC>:RG<CR>
-
 
 " show current directory
 nnoremap cv <ESC>:echo expand('%:p')<CR>
@@ -617,7 +624,8 @@ nnoremap cc <ESC>:pwd<CR>
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-a> <C-\><C-n>
 
-" nnoremap pp <ESC>:browse oldfiles!<CR>
+nnoremap pp <ESC>:Files<CR>
+"GREATER THINGS
 
 " some cool server thing probably slows things down
 "com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"

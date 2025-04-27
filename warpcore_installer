@@ -9,7 +9,7 @@ case $choice in
     * ) echo 'Aborting.'; exit;;
 esac
 
-sudo apt-get install vim silversearcher-ag exuberant-ctags
+sudo apt-get install vim vim-gtk3 ripgrep fzf
 mkdir -p ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo 'stty -ixon' >> ~/.bashrc
