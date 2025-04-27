@@ -10,7 +10,7 @@
 " CONTROL KEY MAPPING:
 " C-q: save and quit
 " C-w: Left/Right Split
-" C-e: Edit
+" C-e: Open a new terminal
 " C-r: Redo
 " C-t: Find and replace
 " C-y: Top/Bottom Split
@@ -52,7 +52,7 @@
 " S-q: command
 " S-w: set vim path to match current file
 " S-p: set vim colors
-" S-e: terminal
+" S-e: :edit
 " S-r: copy line to register # We could change this one
 " S-t: todo.txt
 " S-y: git diff current file
@@ -82,6 +82,8 @@
 " yy             do yapf formatting of the current file
 " de             cut to end of current line
 " dw             delete word under cursor
+" mm             view man page
+" bb             convert the loaded file to hex
 " n/S-n: next/previous search result in file
 " gg: search through commit history tree graph
 " gf: search through commit history of current file
@@ -132,6 +134,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
+Plugin 'lambdalisue/vim-manpager'
 
 " More fuzzy file search because more is better
 " FZF is by far my favorite plugin
@@ -155,7 +158,7 @@ colorscheme molokai
 " ==== Easymotion ====
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-nmap f <Plug>(easymotion-s)
+" nmap f <Plug>(easymotion-s)
 
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
@@ -202,6 +205,9 @@ set shell=/usr/bin/zsh
 syntax enable
 
 "trying some new settings
+set colorcolumn=80
+set textwidth=78
+set formatoptions+=t
 set encoding=utf8
 set ffs=unix,dos,mac
 set nowb
@@ -286,10 +292,10 @@ inoremap <C-d> <Delete>
 vnoremap <C-d> <Delete>
 cnoremap <C-d> <Delete>
 " EDIT AND DELETE
-nnoremap <C-e> <ESC>:edit<Space>~/
-inoremap <C-e> <ESC>:edit<Space>~/
-vnoremap <C-e> <ESC>:edit<Space>~/
-cnoremap <C-e> <ESC>:edit<Space>~/
+nnoremap <S-e> <ESC>:edit<Space>
+inoremap <S-e> <ESC>:edit<Space>
+vnoremap <S-e> <ESC>:edit<Space>
+cnoremap <S-e> <ESC>:edit<Space>
 " SAVE AND QUIT
 nnoremap <C-q> <ESC>:x!<CR>
 inoremap <C-q> <ESC>:x!<CR>
@@ -390,7 +396,6 @@ nnoremap <C-b> <ESC>:Buffers<CR>
 vnoremap <C-b> <ESC>:Buffers<CR>
 
 nnoremap <C-m> <ESC>:Marks<CR>
-vnoremap <C-m> <ESC>:Marks<CR>
 " prev and next location
 nnoremap <S-a> <C-o>
 nnoremap <S-s> <Tab>
@@ -460,9 +465,8 @@ let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
 set scrolloff=999
 
-
 " change current directory
-nnoremap cd <ESC>:cd<Space>~/
+nnoremap cd <ESC>:cd<Space>
 
 """""""""""""""""""""""""""""""""""
 " STARCRAFT-STYLE CONTROL GROUPS
@@ -547,7 +551,7 @@ nnoremap <S-q> <ESC>:
 nnoremap <S-w> <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
 
 " run terminal inside of vim for quick things.. autoset dir to current
-nnoremap <S-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
+nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
 
 " NEW AND IMPROVED REG BUFFER
 nnoremap <S-r> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
@@ -556,13 +560,13 @@ vnoremap rr <ESC>:set paste<CR>"kp<ESC>:set nopaste<CR>
 nnoremap rr <ESC>:set paste<CR>"kp<ESC>:set nopaste<CR>
 
 " todo file
-nnoremap <S-t> <ESC>:edit ~/.todo.txt<CR>
+nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
 
 " show side by side git diff within vim
 nnoremap <S-y> <ESC>:Gdiffsplit<CR>
 
 " temporary scratch file
-nnoremap <C-n> <ESC>:edit ~/.nonono.txt<CR>
+nnoremap <C-n> <ESC>:edit ~/.nonono.md<CR>
 
 "MACRO HOTKEY
 " toggle start/stop recording
@@ -581,8 +585,14 @@ nnoremap gb G
 " FZF SEARCH!
 nnoremap <S-d> <ESC>:Files<CR>'
 
-" FZF HISTORY VIEW
-nnoremap <S-z> <ESC>:History<CR>'
+" TABS
+nnoremap <S-z> <ESC>:tabnext<CR>
+
+"FZF File History
+nnoremap <S-x> <ESC>:History<CR>'
+
+"FZF Git Status
+nnoremap <S-c> <ESC>:GFiles?<CR>
 
 nnoremap <C-f> <ESC>:BLines<CR>'
 nnoremap fd <ESC>:Lines<CR>'
@@ -602,30 +612,21 @@ nnoremap <S-f> <ESC>:RG<CR>
 nnoremap cv <ESC>:echo expand('%:p')<CR>
 nnoremap cc <ESC>:pwd<CR>
 
-nnoremap <S-c> <ESC>:GFiles?<CR>
-
-nnoremap <S-x> <ESC>:tabnext<CR>
-
 " NOT SURE IF I WANT THIS.
 " TERMINAL FROM WITHIN VIM
-" nnoremap <S-z> <ESC>:terminal<CR>
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-a> <C-\><C-n>
 
 " nnoremap pp <ESC>:browse oldfiles!<CR>
 
-" open some favorite files like cake
-nnoremap .vim <ESC>:edit ~/.vimrc<CR>
-nnoremap .bash <ESC>:edit ~/.bashrc<CR>
-nnoremap .zsh <ESC>:edit ~/.zshrc<CR>
-"nnoremap notes <ESC>:edit ~/.notes.txt<CR>Gi
-" nnoremap <S-b> <ESC>:tabedit
-
 " some cool server thing probably slows things down
 "com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
 
 "Toggle Hexmode Fun
-nnoremap mm <ESC>:Hexmode<CR>
+nnoremap <S-m> <ESC>:Man<Space>
+nnoremap mm <ESC>:Man<Space>
+
+nnoremap bb <ESC>:Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
 command! -bar Hexmode call ToggleHex()
