@@ -205,8 +205,8 @@ set shell=/usr/bin/zsh
 syntax enable
 
 "trying some new settings
-set colorcolumn=80
-set textwidth=78
+set colorcolumn=81
+set textwidth=79
 set formatoptions+=t
 set encoding=utf8
 set ffs=unix,dos,mac
@@ -292,9 +292,9 @@ inoremap <C-d> <Delete>
 vnoremap <C-d> <Delete>
 cnoremap <C-d> <Delete>
 " EDIT AND DELETE
-nnoremap <S-e> <ESC>:edit<Space>
-vnoremap <S-e> <ESC>:edit<Space>
-cnoremap <S-e> <ESC>:edit<Space>
+nnoremap <S-e> <ESC>:tabedit<CR>
+vnoremap <S-e> <ESC>:tabedit<CR>
+cnoremap <S-e> <ESC>:tabedit<CR>
 " SAVE AND QUIT
 nnoremap <C-q> <ESC>:x!<CR>
 inoremap <C-q> <ESC>:x!<CR>
@@ -416,8 +416,8 @@ vnoremap <C-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 "tabs
-nnoremap <S-b> <ESC>:tabedit<CR>
-vnoremap <S-b> <ESC>:tabedit<CR>
+nnoremap <S-b> <ESC>:terminal<CR>
+vnoremap <S-b> <ESC>:terminal<CR>
 nnoremap <C-b> <ESC>:Buffers<CR>
 vnoremap <C-b> <ESC>:Buffers<CR>
 
@@ -561,7 +561,9 @@ nnoremap <S-q> <ESC>:
 nnoremap <S-w> <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
 
 " run terminal inside of vim for quick things.. autoset dir to current
-nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
+" nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
+nnoremap <C-e> <ESC>:edit<Space>
+
 
 " NEW AND IMPROVED REG BUFFER
 nnoremap <S-r> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
