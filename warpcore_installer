@@ -9,6 +9,12 @@ case $choice in
     * ) echo 'Aborting.'; exit;;
 esac
 
+# Adding these in order to get the latest version of vim
+sudo add-apt-repository ppa:jonathonf/vim
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install vim
+
 sudo apt-get install vim vim-gtk3 ripgrep fzf
 mkdir -p ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

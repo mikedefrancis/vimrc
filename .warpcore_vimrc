@@ -131,23 +131,80 @@ call vundle#begin()
 " All plugins using vundle
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-Plugin 'lambdalisue/vim-manpager'
+
+" Plugin 'git@github.com:richardtz/vim-gpt'
+" Plugin 'jackMort/ChatGPT.nvim'
+" Plugin 'git@github.com:iberianpig/chatgpt.vim.git'
+" Plugin 'git@github.com:terryma/vim-openai'
+
+" Sample ChatGPT settings
+" let g:chatgpt_system_message = 'Please summarize the following. The response should be in "English."'
+" let g:chatgpt_model = 'gpt-4o'
+" let g:chatgpt_system_marker = '-----🤖-----'
+" let g:chatgpt_user_marker = '-----✍------'
+"
+" Send selected text to ChatGPT
+" vnoremap ,a :ChatGPT<CR>
+"
+" Send current buffer to ChatGPT
+" noremap ,a :ChatGPT<CR>
+"
+" Create a diff within a code block
+" nnoremap ,d :DiffWithinCodeBlock<CR>
+"
+"
+
+Plugin 'git@github.com:scrooloose/nerdcommenter'
+Plugin 'git@github.com:easymotion/vim-easymotion'
+Plugin 'git@github.com:tpope/vim-fugitive'
+Plugin 'git@github.com:lambdalisue/vim-manpager'
+
+Plugin 'git@github.com:francoiscabrol/ranger.vim'
+
+Plugin 'git@github.com:github/copilot.vim'
+
+"---- custom mapping for autocomplete ----"
+"Use <C-e> to accept Copilot suggestions
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+"---- end custom mapping for autocomplete ----"
+
+let g:copilot_filetypes = {
+  \ 'javascript': v:true,
+  \ 'python': v:true,
+  \ 'go': v:true,
+  \ 'lua': v:true,
+  \ 'typescript': v:true,
+  \ }
+
 
 " More fuzzy file search because more is better
 " FZF is by far my favorite plugin
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plugin 'git@github.com:junegunn/fzf'
+Plugin 'git@github.com:junegunn/fzf.vim'
 " This can be used in place of fzf when you don't have fzf
 " Plugin 'kien/ctrlp.vim'
 " this is very important if using ctrlp
 " let g:ctrlp_map = 'fd'
 
 " ==== COOLOR THEMES ====
-Plugin 'tomasr/molokai'
+Plugin 'git@github.com:tomasr/molokai'
 " ==== END PLUGIN THEMES ====
+
+" Set ranger plugin to start if we open vim at a folder
+" autocmd VimEnter * if isdirectory(expand("%")) | exec "Ranger" | endif
+
+"Settings for folder view
+" Go up one directory (back)
+autocmd FileType netrw nnoremap <buffer> h -
+" Enter a directory (forward)
+autocmd FileType netrw nnoremap <buffer> l <CR>
+
+" Map Shift-A to go back in the jump list
+autocmd FileType netrw nnoremap <buffer> <S-a> <C-o>
+
+" Map Shift-S to cycle through windows
+autocmd FileType netrw nnoremap <buffer> <S-s> <Tab>
 
 call vundle#end()
 filetype plugin indent on
@@ -280,7 +337,6 @@ nnoremap a <ESC>i
 inoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC>l
 nnoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC><ESC>l
 vnoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC>l
-cnoremap <C-a> <ESC>:echo "-- NORMAL --"<C-c><ESC><ESC>l
 " FIND
 nnoremap ff /
 " search for word under cursor with ff
@@ -290,31 +346,25 @@ vnoremap ?? *
 nnoremap <C-d> <Delete>
 inoremap <C-d> <Delete>
 vnoremap <C-d> <Delete>
-cnoremap <C-d> <Delete>
 " EDIT AND DELETE
-nnoremap <S-e> <ESC>:tabedit<CR>
-vnoremap <S-e> <ESC>:tabedit<CR>
-cnoremap <S-e> <ESC>:tabedit<CR>
+" nnoremap <S-e> <ESC>:tabedit<CR>
+nnoremap <S-q> <ESC>:edit ~/.nonono.md<CR>
 " SAVE AND QUIT
 nnoremap <C-q> <ESC>:x!<CR>
 inoremap <C-q> <ESC>:x!<CR>
 vnoremap <C-q> <ESC>:x!<CR>
-cnoremap <C-q> <ESC>:x!<CR>
 tnoremap <C-q> <ESC>:x!<CR>
 nnoremap <C-s> <ESC>:w<CR>
 inoremap <C-s> <ESC>:w<CR>l
 vnoremap <C-s> <ESC>:w<CR>
-cnoremap <C-s> <ESC>:w<CR>
 tnoremap <C-s> <ESC>:w<CR>
 " UNDO AND REDO
 inoremap <C-z> <ESC>:undo<CR>
 nnoremap <C-z> <ESC>:undo<CR>
 vnoremap <C-z> <ESC>:undo<CR>
-cnoremap <C-z> <ESC>:undo<CR>
 nnoremap <C-r> <ESC>:redo<CR>
 inoremap <C-r> <ESC>:redo<CR>
 vnoremap <C-r> <ESC>:redo<CR>
-cnoremap <C-r> <ESC>:redo<CR>
 
 
 
@@ -337,8 +387,6 @@ nnoremap <C-c> "+yy
 nnoremap <C-v> "+p
 " Ctrl-v to paste in insert mode
 inoremap <C-v> <C-r>+
-" Ctrl-v to paste in command mode
-cnoremap <C-v> <C-r>+
 "" Cut selected text (Visual mode) to clipboard with Ctrl-x
 vnoremap <C-x> "+d
 " Cut current line (Normal mode) to clipboard with Ctrl-x
@@ -386,10 +434,8 @@ inoremap <silent> <A-PageDown> 4<PageDown>
 " nnoremap <C-l> <ESC>gt
 vnoremap <C-h> :wincmd h<CR>
 nnoremap <C-h> :wincmd h<CR>
-cnoremap <C-h> :wincmd h<CR>
 vnoremap <C-l> :wincmd l<CR>
 nnoremap <C-l> :wincmd l<CR>
-cnoremap <C-l> :wincmd l<CR>
 
 " Ctrl nav
 vnoremap <C-j> 64j
@@ -416,8 +462,8 @@ vnoremap <C-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 "tabs
-nnoremap <S-b> <ESC>:terminal<CR>
-vnoremap <S-b> <ESC>:terminal<CR>
+nnoremap <S-z> <ESC>:terminal<CR>
+vnoremap <S-z> <ESC>:terminal<CR>
 nnoremap <C-b> <ESC>:Buffers<CR>
 vnoremap <C-b> <ESC>:Buffers<CR>
 
@@ -476,8 +522,8 @@ nnoremap i <ESC>:set list!<CR>
 " nnoremap <C-p> "kp<Right><ESC>:echo "pasted contents from p register"<CR>
 
 " FIND AND REPLACE WITHIN FILE
-nnoremap <C-t> <ESC>:%s/<find>/<replace>/gc
-vnoremap <C-t> <ESC>:%s/<find>/<replace>/gc
+nnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
+vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
 " This is a really fun hack. If you don't have write permissions hit this hotkey
 " nnoremap <S-o> <ESC>:w !sudo tee %<CR>
 
@@ -555,21 +601,24 @@ nnoremap ) <ESC>mX<ESC>:echo "mapped bookmark 10"<CR>
 nnoremap q <ESC>
 
 " prompt
-nnoremap <S-q> <ESC>:
+nnoremap <S-x> <ESC>:History<CR>'
+nnoremap <C-@> <ESC>:Files<CR>'
+
+nnoremap <S-d> <ESC>:Ranger<CR>
 
 " set current directory to that of the currently open file
 nnoremap <S-w> <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
 
 " run terminal inside of vim for quick things.. autoset dir to current
 " nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
-nnoremap <C-e> <ESC>:edit<Space>
+" nnoremap <C-e> <ESC>:edit<Space>
 
 
 " NEW AND IMPROVED REG BUFFER
-nnoremap <S-r> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
-vnoremap <S-r> "ky<ESC>:echo "copied selection to r register"<CR>
-vnoremap rr <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
-nnoremap rr <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
+nnoremap <C-t> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
+vnoremap <C-t> "ky<ESC>:echo "copied selection to r register"<CR>
+vnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
+nnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
 
 " todo file
 nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
@@ -578,7 +627,7 @@ nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
 nnoremap <S-y> <ESC>:Gdiffsplit<CR>
 
 " temporary scratch file
-nnoremap <C-n> <ESC>:edit ~/.nonono.md<CR>
+nnoremap <C-n> <ESC>:edit ~/.bytecrown.md<CR>
 
 "MACRO HOTKEY
 " toggle start/stop recording
@@ -594,14 +643,11 @@ nnoremap ' <ESC>:!
 nnoremap gt gg
 nnoremap gb G
 
-" FZF SEARCH!
-nnoremap <S-d> <ESC>:Files<CR>'
-
 " TABS
-nnoremap <S-z> <ESC>:tabnext<CR>
+nnoremap <S-b> <ESC>:tabnext<CR>
 
 "FZF File History
-nnoremap <S-x> <ESC>:History<CR>'
+nnoremap <S-e> <ESC>:edit<Space>
 
 "FZF Git Status
 nnoremap <S-c> <ESC>:GFiles?<CR>
