@@ -1,28 +1,863 @@
-#!/bin/sh
-echo "WARPCORE"
-echo "installing..."
-echo "WARNING, This installation will replace your existing .vimrc file! Your original .vimrc file will be backed up to ~/.vimrc_warpcore_bak. \nDo you wish to continue?(y or n) [ENTER]:"
-read choice
-case $choice in
-    [Nn]* ) echo 'Aborting.'; exit;;
-    [Yy]* ) echo "proceeding with install. you have chosen wisely.";;
-    * ) echo 'Aborting.'; exit;;
-esac
+" ============ WARPCORE VIMRC ===========
+" @Description
+" WARPCORE is a heavily edited vim configuration.
+"
+" WARNING: You MUST add the following line to THE END of your .bashrc (or .zshrc).
+" Note that my install scripts attempt to add this line to your .bashrc automatically:
+"     stty -ixon
+"
+" This file has been reorganized and documented, while preserving the original
+" functionality as much as possible. Commented-out code has been retained.
 
-# Adding these in order to get the latest version of vim
-sudo add-apt-repository ppa:jonathonf/vim
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install vim
+" ============================================================================
+" HIGH-LEVEL KEY REFERENCE
+" ============================================================================
+"
+" CONTROL KEY MAPPING:
+" C-q: save and quit
+" C-w: set working directory to current file's directory
+" C-e: Open a new terminal (currently commented out below)
+" C-r: Redo
+" C-t: Copy line/selection into the custom k register
+" C-y: open horizontal split
+" C-a: leave insert/visual and return toward normal mode
+" C-s: Save
+" C-d: Delete character
+" C-f: Find in file
+" C-g: Start/stop recording macro
+" C-h: Jump left window
+" C-j: Jump down by 64 lines
+" C-k: Jump up by 64 lines
+" C-l: Jump right window
+" C-z: Undo
+" C-x: Cut
+" C-c: Copy
+" C-v: Paste
+" C-b: Search open buffers with fzf
+" C-m: Start/stop recording macro into register g
+" Ctrl+{h,j,k,l}: custom movement/window navigation
+" Ctrl+Left/Right/Up/Down: move between windows
+"
+" SHIFT KEY REMAPPING:
+" S-`: Drop Nexus file to current path or open if existing
+" S-1..S-0: bookmark-related helpers using shifted number keys
+" S-q: save and quit
+" S-w: vertical split and move into it
+" S-p: set vim colors (currently commented out below)
+" S-e: open a new tab
+" S-r: search and replace prompt
+" S-t: todo.txt
+" S-y: git diff current file
+" S-a: back in jump list
+" S-s: forward-ish / tab behavior
+" S-d: fuzzy file search from current directory
+" S-f: ripgrep search in files
+" S-g: fuzzy git status
+" S-z: open terminal then run ls
+" S-x: fuzzy open buffers
+" S-c: fuzzy file history
+" S-v: Enter visual mode
+" S-b: next tab
+" S-n: previous search result in file
+" S-i: toggle search highlight
+" S-Tab: unindent (visual mode)
+"
+" OTHER MAPPINGS FOR NORMAL MODE:
+" a              insert mode
+" i              toggle whitespace characters
+" cd             change directory using :cd command
+" cw             change word under cursor
+" dd             cut line
+" yy             run yapf formatting on the current file
+" de             cut to end of current line
+" dw             delete word under cursor
+" mm             view man page
+" bb             convert the loaded file to hex
+" n/S-n: next/previous search result in file
+" gg: search commit history tree graph
+" gf: search commit history of current file
+" fd: fzf search for text in all open buffers
+" fg: search search history
+" fc: search command history
+" ff: search for text in current buffer using fzf BLines
+" fh: find/highlight word under cursor using gd
+" ``: goto current nexus and set it as the working directory
+" cc: show current working directory
+" cv: show full path to current file
+" gt: goto top of file
+" gb: goto bottom of file
+" gs: goto first non-blank character of the line
+" ge: goto end of current line's real text
+" rr: paste contents stored to r register (stored via S-r / custom flows)
+" Space toggle center-scroll
+" ;     Enter command mode (:<command>)
+" '     Run external command (:!<command>)
+" ,     Leader
+" ,c<Space> Toggle comment/uncomment selected line(s)
+"
+" STANDARD VIM COMMAND REFERENCE:
+"  w/W       goto start of next word
+"  e/E       goto end of next word
+"  b/B       goto start of previous word
+"  v         enter visual mode
+"  V         enter visual line mode
+"  :<number> goto line number
+"  :Delete   delete file in buffer
+"  :SudoEdit edit a file using sudo
+"  :Find     use find and output results to quickfix window
+"  :Chmod    change the permission of the current file
+"
+" PLUGINS:
+"   I am using Vundle to install my plugins
 
-sudo apt-get install vim vim-gtk3 ripgrep fzf
-mkdir -p ~/.vim/bundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-echo 'stty -ixon' >> ~/.bashrc
-cp ~/.vimrc ~/.vimrc_warpcore_bak
-cp .warpcore_vimrc ~/.vimrc
-vim -c ":PluginInstall" -c "qa!" README.md
+" ============================================================================
+" CORE VIM / VUNDLE BOOTSTRAP
+" ============================================================================
+
+" Use bash for all shell integration inside Vim (:!, :terminal, plugins, etc.).
+set shell=/bin/bash
+
+" Enable improved Vim behavior instead of Vi compatibility mode.
+set nocompatible
+
+" Allow local .vimrc/.exrc files and disable filetype detection until plugins load.
+filetype off
+set exrc
+
+" Add Vundle itself to runtimepath and start plugin declaration.
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" ============================================================================
+" PLUGINS
+" ============================================================================
+
+" Vundle manages the rest of the plugin list.
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugin 'richardtz/vim-gpt'
+" Plugin 'jackMort/ChatGPT.nvim'
+" Plugin 'iberianpig/chatgpt.vim.git'
+" Plugin 'terryma/vim-openai'
+
+" Sample ChatGPT settings
+" let g:chatgpt_system_message = 'Please summarize the following. The response should be in "English."'
+" let g:chatgpt_model = 'gpt-4o'
+" let g:chatgpt_system_marker = '-----🤖-----'
+" let g:chatgpt_user_marker = '-----✍------'
+"
+" Send selected text to ChatGPT
+" vnoremap ,a :ChatGPT<CR>
+"
+" Send current buffer to ChatGPT
+" noremap ,a :ChatGPT<CR>
+"
+" Create a diff within a code block
+" nnoremap ,d :DiffWithinCodeBlock<CR>
+"
+"
+
+" Comment toggling helpers.
+Plugin 'scrooloose/nerdcommenter'
+
+" Fast in-buffer and screen movement.
+Plugin 'easymotion/vim-easymotion'
+
+" Git integration.
+Plugin 'tpope/vim-fugitive'
+
+" Better man page viewing.
+Plugin 'lambdalisue/vim-manpager'
+
+" File manager integration.
+" Plugin 'francoiscabrol/ranger.vim'
+
+" Fuzzy finding.
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+"
+" This can be used in place of fzf when you don't have fzf
+" Plugin 'kien/ctrlp.vim'
+" this is very important if using ctrlp
+" let g:ctrlp_map = 'fd'
+"
+" ==== COOLOR THEMES ====
+Plugin 'tomasr/molokai'
+" ==== END PLUGIN THEMES ====
+"
+
+" =========AI SHENANIGANS ============
+
+" Plugin 'github/copilot.vim'
+
+"---- custom mapping for autocomplete ----
+"Use <C-e> to accept Copilot suggestions
+" let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+"---- end custom mapping for autocomplete ----
+
+" Enable Copilot only for selected filetypes when the plugin is installed.
+" let g:copilot_filetypes = {
+"   \ 'javascript': v:true,
+"   \ 'python': v:true,
+"   \ 'go': v:true,
+"   \ 'lua': v:true,
+"   \ 'typescript': v:true,
+"   \ }
+
+" =========END AI SHENANIGANS ============
+"
+
+" Set ranger plugin to start if we open vim at a folder
+" autocmd VimEnter * if isdirectory(expand("%")) | exec "Ranger" | endif
+
+" Settings for netrw folder view.
+" Go up one directory (back).
+autocmd FileType netrw nnoremap <buffer> h -
+" Enter a directory (forward).
+autocmd FileType netrw nnoremap <buffer> l <CR>
+" Map Shift-A to go back in the jump list.
+autocmd FileType netrw nnoremap <buffer> <S-a> <C-o>
+" Map Shift-S to cycle through windows.
+autocmd FileType netrw nnoremap <buffer> <S-s> <Tab>
+
+" Finish Vundle setup and restore filetype detection.
+call vundle#end()
+filetype plugin indent on
+
+" ============================================================================
+" PLUGIN CONFIGURATION
+" ============================================================================
+
+" Use the Molokai colorscheme.
+colorscheme molokai
+
+" ==== Easymotion ====
+" Disable default EasyMotion mappings so custom mappings can be used instead.
+let g:EasyMotion_do_mapping = 0
+" Make EasyMotion searches smart-case aware.
+let g:EasyMotion_smartcase = 1
+" nmap f <Plug>(easymotion-s)
+
+" Configure fzf to avoid preview windows for a leaner UI.
+let g:fzf_vim = {}
+let g:fzf_vim.buffers_options = '--no-preview'
+let g:fzf_preview_window = []
+let g:fzf_marks_options = '--no-preview --ansi --layout=reverse --delimiter=\s\+ --with-nth=1..'
+
+" Window navigation with Ctrl+arrow keys from normal and insert mode.
+nnoremap <silent> <C-Up> :wincmd k<CR>
+nnoremap <silent> <C-Down> :wincmd j<CR>
+nnoremap <silent> <C-Left> :wincmd h<CR>
+nnoremap <silent> <C-Right> :wincmd l<CR>
+inoremap <silent> <C-Up> <ESC>:wincmd k<CR>
+inoremap <silent> <C-Down> <ESC>:wincmd j<CR>
+inoremap <silent> <C-Left> <ESC>:wincmd h<CR>
+inoremap <silent> <C-Right> <ESC>:wincmd l<CR>
+
+" NERDCOMMENTER
+" Add spaces after comment delimiters by default.
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments.
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left.
+let g:NERDDefaultAlign = 'left'
+" Set Java to use alternate delimiters by default.
+let g:NERDAltDelims_java = 1
+" Add custom comment delimiters for C.
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines.
+let g:NERDCommentEmptyLines = 1
+" Trim trailing whitespace when uncommenting.
+let g:NERDTrimTrailingWhitespace = 1
+
+" ============================================================================
+" GENERAL EDITOR SETTINGS
+" ============================================================================
+
+" Enable syntax highlighting.
+syntax enable
+
+" Set a visual guide column and wrap/format width for text editing.
+set colorcolumn=81
+set textwidth=79
+set formatoptions+=t
+
+" Use UTF-8 and support common file formats.
+set encoding=utf8
+set ffs=unix,dos,mac
+
+" Misc display and editing behavior.
+set nowb
+set showmatch
+set lazyredraw
+set noerrorbells
+set novisualbell
+set ai
+set si
+set wrap
+" set wildmode
+set expandtab
+set background=dark
+set guifont=Monospace\ 10
+set fillchars+=vert:\$
+set ruler
+set hidden
+set number
+set laststatus=2
+set smartindent
+set st=4 sw=4 et
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+" Remove GUI chrome where supported.
+set guioptions-=m  " remove menu bar
+set guioptions-=T  " remove toolbar
+set guioptions-=r  " remove right-hand scroll bar
+set guioptions-=L  " remove left-hand scroll bar
+
+" Increase stored viminfo/history and keep useful title/status behavior.
+set viminfo='100,<50,s10,h
+" I AM COMMENTING OUT THIS LINE BECAUSE I WANT USER TO DECIDE SIZE OF VIM WINDOW
+" :set lines=999 columns=999
+set history=10000
+set undolevels=1000
+set title
+set nobackup
+
+" Make searches incremental and smart-case.
+set ignorecase smartcase
+set incsearch
+set autoindent smartindent
+
+" DANGERWILLROBINSON
+set noswapfile
+
+" Ack-related highlighting/preview toggles if ack is present.
+let g:ackhighlight = 1
+let g:ackpreview = 1
+
+" Use semicolon as a quick alias for colon commands.
+nnoremap ; :
+" Set comma as the leader key.
+let mapleader=","
+
+" Use the system clipboard by default.
+set clipboard=unnamedplus
+
+" Search highlight starts enabled.
+set hlsearch
+
+" Default to centered scrolling behavior.
+set scrolloff=999
+
+" Load local .vimrc/.exrc in secure mode.
+set secure
+
+" ============================================================================
+" AUTOCOMMANDS
+" ============================================================================
+
+" Automatically delete trailing whitespace on save.
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Show man pages alone in their own layout.
+autocmd FileType man only
+
+" Automatically format python files on save to comply with yapf.
+" autocmd BufWritePre *.py execute ':silent !yapf -i %'
+
+" ============================================================================
+" BASIC EDITING AND MODE MAPPINGS
+" ============================================================================
+
+" Run yapf formatting on the current file and reload it.
+nnoremap yy :silent !yapf -i %<CR>:edit!<CR>
+
+" Make 'a' behave like insert at the current cursor location.
+nnoremap a <ESC>i
+
+"make pressing s, x, r in normal mode accidentally safe. do nothing.
+nnoremap s <ESC>
+nnoremap x <ESC>
+nnoremap r <ESC>
+
+" Leave insert/visual mode and show a NORMAL status hint.
+inoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC>l
+nnoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC><ESC>l
+vnoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC>l
+
+" Enter / search quickly from normal or insert mode.
+nnoremap <C-f> /
+inoremap <C-f> /
+
+" Search/highlight helpers.
+nnoremap fh gd
+vnoremap ?? *
+
+" Delete the character under the cursor in all common modes.
+" nnoremap <C-d> <Delete>
+" inoremap <C-d> <Delete>
+" vnoremap <C-d> <Delete>
+nnoremap <C-d> <ESC>
+inoremap <C-d> <ESC>
+vnoremap <C-d> <ESC>
+
+" Edit and delete helpers.
+" nnoremap <S-e> <ESC>:tabedit<CR>
+nnoremap <S-q> <ESC>:x!<CR>
+inoremap <S-q> <ESC>:x!<CR>
+vnoremap <S-q> <ESC>:x!<CR>
+tnoremap <S-q> <C-\><C-n>:x!<CR>
+
+" Save and quit helpers.
+nnoremap <C-q> <ESC>:x!<CR>
+inoremap <C-q> <ESC>:x!<CR>
+vnoremap <C-q> <ESC>:x!<CR>
+tnoremap <C-q> <C-\><C-n>:x!<CR>
+
+" Save the current buffer.
+nnoremap <C-s> <ESC>:w<CR>
+inoremap <C-s> <ESC>:w<CR>l
+vnoremap <C-s> <ESC>:w<CR>
+tnoremap <C-s> <C-\><C-n>:w<CR>
+
+" Undo and redo helpers.
+inoremap <C-z> <ESC>:undo<CR>
+nnoremap <C-z> <ESC>:undo<CR>
+vnoremap <C-z> <ESC>:undo<CR>
+nnoremap <C-r> <ESC>:redo<CR>
+inoremap <C-r> <ESC>:redo<CR>
+vnoremap <C-r> <ESC>:redo<CR>
+
+" ============================================================================
+" SYSTEM CLIPBOARD AND COPY/PASTE HELPERS
+" ============================================================================
+
+" COPY, CUT, PASTE, REDO, UNDO
+" using control +z, x, c, v, r for undo, cut, copy, paste, redo
+" like all other programs
+" note that for copy paste compatibility with other editors is broken
+" because vim uses yank instead of copy
+" also note that you need to be in visual mode to block copy
+
+" Mappings for easier manual clipboard control.
+" Ctrl-c to copy selected text.
+vnoremap <C-c> "+y
+" Ctrl-c to copy current line.
+nnoremap <C-c> "+yy
+" Ctrl-v to paste in normal mode.
+nnoremap <C-v> "+p
+" Ctrl-v to paste in insert mode.
+inoremap <C-v> <C-r>+
+" Cut selected text (Visual mode) to clipboard with Ctrl-x.
+vnoremap <C-x> "+d
+" Cut current line (Normal mode) to clipboard with Ctrl-x.
+nnoremap <C-x> "+dd
+
+""" OLD DEPRECATED HACKS:
+" vnoremap <C-c> y'] `]
+" nnoremap <C-c> <Home>y$
+" inoremap <C-c> <ESC><Home>y$i
+" " set pastetoggle=<C-u>
+" "TODO: CHANGE FIX PASTE MODE VERSIONS OF OTHER THINGS
+" inoremap <C-v> <ESC>:set paste<CR><ESC>pi<Right><ESC>:set nopaste<CR>a
+" nnoremap <C-v> <ESC>:set paste<ESC>P<ESC>:set nopaste<CR>
+" vnoremap <C-v> <ESC>:set paste<ESC>Pv<ESC>:set nopaste<CR>
+" vnoremap <C-x> d
+" nnoremap <C-x> <Home>d$
+
+" ============================================================================
+" MOVEMENT
+" ============================================================================
+
+" Large and medium jumps using Alt/Shift + arrow keys.
+nnoremap <silent> <A-Up> 128<Up>
+nnoremap <silent> <A-Down> 128<Down>
+vnoremap <silent> <A-Up> 128<Up>
+vnoremap <silent> <A-Down> 128<Down>
+inoremap <silent> <A-Up> <ESC>128<Up>i
+inoremap <silent> <A-Down> <ESC>128<Down>i
+
+nnoremap <silent> <S-Up> 10<Up>
+nnoremap <silent> <S-Down> 10<Down>
+inoremap <silent> <S-Up> <ESC>10<Up>i
+inoremap <silent> <S-Down> <ESC>10<Down>i
+
+nnoremap <silent> <A-PageUp> 4<PageUp>
+nnoremap <silent> <A-PageDown> 4<PageDown>
+vnoremap <silent> <A-PageUp> 4<PageUp>
+vnoremap <silent> <A-PageDown> 4<PageDown>
+inoremap <silent> <A-PageUp> 4<PageUp>
+inoremap <silent> <A-PageDown> 4<PageDown>
+
+" Tab switch (not using).
+" vnoremap <C-h> <ESC>gT
+" nnoremap <C-h> <ESC>gT
+" vnoremap <C-l> <ESC>gt
+" nnoremap <C-l> <ESC>gt
+
+" Window navigation on Ctrl-h / Ctrl-l.
+vnoremap <C-h> :wincmd h<CR>
+nnoremap <C-h> :wincmd h<CR>
+vnoremap <C-l> :wincmd l<CR>
+nnoremap <C-l> :wincmd l<CR>
+
+" Large vertical navigation on Ctrl-j / Ctrl-k.
+vnoremap <C-j> 64j
+nnoremap <C-j> 64j
+vnoremap <C-k> 64k
+nnoremap <C-k> 64k
+
+" Medium navigation on Shift-j / Shift-k / Shift-h / Shift-l.
+vnoremap <S-j> 8j
+nnoremap <S-j> 8j
+vnoremap <S-k> 8k
+nnoremap <S-k> 8k
+vnoremap <S-l> 8l
+nnoremap <S-l> 8l
+vnoremap <S-h> 8h
+nnoremap <S-h> 8h
+
+" ============================================================================
+" WINDOWS, TABS, BUFFERS, FZF, AND FILE NAVIGATION
+" ============================================================================
+
+" Split window helpers.
+nnoremap <S-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+vnoremap <S-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
+nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+
+" Open a terminal and run ls.
+nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
+vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
+
+" Search open buffers with fzf.
+nnoremap <C-b> <ESC>:Buffers<CR>
+vnoremap <C-b> <ESC>:Buffers<CR>
+
+" toggle previous buffer
+nnoremap <S-z> :b#<CR>
+nnoremap <S-z> :b#<CR>
+
+" Previous and next location behavior
+nnoremap <S-a> <C-o>
+nnoremap <S-s> <Tab>
+
+" Current working directory prompt.
+nnoremap cd <ESC>:cd<Space>
+
+" Set current directory to that of the currently open file.
+nnoremap <C-w> <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
+
+" Run terminal inside of vim for quick things.. autoset dir to current
+" nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
+nnoremap <S-e> <ESC>:edit<Space>
+nnoremap <C-e> <ESC>:edit<Space>
 
 
-echo "...install complete. Enjoy!"
-echo "IMPORTANT: you must run 'source ~/.bashrc' to enable all features"
+" Prompt-like fuzzy helpers.
+nnoremap <S-x> <ESC>:Buffers<CR>
+nnoremap <S-c> <ESC>:History<CR>
+nnoremap <S-d> <ESC>:Files<CR>
+
+" Tab and fuzzy helpers.
+nnoremap <S-b> <ESC>:tabnext<CR>
+nnoremap <S-t> <ESC>:tabedit<CR>
+
+" File/history/commit search helpers.
+nnoremap ff <ESC>:BLines<CR>
+nnoremap fd <ESC>:Lines<CR>
+nnoremap fg <ESC>:History/<CR>
+nnoremap fc <ESC>:History:<CR>
+nnoremap gg <ESC>:Commits<CR>
+nnoremap gf <ESC>:BCommits<CR>
+
+" RIPGREP SEARCH! Use the standard fzf.vim command name.
+nnoremap <S-f> <ESC>:RG<CR>
+
+" Show current file path or working directory.
+nnoremap cv <ESC>:echo expand('%:p')<CR>
+nnoremap cc <ESC>:pwd<CR>
+
+" Quick fuzzy file access.
+nnoremap pp <ESC>:Files<CR>
+
+" ============================================================================
+" LINE MANIPULATION AND SEARCH DISPLAY
+" ============================================================================
+
+" Delete to end of line with de.
+nnoremap de d$
+
+" Indent and unindent selected text while preserving the selection.
+vnoremap <Tab>   >><ESC>gv
+vnoremap <S-Tab> <<<ESC>gv
+
+nnoremap <Tab> :tabnext<CR>
+nnoremap <S-Tab> :tabprevious<CR>
+
+" Override some standard g-based movement to prefer non-whitespace navigation.
+nnoremap ge g_
+" nnoremap gl _
+nnoremap gs _
+" nnoremap gs 0i
+nnoremap gf -
+nnoremap ga g_<ESC>:echo "-- INSERT --"<ESC>a<Right>
+vnoremap ge g_
+vnoremap gs _
+vnoremap gf -
+
+" Change in word helper.
+nnoremap cw ciw
+
+" Make yanking a bit easier.
+" nnoremap yw yiw
+" nnoremap yl yy
+
+" Toggle line numbers from any common mode.
+nnoremap <C-o> <ESC>:call ToggleLines()<CR>
+inoremap <C-o> <ESC>:call ToggleLines()<CR>
+vnoremap <C-o> <ESC>:call ToggleLines()<CR>
+
+" Toggle mouse.
+" nnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+" vnoremap <C-t> <ESC>:call ToggleMouse()<CR>
+
+" CHANGE BACKGROUND COLOR WITH SHIFT P
+" nnoremap <S-p> <ESC>:Colors<CR>
+
+" Toggle whitespace chars with i.
+nnoremap i <ESC>:set list!<CR>
+
+" FIND AND REPLACE WITHIN FILE
+nnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
+vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
+
+" This is a really fun hack. If you don't have write permissions hit this hotkey
+" nnoremap <S-o> <ESC>:w !sudo tee %<CR>
+
+" SEARCH HIGHLIGHT
+let hlstate=0
+nnoremap <S-i> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+
+" Toggle auto scroll using the space key.
+let scrollstate=1
+nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
+
+" ============================================================================
+" CUSTOM REGISTERS, SCRATCH FILES, GIT, TERMINAL, AND MACROS
+" ============================================================================
+
+" NEW AND IMPROVED REG BUFFER
+" Copy the current line/selection into register k.
+nnoremap <C-t> <Home>"ky$<ESC>:echo "copied line to r register"<CR>
+vnoremap <C-t> "ky<ESC>:echo "copied selection to r register"<CR>
+
+" Paste the contents of register k with paste mode enabled temporarily.
+vnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
+nnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
+
+" Todo file.
+" nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
+
+" Show side-by-side git diff within Vim.
+nnoremap <S-y> <ESC>:Gdiffsplit<CR>
+
+" Temporary scratch file.
+" nnoremap <C-n> <ESC>:edit ~/.bytecrown.md<CR>
+
+" MACRO HOTKEY
+" Toggle start/stop recording into register g.
+nnoremap <C-g> qg
+" Replay recorded macro from register g.
+nnoremap <S-g> @g
+
+" Execute shell command prompt.
+nnoremap ' <ESC>:!
+
+" Note that the following gg and G are remapped later in this, but work for go
+" top and go bottom listed below.
+nnoremap gt gg
+nnoremap gb G
+
+" NOT SURE IF I WANT THIS.
+" TERMINAL FROM WITHIN VIM
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-a> <C-\><C-n>
+
+" Toggle Hexmode Fun
+nnoremap <S-m> <ESC>:Man<Space>
+nnoremap mm <ESC>:Man<Space>
+nnoremap bb <ESC>:Hexmode<CR>
+
+" some cool server thing probably slows things down
+" com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
+
+" ignore q keypress in normal mode if not used with other keys
+nnoremap q <ESC>
+
+" ============================================================================
+" STARCRAFT-STYLE CONTROL GROUPS / BOOKMARKS / NEXUS
+" ============================================================================
+
+nnoremap `` :edit ~/notes.md<CR>:w<CR>
+" nnoremap ~ :Marks<CR>
+
+" Jump to saved bookmarks and echo the current file path.
+nnoremap 11 'A<ESC>:echo expand('%:p')<CR>
+nnoremap 22 'B<ESC>:echo expand('%:p')<CR>
+nnoremap 33 'C<ESC>:echo expand('%:p')<CR>
+nnoremap 44 'D<ESC>:echo expand('%:p')<CR>
+nnoremap 55 'E<ESC>:echo expand('%:p')<CR>
+nnoremap 66 'F<ESC>:echo expand('%:p')<CR>
+nnoremap 77 'G<ESC>:echo expand('%:p')<CR>
+nnoremap 88 'H<ESC>:echo expand('%:p')<CR>
+nnoremap 99 'I<ESC>:echo expand('%:p')<CR>
+nnoremap 00 'J<ESC>:echo expand('%:p')<CR>
+
+" Save bookmark marks to fixed global mark letters.
+nnoremap ! <ESC>mA<ESC>:echo "mapped bookmark 1"<CR>
+nnoremap @ <ESC>mB<ESC>:echo "mapped bookmark 2"<CR>
+nnoremap # <ESC>mC<ESC>:echo "mapped bookmark 3"<CR>
+nnoremap $ <ESC>mD<ESC>:echo "mapped bookmark 4"<CR>
+nnoremap % <ESC>mE<ESC>:echo "mapped bookmark 5"<CR>
+nnoremap ^ <ESC>mF<ESC>:echo "mapped bookmark 6"<CR>
+nnoremap & <ESC>mG<ESC>:echo "mapped bookmark 7"<CR>
+nnoremap * <ESC>mH<ESC>:echo "mapped bookmark 8"<CR>
+nnoremap ( <ESC>mI<ESC>:echo "mapped bookmark 9"<CR>
+nnoremap ) <ESC>mJ<ESC>:echo "mapped bookmark 10"<CR>
+
+" ============================================================================
+" COMMANDS AND FUNCTIONS
+" ============================================================================
+
+" Ex command for toggling hex mode.
+command! -bar Hexmode call ToggleHex()
+
+" Toggle light/dark background mode.
+function! ToggleBackground()
+    if &background == "dark"
+        set background=light
+    else
+        set background=dark
+    endif
+endfunction
+
+" Toggle mouse support.
+function! ToggleMouse()
+    if &mouse == 'a'
+        set mouse=
+    else
+        set mouse=a
+    endif
+endfunc
+
+" Toggle absolute line numbers on and off.
+function! ToggleLines()
+    set invnumber
+endfunc
+
+" Helper function to toggle xxd-based hex mode.
+function! ToggleHex()
+  " Hex mode should be considered a read-only operation.
+  " Save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now.
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " Save old options.
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " Set new options.
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries
+              " (DOS line endings will be shown entirely)
+    let &ft="xxd"
+    " Set status.
+    let b:editHex=1
+    " Switch to hex editor.
+    %!xxd
+  else
+    " Restore old options.
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " Set status.
+    let b:editHex=0
+    " Return to normal editing.
+    %!xxd -r
+  endif
+  " Restore values for modified and read only state.
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
+
+
+" ============================================================================
+" CUSTOM DIRECTORY BOOKMARKS HANDLING
+" ============================================================================
+
+" Change Vim working directory to the path in the first line of ~/cd_bookmarks/save
+" Expected first line format:
+" cd /some/path
+function! GoToSavedBookmark()
+  let file = expand('~/.cd_bookmarks/save')
+
+  if !filereadable(file)
+    echo "Bookmark file not found: " . file
+    return
+  endif
+
+  let lines = readfile(file)
+
+  if len(lines) == 0
+    echo "Bookmark file is empty"
+    return
+  endif
+
+  let path = substitute(lines[0], '^cd\s\+', '', '')
+  let path = expand(path)
+
+  if !isdirectory(path)
+    echo "Invalid directory: " . path
+    return
+  endif
+
+  execute 'cd ' . fnameescape(path)
+  echo "Changed directory to: " . path
+endfunction
+
+" Jump to saved bookmark directory
+nnoremap ~ :call GoToSavedBookmark()<CR>
+
+" ============================================================================
+" BINARY FILE HANDLING
+" ============================================================================
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+
+  " elf files
+  au BufReadPre  *.elf let &bin=1
+  au BufReadPost *.elf if &bin | %!xxd
+  au BufReadPost *.elf set ft=xxd | endif
+  au BufWritePre *.elf if &bin | %!xxd -r
+  au BufWritePre *.elf endif
+  au BufWritePost *.elf if &bin | %!xxd
+  au BufWritePost *.elf set nomod | endif
+augroup END
