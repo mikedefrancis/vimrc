@@ -269,7 +269,7 @@ syntax enable
 
 " Set a visual guide column and wrap/format width for text editing.
 set colorcolumn=81
-set textwidth=79
+" set textwidth=79
 set formatoptions+=t
 
 " Use UTF-8 and support common file formats.
