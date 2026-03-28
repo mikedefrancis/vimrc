@@ -33,7 +33,6 @@
 " C-x: Cut
 " C-c: Copy
 " C-v: Paste
-" C-b: Search open buffers with fzf
 " C-m: Start/stop recording macro into register g
 " Ctrl+{h,j,k,l}: custom movement/window navigation
 " Ctrl+Left/Right/Up/Down: move between windows
@@ -135,27 +134,8 @@ call vundle#begin()
 " Vundle manages the rest of the plugin list.
 Plugin 'VundleVim/Vundle.vim'
 
-" Plugin 'richardtz/vim-gpt'
-" Plugin 'jackMort/ChatGPT.nvim'
-" Plugin 'iberianpig/chatgpt.vim.git'
-" Plugin 'terryma/vim-openai'
-
-" Sample ChatGPT settings
-" let g:chatgpt_system_message = 'Please summarize the following. The response should be in "English."'
-" let g:chatgpt_model = 'gpt-4o'
-" let g:chatgpt_system_marker = '-----🤖-----'
-" let g:chatgpt_user_marker = '-----✍------'
-"
-" Send selected text to ChatGPT
-" vnoremap ,a :ChatGPT<CR>
-"
-" Send current buffer to ChatGPT
-" noremap ,a :ChatGPT<CR>
-"
 " Create a diff within a code block
 " nnoremap ,d :DiffWithinCodeBlock<CR>
-"
-"
 
 " Comment toggling helpers.
 Plugin 'scrooloose/nerdcommenter'
@@ -168,9 +148,6 @@ Plugin 'tpope/vim-fugitive'
 
 " Better man page viewing.
 Plugin 'lambdalisue/vim-manpager'
-
-" File manager integration.
-" Plugin 'francoiscabrol/ranger.vim'
 
 " Fuzzy finding.
 Plugin 'junegunn/fzf'
@@ -188,6 +165,22 @@ Plugin 'tomasr/molokai'
 
 " =========AI SHENANIGANS ============
 
+" Plugin 'richardtz/vim-gpt'
+" Plugin 'jackMort/ChatGPT.nvim'
+" Plugin 'iberianpig/chatgpt.vim.git'
+" Plugin 'terryma/vim-openai'
+
+" Sample ChatGPT settings
+" let g:chatgpt_system_message = 'Please summarize the following. The response should be in "English."'
+" let g:chatgpt_model = 'gpt-4o'
+" let g:chatgpt_system_marker = '-----🤖-----'
+" let g:chatgpt_user_marker = '-----✍------'
+"
+" Send selected text to ChatGPT
+" vnoremap ,a :ChatGPT<CR>
+"
+" Send current buffer to ChatGPT
+" noremap ,a :ChatGPT<CR>
 " Plugin 'github/copilot.vim'
 
 "---- custom mapping for autocomplete ----
@@ -207,10 +200,6 @@ Plugin 'tomasr/molokai'
 
 " =========END AI SHENANIGANS ============
 "
-
-" Set ranger plugin to start if we open vim at a folder
-" autocmd VimEnter * if isdirectory(expand("%")) | exec "Ranger" | endif
-
 " Settings for netrw folder view.
 " Go up one directory (back).
 autocmd FileType netrw nnoremap <buffer> h -
@@ -397,9 +386,12 @@ nnoremap fh gd
 vnoremap ?? *
 
 " Delete the character under the cursor in all common modes.
-nnoremap <C-d> <Delete>
-inoremap <C-d> <Delete>
-vnoremap <C-d> <Delete>
+" nnoremap <C-d> <Delete>
+" inoremap <C-d> <Delete>
+" vnoremap <C-d> <Delete>
+nnoremap <C-d> <ESC>
+inoremap <C-d> <ESC>
+vnoremap <C-d> <ESC>
 
 " Edit and delete helpers.
 " nnoremap <S-e> <ESC>:tabedit<CR>
@@ -489,12 +481,6 @@ vnoremap <silent> <A-PageDown> 4<PageDown>
 inoremap <silent> <A-PageUp> 4<PageUp>
 inoremap <silent> <A-PageDown> 4<PageDown>
 
-" Tab switch (not using).
-" vnoremap <C-h> <ESC>gT
-" nnoremap <C-h> <ESC>gT
-" vnoremap <C-l> <ESC>gt
-" nnoremap <C-l> <ESC>gt
-
 " Window navigation on Ctrl-h / Ctrl-l.
 vnoremap <C-h> :wincmd h<CR>
 nnoremap <C-h> :wincmd h<CR>
@@ -532,8 +518,8 @@ nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 
 " Search open buffers with fzf.
-nnoremap <C-b> <ESC>:Buffers<CR>
-vnoremap <C-b> <ESC>:Buffers<CR>
+nnoremap <C-b> <ESC>:bd<CR>
+vnoremap <C-b> <ESC>:bd<CR>
 
 " toggle previous buffer
 nnoremap <S-z> :b#<CR>
@@ -547,20 +533,40 @@ nnoremap <S-s> <Tab>
 nnoremap cd <ESC>:cd<Space>
 
 " Set current directory to that of the currently open file.
-nnoremap <C-w> <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
+nnoremap cx <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<CR>
 
 " Run terminal inside of vim for quick things.. autoset dir to current
 " nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
+nnoremap <S-e> <ESC>:edit<Space>
 " nnoremap <C-e> <ESC>:edit<Space>
+nnoremap <C-w> <ESC>:write<Space>
+
+function! RunCurrentFile()
+  let l:file = expand('%:p')
+  let l:ext = expand('%:e')
+
+  if l:ext ==# 'py'
+    execute '!python3 ' . shellescape(l:file)
+  elseif l:ext ==# 'sh'
+    execute '!bash ' . shellescape(l:file)
+  else
+    echo "Unsupported file type: " . l:ext
+  endif
+endfunction
+
+nnoremap <C-e> :w<CR>:call RunCurrentFile()<CR>
 
 " Prompt-like fuzzy helpers.
 nnoremap <S-x> <ESC>:Buffers<CR>
+vnoremap <S-x> <ESC>:Buffers<CR>
 nnoremap <S-c> <ESC>:History<CR>
+vnoremap <S-c> <ESC>:History<CR>
 nnoremap <S-d> <ESC>:Files<CR>
+vnoremap <S-d> <ESC>:Files<CR>
 
 " Tab and fuzzy helpers.
 nnoremap <S-b> <ESC>:tabnext<CR>
-nnoremap <S-e> <ESC>:tabedit<CR>
+nnoremap <S-t> <ESC>:tabedit<CR>
 
 " File/history/commit search helpers.
 nnoremap ff <ESC>:BLines<CR>
@@ -637,6 +643,9 @@ vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
 " SEARCH HIGHLIGHT
 let hlstate=0
 nnoremap <S-i> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+
+nnoremap <C-d> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+
 
 " Toggle auto scroll using the space key.
 let scrollstate=1
