@@ -280,6 +280,7 @@ set ffs=unix,dos,mac
 set nowb
 set showmatch
 set lazyredraw
+set ttyfast
 set noerrorbells
 set novisualbell
 set ai
@@ -331,7 +332,7 @@ let g:ackpreview = 1
 nnoremap ; :
 " Set comma as the leader key.
 let mapleader=","
-
+"
 " Use the system clipboard by default.
 set clipboard=unnamedplus
 
@@ -362,15 +363,15 @@ autocmd FileType man only
 " ============================================================================
 
 " Run yapf formatting on the current file and reload it.
-nnoremap yy :silent !yapf -i %<CR>:edit!<CR>
+" nnoremap yy :silent !yapf -i %<CR>:edit!<CR>
 
 " Make 'a' behave like insert at the current cursor location.
-nnoremap a <ESC>i
+nnoremap a i
 
 "make pressing s, x, r in normal mode accidentally safe. do nothing.
 nnoremap s <ESC>
-nnoremap x <ESC>
-nnoremap r <ESC>
+" nnoremap x <ESC>
+" nnoremap r <ESC>
 
 " Leave insert/visual mode and show a NORMAL status hint.
 inoremap <C-a> <ESC>:echo "-- NORMAL --"<ESC>l
@@ -386,17 +387,16 @@ nnoremap fh gd
 vnoremap ?? *
 
 " Delete the character under the cursor in all common modes.
-" nnoremap <C-d> <Delete>
-" inoremap <C-d> <Delete>
-" vnoremap <C-d> <Delete>
-nnoremap <C-d> <ESC>
-inoremap <C-d> <ESC>
-vnoremap <C-d> <ESC>
+nnoremap <C-d> <Delete>
+inoremap <C-d> <Delete>
+vnoremap <C-d> <Delete>
+" nnoremap <C-d> <ESC>
+" inoremap <C-d> <ESC>
+" vnoremap <C-d> <ESC>
 
 " Edit and delete helpers.
 " nnoremap <S-e> <ESC>:tabedit<CR>
 nnoremap <S-q> <ESC>:x!<CR>
-inoremap <S-q> <ESC>:x!<CR>
 vnoremap <S-q> <ESC>:x!<CR>
 tnoremap <S-q> <C-\><C-n>:x!<CR>
 
@@ -518,11 +518,10 @@ nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 
 " Search open buffers with fzf.
-nnoremap <C-b> <ESC>:bd<CR>
-vnoremap <C-b> <ESC>:bd<CR>
+nnoremap <C-d> <ESC>:bd<CR>
+vnoremap <C-d> <ESC>:bd<CR>
 
 " toggle previous buffer
-nnoremap <S-z> :b#<CR>
 nnoremap <S-z> :b#<CR>
 
 " Previous and next location behavior
@@ -538,7 +537,6 @@ nnoremap cx <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<C
 " Run terminal inside of vim for quick things.. autoset dir to current
 " nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
 nnoremap <S-e> <ESC>:edit<Space>
-" nnoremap <C-e> <ESC>:edit<Space>
 nnoremap <C-w> <ESC>:write<Space>
 
 function! RunCurrentFile()
@@ -554,7 +552,8 @@ function! RunCurrentFile()
   endif
 endfunction
 
-nnoremap <C-e> :w<CR>:call RunCurrentFile()<CR>
+" nnoremap <C-e> :w<CR>:call RunCurrentFile()<CR>
+nnoremap <C-e> :update<CR>:terminal<CR>
 
 " Prompt-like fuzzy helpers.
 nnoremap <S-x> <ESC>:Buffers<CR>
@@ -565,7 +564,6 @@ nnoremap <S-d> <ESC>:Files<CR>
 vnoremap <S-d> <ESC>:Files<CR>
 
 " Tab and fuzzy helpers.
-nnoremap <S-b> <ESC>:tabnext<CR>
 nnoremap <S-t> <ESC>:tabedit<CR>
 
 " File/history/commit search helpers.
@@ -644,9 +642,6 @@ vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
 let hlstate=0
 nnoremap <S-i> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
 
-nnoremap <C-d> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
-
-
 " Toggle auto scroll using the space key.
 let scrollstate=1
 nnoremap <Space> :if (scrollstate%2 == 0) \| set scrolloff=999 \| else \| set scrolloff=0 \| endif \| let scrollstate=scrollstate+1<CR><ESC>:echo "toggle center scroll"<CR>
@@ -694,8 +689,7 @@ tnoremap <C-a> <C-\><C-n>
 
 " Toggle Hexmode Fun
 nnoremap <S-m> <ESC>:Man<Space>
-nnoremap mm <ESC>:Man<Space>
-nnoremap bb <ESC>:Hexmode<CR>
+nnoremap <S-b> <ESC>:Hexmode<CR>
 
 " some cool server thing probably slows things down
 " com! -complete=file -nargs=* Edit silent! exec "!vim --servername " . v:servername . " --remote-tab-silent <args>"
