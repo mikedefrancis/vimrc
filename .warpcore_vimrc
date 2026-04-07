@@ -387,9 +387,9 @@ nnoremap fh gd
 vnoremap ?? *
 
 " Delete the character under the cursor in all common modes.
-nnoremap <C-d> <Delete>
-inoremap <C-d> <Delete>
-vnoremap <C-d> <Delete>
+nnoremap <C-d> ?
+inoremap <C-d> ?
+vnoremap <C-d> ?
 " nnoremap <C-d> <ESC>
 " inoremap <C-d> <ESC>
 " vnoremap <C-d> <ESC>
@@ -518,8 +518,8 @@ nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 
 " Search open buffers with fzf.
-nnoremap <C-d> <ESC>:bd<CR>
-vnoremap <C-d> <ESC>:bd<CR>
+nnoremap <C-e> <ESC>:bd<CR>
+vnoremap <C-e> <ESC>:bd<CR>
 
 " toggle previous buffer
 nnoremap <S-z> :b#<CR>
@@ -537,7 +537,7 @@ nnoremap cx <ESC>:cd %:p:h<CR><ESC>:echo "SET WORKING DIR TO " . expand('%:p')<C
 " Run terminal inside of vim for quick things.. autoset dir to current
 " nnoremap <C-e> <ESC>:cd %:p:h<ESC>:vertical terminal<CR>
 nnoremap <S-e> <ESC>:edit<Space>
-nnoremap <C-w> <ESC>:write<Space>
+nnoremap <C-w> <ESC>:saveas<Space>
 
 function! RunCurrentFile()
   let l:file = expand('%:p')
@@ -553,7 +553,7 @@ function! RunCurrentFile()
 endfunction
 
 " nnoremap <C-e> :w<CR>:call RunCurrentFile()<CR>
-nnoremap <C-e> :update<CR>:terminal<CR>
+" nnoremap <C-e> :update<CR>:terminal<CR>
 
 " Prompt-like fuzzy helpers.
 nnoremap <S-x> <ESC>:Buffers<CR>
@@ -666,7 +666,14 @@ nnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
 nnoremap <S-y> <ESC>:Gdiffsplit<CR>
 
 " Temporary scratch file.
-" nnoremap <C-n> <ESC>:edit ~/.bytecrown.md<CR>
+nnoremap <C-n> :enew<CR>
+inoremap <C-n> :enew<CR>
+vnoremap <C-n> :enew<CR>
+" nnoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
+" inoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
+" vnoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
+
+
 
 " MACRO HOTKEY
 " Toggle start/stop recording into register g.
