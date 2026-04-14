@@ -64,7 +64,6 @@ Plugin 'junegunn/fzf.vim'
 " ==== COOLOR THEMES ====
 Plugin 'tomasr/molokai'
 " ==== END PLUGIN THEMES ====
-"
 
 " =========AI SHENANIGANS ============
 
@@ -289,7 +288,7 @@ inoremap <C-f> /
 nnoremap fh gd
 vnoremap ?? *
 
-" Delete the character under the cursor in all common modes.
+" Go backward to the specified text
 nnoremap <C-d> ?
 inoremap <C-d> ?
 vnoremap <C-d> ?
@@ -398,14 +397,14 @@ nnoremap <S-h> 8h
 " Split window helpers.
 nnoremap <S-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
 vnoremap <S-w> <ESC>:vsplit<CR><ESC>:wincmd l<CR>
-nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
-vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+" nnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
+" vnoremap <C-y> <ESC>:split<CR><ESC>:wincmd j<CR>
 
 " Open a terminal and run ls.
 nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 
-" Search open buffers with fzf.
+" save and delete active buffer
 nnoremap <C-e> <ESC>:update \| :bd<CR>
 vnoremap <C-e> <ESC>:update \| :bd<CR>
 
@@ -498,10 +497,6 @@ vnoremap gf -
 " Change in word helper.
 nnoremap cw ciw
 
-" Make yanking a bit easier.
-" nnoremap yw yiw
-" nnoremap yl yy
-
 " Toggle line numbers from any common mode.
 nnoremap <C-o> <ESC>:call ToggleLines()<CR>
 inoremap <C-o> <ESC>:call ToggleLines()<CR>
@@ -528,6 +523,7 @@ vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
 let hlstate=0
 nnoremap <S-i> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
 
+" select text under cursor for search
 nnoremap ff :let @/ = '\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
 vnoremap ff :let @/ = '\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
 
