@@ -9,103 +9,6 @@
 " This file has been reorganized and documented, while preserving the original
 " functionality as much as possible. Commented-out code has been retained.
 
-" ============================================================================
-" HIGH-LEVEL KEY REFERENCE
-" ============================================================================
-"
-" CONTROL KEY MAPPING:
-" C-q: save and quit
-" C-w: set working directory to current file's directory
-" C-e: Open a new terminal (currently commented out below)
-" C-r: Redo
-" C-t: Copy line/selection into the custom k register
-" C-y: open horizontal split
-" C-a: leave insert/visual and return toward normal mode
-" C-s: Save
-" C-d: Delete character
-" C-f: Find in file
-" C-g: Start/stop recording macro
-" C-h: Jump left window
-" C-j: Jump down by 64 lines
-" C-k: Jump up by 64 lines
-" C-l: Jump right window
-" C-z: Undo
-" C-x: Cut
-" C-c: Copy
-" C-v: Paste
-" C-m: Start/stop recording macro into register g
-" Ctrl+{h,j,k,l}: custom movement/window navigation
-" Ctrl+Left/Right/Up/Down: move between windows
-"
-" SHIFT KEY REMAPPING:
-" S-`: Drop Nexus file to current path or open if existing
-" S-1..S-0: bookmark-related helpers using shifted number keys
-" S-q: save and quit
-" S-w: vertical split and move into it
-" S-p: set vim colors (currently commented out below)
-" S-e: open a new tab
-" S-r: search and replace prompt
-" S-t: todo.txt
-" S-y: git diff current file
-" S-a: back in jump list
-" S-s: forward-ish / tab behavior
-" S-d: fuzzy file search from current directory
-" S-f: ripgrep search in files
-" S-g: fuzzy git status
-" S-z: open terminal then run ls
-" S-x: fuzzy open buffers
-" S-c: fuzzy file history
-" S-v: Enter visual mode
-" S-b: next tab
-" S-n: previous search result in file
-" S-i: toggle search highlight
-" S-Tab: unindent (visual mode)
-"
-" OTHER MAPPINGS FOR NORMAL MODE:
-" a              insert mode
-" i              toggle whitespace characters
-" cd             change directory using :cd command
-" cw             change word under cursor
-" dd             cut line
-" yy             run yapf formatting on the current file
-" de             cut to end of current line
-" dw             delete word under cursor
-" mm             view man page
-" bb             convert the loaded file to hex
-" n/S-n: next/previous search result in file
-" gg: search commit history tree graph
-" gf: search commit history of current file
-" fd: fzf search for text in all open buffers
-" fg: search search history
-" fc: search command history
-" ff: search for text in current buffer using fzf BLines
-" fh: find/highlight word under cursor using gd
-" ``: goto current nexus and set it as the working directory
-" cc: show current working directory
-" cv: show full path to current file
-" gt: goto top of file
-" gb: goto bottom of file
-" gs: goto first non-blank character of the line
-" ge: goto end of current line's real text
-" rr: paste contents stored to r register (stored via S-r / custom flows)
-" Space toggle center-scroll
-" ;     Enter command mode (:<command>)
-" '     Run external command (:!<command>)
-" ,     Leader
-" ,c<Space> Toggle comment/uncomment selected line(s)
-"
-" STANDARD VIM COMMAND REFERENCE:
-"  w/W       goto start of next word
-"  e/E       goto end of next word
-"  b/B       goto start of previous word
-"  v         enter visual mode
-"  V         enter visual line mode
-"  :<number> goto line number
-"  :Delete   delete file in buffer
-"  :SudoEdit edit a file using sudo
-"  :Find     use find and output results to quickfix window
-"  :Chmod    change the permission of the current file
-"
 " PLUGINS:
 "   I am using Vundle to install my plugins
 
@@ -390,9 +293,6 @@ vnoremap ?? *
 nnoremap <C-d> ?
 inoremap <C-d> ?
 vnoremap <C-d> ?
-" nnoremap <C-d> <ESC>
-" inoremap <C-d> <ESC>
-" vnoremap <C-d> <ESC>
 
 " Edit and delete helpers.
 " nnoremap <S-e> <ESC>:tabedit<CR>
@@ -444,18 +344,6 @@ inoremap <C-v> <C-r>+
 vnoremap <C-x> "+d
 " Cut current line (Normal mode) to clipboard with Ctrl-x.
 nnoremap <C-x> "+dd
-
-""" OLD DEPRECATED HACKS:
-" vnoremap <C-c> y'] `]
-" nnoremap <C-c> <Home>y$
-" inoremap <C-c> <ESC><Home>y$i
-" " set pastetoggle=<C-u>
-" "TODO: CHANGE FIX PASTE MODE VERSIONS OF OTHER THINGS
-" inoremap <C-v> <ESC>:set paste<CR><ESC>pi<Right><ESC>:set nopaste<CR>a
-" nnoremap <C-v> <ESC>:set paste<ESC>P<ESC>:set nopaste<CR>
-" vnoremap <C-v> <ESC>:set paste<ESC>Pv<ESC>:set nopaste<CR>
-" vnoremap <C-x> d
-" nnoremap <C-x> <Home>d$
 
 " ============================================================================
 " MOVEMENT
@@ -518,8 +406,8 @@ nnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 vnoremap <C-m> <ESC>:terminal<CR>ls<CR>
 
 " Search open buffers with fzf.
-nnoremap <C-e> <ESC>:bd<CR>
-vnoremap <C-e> <ESC>:bd<CR>
+nnoremap <C-e> <ESC>:update \| :bd<CR>
+vnoremap <C-e> <ESC>:update \| :bd<CR>
 
 " toggle previous buffer
 nnoremap <S-z> :b#<CR>
@@ -551,9 +439,6 @@ function! RunCurrentFile()
     echo "Unsupported file type: " . l:ext
   endif
 endfunction
-
-" nnoremap <C-e> :w<CR>:call RunCurrentFile()<CR>
-" nnoremap <C-e> :update<CR>:terminal<CR>
 
 " Prompt-like fuzzy helpers.
 nnoremap <S-x> <ESC>:Buffers<CR>
@@ -598,10 +483,6 @@ nnoremap <Tab> :bnext<CR>zz
 nnoremap <S-Tab> :bprevious<CR>zz
 " nnoremap <Tab> :tabnext<CR>
 " nnoremap <S-Tab> :tabprevious<CR>
-
-" nnoremap <silent> <Tab> :cnext<CR>zz
-" nnoremap <silent> <S-Tab> :cprev<CR>zz
-
 
 " Override some standard g-based movement to prefer non-whitespace navigation.
 nnoremap ge g_
@@ -667,9 +548,6 @@ vnoremap <C-t> "ky<ESC>:echo "copied selection to r register"<CR>
 vnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
 nnoremap tt <ESC>:set paste<CR>"kP<ESC>:set nopaste<CR>
 
-" Todo file.
-" nnoremap <S-t> <ESC>:edit ~/.todo.md<CR>
-
 " Show side-by-side git diff within Vim.
 nnoremap <S-y> <ESC>:Gdiffsplit<CR>
 
@@ -677,11 +555,6 @@ nnoremap <S-y> <ESC>:Gdiffsplit<CR>
 nnoremap <C-n> :enew<CR>
 inoremap <C-n> :enew<CR>
 vnoremap <C-n> :enew<CR>
-" nnoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
-" inoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
-" vnoremap <C-n> :enew<CR>:file scratch<CR>:setlocal buftype=nofile bufhidden=hide noswapfile<CR>
-
-
 
 " MACRO HOTKEY
 " Toggle start/stop recording into register g.
