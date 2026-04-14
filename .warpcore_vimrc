@@ -567,8 +567,8 @@ vnoremap <S-d> <ESC>:Files<CR>
 nnoremap <S-t> <ESC>:tabedit<CR>
 
 " File/history/commit search helpers.
-nnoremap ff <ESC>:BLines<CR>
-nnoremap fd <ESC>:Lines<CR>
+nnoremap fd <ESC>:BLines<CR>
+" nnoremap fd <ESC>:Lines<CR>
 nnoremap fg <ESC>:History/<CR>
 nnoremap fc <ESC>:History:<CR>
 nnoremap gg <ESC>:Commits<CR>
@@ -594,9 +594,14 @@ nnoremap de d$
 " Indent and unindent selected text while preserving the selection.
 vnoremap <Tab>   >><ESC>gv
 vnoremap <S-Tab> <<<ESC>gv
+nnoremap <Tab> :bnext<CR>zz
+nnoremap <S-Tab> :bprevious<CR>zz
+" nnoremap <Tab> :tabnext<CR>
+" nnoremap <S-Tab> :tabprevious<CR>
 
-nnoremap <Tab> :tabnext<CR>
-nnoremap <S-Tab> :tabprevious<CR>
+" nnoremap <silent> <Tab> :cnext<CR>zz
+" nnoremap <silent> <S-Tab> :cprev<CR>zz
+
 
 " Override some standard g-based movement to prefer non-whitespace navigation.
 nnoremap ge g_
@@ -641,6 +646,9 @@ vnoremap <S-r> <ESC>:%s/<find>/<replace>/gc
 " SEARCH HIGHLIGHT
 let hlstate=0
 nnoremap <S-i> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR><ESC>:echo "toggle search highlight"<CR>
+
+nnoremap ff :let @/ = '\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
+vnoremap ff :let @/ = '\<<C-r><C-w>\>'<CR>:set hlsearch<CR>
 
 " Toggle auto scroll using the space key.
 let scrollstate=1
