@@ -289,9 +289,9 @@ nnoremap fh gd
 vnoremap ?? *
 
 " Go backward to the specified text
-nnoremap <C-d> ?
-inoremap <C-d> ?
-vnoremap <C-d> ?
+nnoremap <C-d> :Lines<CR>
+inoremap <C-d> :Lines<CR>
+vnoremap <C-d> :Lines<CR>
 
 " Edit and delete helpers.
 " nnoremap <S-e> <ESC>:tabedit<CR>
